@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+/*
+ * Token desain Kirana.
+ *
+ * Dua gaya hidup berdampingan sesuai matriks penggabungan desain:
+ * - GAYA LAMA (design-reference/screens/*.html dan screenshot A1–D4):
+ *   primary, ink, muted, border, ... dengan Plus Jakarta Sans + IBM Plex Mono.
+ *   Dipakai penuh di Detail Sesi (B4), Hasil & Diagnosis (D1), Panduan (D3),
+ *   dan tabel Daftar Sesi (B2).
+ * - GAYA BARU (design-reference/kirana_interactive_canvas (3).html):
+ *   navy, turquoise, royal-blue, sun-yellow, meadow-green, coral-red dengan
+ *   Poppins + JetBrains Mono. Aktif di dalam elemen berkelas `.gaya-baru`.
+ */
+@theme {
+  --color-primary: #2448b8;
+  --color-primary-hover: #16307f;
+  --color-primary-soft: #e8edfb;
+  --color-primary-ink: #1b3a99;
+
+  --color-page: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-border: #d9dee7;
+  --color-border-strong: #c5ccd8;
+  --color-divider: #eef0f4;
+
+  --color-ink: #141b2d;
+  --color-ink-2: #313a4e;
+  --color-muted: #4a5468;
+  --color-faint: #6b7487;
+  --color-disabled: #dde2ea;
+
+  --color-success: #17633a;
+  --color-success-soft: #e6f4ec;
+  --color-danger: #9b1c1c;
+  --color-danger-soft: #fdecec;
+  --color-danger-ink: #5c1010;
+
+  /* "Hasil di luar opsi" dan label Data demo */
+  --color-luar: #a84a0b;
+  --color-luar-ink: #7a3606;
+  --color-luar-soft: #fff3e8;
+  --color-demo-soft: #fff8f1;
+  --color-demo-ink: #5c2a05;
+
+  /* Kotak bukti yang belum terisi */
+  --color-kotak-kosong: #9aa6c8;
+
+  /* ---- Gaya baru ---- */
+  --color-navy: #243b5a;
+  --color-navy-hover: #1a2c44;
+  --color-turquoise: #22c7c9;
+  --color-turquoise-light: #e6f9f9;
+  /* Turquoise gelap untuk TEKS di atas putih/turquoise-light (kontras ≥ 4.5:1). */
+  --color-turquoise-ink: #0b6e70;
+  --color-royal-blue: #2563eb;
+  --color-royal-blue-hover: #1d4ed8;
+  --color-sun-yellow: #ffd447;
+  --color-meadow-green: #63c174;
+  --color-coral-red: #ff7a6b;
+  --color-coral-red-hover: #e85f50;
+
+  --font-sans: var(--font-jakarta), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-poppins: var(--font-poppins-next), system-ui, sans-serif;
+  --font-jetbrains: var(--font-jetbrains-next), ui-monospace, monospace;
+
+  --shadow-soft: 0 8px 24px rgba(36, 59, 90, 0.05);
+
+  --radius-badge: 8px;
+  --radius-input: 12px;
+  --radius-opsi: 14px;
+  --radius-card: 16px;
+  --radius-kartu-siswa: 20px;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--color-page);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not([aria-disabled="true"]) {
+    cursor: pointer;
+  }
+
+  /* Semua angka memakai font mono dengan digit selebar sama */
+  .angka {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Gaya baru: Poppins untuk UI, JetBrains Mono untuk angka */
+  .gaya-baru {
+    font-family: var(--font-poppins);
+    color: var(--color-navy);
+  }
+  .gaya-baru .angka {
+    font-family: var(--font-jetbrains);
+  }
+  .gaya-baru :focus-visible {
+    outline-color: var(--color-royal-blue);
+  }
+}
+
+@layer utilities {
+  .pb-aman {
+    padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Maskot melayang pelan (desain baru). Mati jika pengguna meminta gerak minimal. */
+  .animasi-melayang {
+    animation: melayang 3.5s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animasi-melayang {
+      animation: none;
+    }
+  }
+}
+
+@keyframes melayang {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1.5deg);
+  }
+}

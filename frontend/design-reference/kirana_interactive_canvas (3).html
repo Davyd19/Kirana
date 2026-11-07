@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kirana - Sahabat Pola Hitung | 14-Screen Complete App Prototype</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Poppins & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- html2canvas CDN (For Export to JPG) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            navy: '#243B5A',
+            turquoise: '#22C7C9',
+            'turquoise-light': '#E6F9F9',
+            'sun-yellow': '#FFD447',
+            'meadow-green': '#63C174',
+            'coral-red': '#FF7A6B',
+            'royal-blue': '#2563EB',
+          },
+          boxShadow: {
+            'soft': '0 8px 24px rgba(36, 59, 90, 0.05)',
+            'glow-turquoise': '0 0 20px rgba(34, 199, 201, 0.25)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #FFFFFF;
+      color: #243B5A;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(1.5deg); }
+    }
+    .animate-float {
+      animation: floatSlow 3.5s ease-in-out infinite;
+    }
+
+    .option-card {
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .option-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(34, 199, 201, 0.15);
+    }
+    
+    .option-selected {
+      border-color: #2563EB !important;
+      background-color: #EFF6FF !important;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.15) !important;
+      transform: scale(1.02);
+    }
+
+    .avatar-card {
+      transition: all 0.2s ease-in-out;
+    }
+    .avatar-card-selected-female {
+      border-color: #EC4899 !important;
+      background-color: #FDF2F8 !important;
+      box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.3) !important;
+    }
+    .avatar-card-selected-male {
+      border-color: #0EA5E9 !important;
+      background-color: #F0F9FF !important;
+      box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3) !important;
+    }
+
+    .screen-page {
+      animation: fadeIn 0.25s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen flex flex-col justify-between overflow-x-hidden relative">
+
+  <!-- SVG TEMPLATE FOR OFFICIAL KIRANA PUZZLE MASCOT & LOGO -->
+  <svg class="hidden">
+    <g id="kirana-mascot-logo">
+      <!-- Mascot Teal Puzzle Shape -->
+      <path d="M 45 10 C 45 4.477 49.477 0 55 0 C 60.523 0 65 4.477 65 10 C 65 15.523 60.523 20 55 20 C 51.5 20 48.5 18 47 15 L 30 15 C 24.477 15 20 19.477 20 25 L 20 42 C 17 40.5 15 37.5 15 34 C 9.477 34 5 38.477 5 44 C 5 49.523 9.477 54 15 54 C 18.5 54 21.5 52 23 49 L 23 65 C 23 70.523 27.477 75 33 75 L 50 75 C 50 69.477 54.477 65 60 65 C 65.523 65 70 69.477 70 75 L 85 75 C 90.523 75 95 70.523 95 65 L 95 48 C 98 49.5 101 50 105 50 C 110.523 50 115 45.523 115 40 C 115 34.477 110.523 30 105 30 C 101 30 98 31.5 95 33 L 95 25 C 95 19.477 90.523 15 85 15 L 68 15 C 66.5 18 63.5 20 60 20 Z" fill="#22C7C9"/>
+    </g>
+  </svg>
+
+  <!-- Helper function to render logo -->
+  <script>
+    function getKiranaLogoSVG(width = 42, height = 42) {
+      return `
+        <div class="relative flex items-center gap-2">
+          <svg width="${width}" height="${height}" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg" class="filter drop-shadow-xs">
+            <!-- Puzzle Body -->
+            <path d="M 45 25 C 45 14 54 5 65 5 C 76 5 85 14 85 25 C 85 30 83 34 79 37 L 95 37 C 106 37 115 46 115 57 L 115 70 C 122 67 128 67 135 74 C 142 81 140 92 133 97 C 128 101 120 99 115 95 L 115 105 C 115 116 106 125 95 125 L 82 125 C 84 130 83 138 77 143 C 70 149 59 146 55 139 C 52 134 53 127 57 125 L 45 125 C 34 125 25 116 25 105 L 25 89 C 20 92 12 91 6 85 C 0 78 2 67 9 63 C 15 59 22 62 25 66 L 25 57 C 25 46 34 37 45 37 L 51 37 C 47 34 45 30 45 25 Z" fill="#22C7C9"/>
+            <!-- Mascot Eyes & Blushing Cheeks -->
+            <circle cx="52" cy="62" r="6" fill="#243B5A"/>
+            <circle cx="54" cy="60" r="2.5" fill="#FFFFFF"/>
+            <circle cx="82" cy="62" r="6" fill="#243B5A"/>
+            <circle cx="84" cy="60" r="2.5" fill="#FFFFFF"/>
+            <!-- Smile -->
+            <path d="M 58 74 Q 67 84 76 74" stroke="#243B5A" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            <!-- Blushing Cheeks -->
+            <circle cx="43" cy="72" r="5" fill="#00B4B6" opacity="0.6"/>
+            <circle cx="91" cy="72" r="5" fill="#00B4B6" opacity="0.6"/>
+            <!-- Path & Numbered Circles 1-2-3 -->
+            <path d="M 20 120 Q 70 145 125 105" stroke="#243B5A" stroke-width="4" stroke-dasharray="6 6" fill="none"/>
+            <circle cx="22" cy="118" r="14" fill="#FF7A6B" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="22" y="123" fill="white" font-size="13" font-weight="900" text-anchor="middle" font-family="Poppins">1</text>
+            <circle cx="68" cy="132" r="14" fill="#FFD447" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="68" y="137" fill="#243B5A" font-size="13" font-weight="900" text-anchor="middle" font-family="Poppins">2</text>
+            <circle cx="114" cy="112" r="14" fill="#63C174" stroke="#FFFFFF" stroke-width="2"/>
+            <text x="114" y="117" fill="white" font-size="13" font-weight="900" text-anchor="middle" font-family="Poppins">3</text>
+          </svg>
+          <span class="text-xl font-black text-navy tracking-tight">Kirana</span>
+        </div>
+      `;
+    }
+  </script>
+
+  <!-- ==================== MAIN CONTENT VIEWPORT CONTAINER ==================== -->
+  <div id="appViewport" class="flex-1 w-full pb-32">
+
+    <!-- ==================== SCREEN 1: LANDING PAGE / BERANDA ==================== -->
+    <section id="screen-1" class="screen-page w-full">
+      <nav class="w-full bg-white border-b border-slate-100 py-4 px-6 sticky top-0 z-20">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+          <div class="cursor-pointer" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(40,40));</script>
+          </div>
+          <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+            <a href="#hero" class="text-turquoise font-bold">Beranda</a>
+            <a href="#cara-kerja" class="hover:text-navy">Cara Kerja</a>
+            <a href="#tentang" class="hover:text-navy">Tentang Kirana</a>
+          </div>
+          <div class="flex items-center gap-3">
+            <button onclick="goToScreen(2)" class="px-4 py-2 rounded-xl border-2 border-slate-200 text-navy font-bold text-xs hover:bg-slate-50 transition-all">Masuk sebagai Guru</button>
+            <button onclick="goToScreen(3)" class="px-4 py-2 rounded-xl bg-coral-red hover:bg-rose-600 text-white font-extrabold text-xs shadow-xs transition-all">Masuk Kuis sebagai Siswa</button>
+          </div>
+        </div>
+      </nav>
+
+      <div id="hero" class="max-w-6xl mx-auto px-6 py-12 md:py-16 grid grid-cols-1 md:grid-cols-12 gap-10 items-center">
+        <div class="md:col-span-7 space-y-6">
+          <span class="inline-block bg-turquoise-light border border-turquoise/30 text-turquoise font-bold text-xs px-3.5 py-1.5 rounded-full">
+            ✨ Inklusi Digital SD • FIRETECH 2026
+          </span>
+          <h1 class="text-3xl md:text-5xl font-black text-navy leading-tight">
+            Bukan sekadar jawaban salah, pahami <span class="text-turquoise underline decoration-sun-yellow decoration-wavy">cara berpikir</span> siswa.
+          </h1>
+          <p class="text-slate-600 font-medium text-sm md:text-base leading-relaxed">
+            Kirana membantu guru mengamati dugaan pola kesalahan dalam penjumlahan dan pengurangan bersusun melalui kuis visual sederhana dan bukti jawaban siswa.
+          </p>
+          <div class="flex flex-wrap gap-4 pt-2">
+            <button onclick="goToScreen(2)" class="bg-navy hover:bg-slate-800 text-white font-extrabold px-6 py-3.5 rounded-2xl text-sm shadow-md transition-all flex items-center gap-2">
+              Mulai sebagai Guru <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+            <button onclick="goToScreen(3)" class="bg-coral-red hover:bg-rose-600 text-white font-extrabold px-6 py-3.5 rounded-2xl text-sm shadow-md transition-all flex items-center gap-2">
+              Masuk Kuis Siswa <i class="fa-solid fa-gamepad text-xs"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 bg-slate-50 border border-slate-200/80 rounded-3xl p-6 shadow-soft relative flex flex-col items-center text-center">
+          <div class="w-28 h-28 animate-float mb-2 flex items-center justify-center">
+            <script>document.write(getKiranaLogoSVG(100,100));</script>
+          </div>
+          <div class="bg-white border-2 border-slate-200 rounded-2xl p-4 w-full shadow-xs text-center font-mono text-3xl font-bold text-navy mb-3">
+            71 - 38 = 33
+          </div>
+          <div class="w-full bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-900 font-medium text-left">
+            <div class="font-bold text-amber-950 flex items-center gap-1 mb-0.5"><i class="fa-solid fa-triangle-exclamation"></i> DUGAAN POLA CONTOH</div>
+            "Lupa mengurangi angka setelah meminjam" (4 dari 5 kesempatan mendukung).
+          </div>
+        </div>
+      </div>
+
+      <div id="cara-kerja" class="bg-slate-50 border-y border-slate-100 py-16 px-6">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-2xl md:text-3xl font-extrabold text-navy text-center mb-10">Cara Kerja Kirana</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div class="w-8 h-8 rounded-full bg-turquoise/20 text-turquoise font-extrabold flex items-center justify-center mb-3">1</div>
+              <h3 class="font-bold text-navy mb-1 text-sm">Pilih Operasi</h3>
+              <p class="text-xs text-slate-500">Guru memilih penjumlahan atau pengurangan bersusun lalu membuat sesi.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div class="w-8 h-8 rounded-full bg-turquoise/20 text-turquoise font-extrabold flex items-center justify-center mb-3">2</div>
+              <h3 class="font-bold text-navy mb-1 text-sm">Bagikan QR atau Kode</h3>
+              <p class="text-xs text-slate-500">Siswa memindai QR, membuka tautan atau mengetik kode sesi.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div class="w-8 h-8 rounded-full bg-turquoise/20 text-turquoise font-extrabold flex items-center justify-center mb-3">3</div>
+              <h3 class="font-bold text-navy mb-1 text-sm">Siswa Mengerjakan 15 Soal</h3>
+              <p class="text-xs text-slate-500">Tanpa akun, satu soal per layar, boleh melewati atau menandai hasil di luar opsi.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs">
+              <div class="w-8 h-8 rounded-full bg-turquoise/20 text-turquoise font-extrabold flex items-center justify-center mb-3">4</div>
+              <h3 class="font-bold text-navy mb-1 text-sm">Periksa Dugaan Pola</h3>
+              <p class="text-xs text-slate-500">Guru melihat dugaan pola kesalahan beserta jawaban yang mendukungnya.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 2: LOGIN GURU ==================== -->
+    <section id="screen-2" class="screen-page w-full min-h-[80vh] flex items-center justify-center p-6 hidden">
+      <div class="max-w-md w-full bg-white border-2 border-slate-200 rounded-3xl p-8 shadow-soft text-center">
+        <div class="flex justify-center mb-3">
+          <script>document.write(getKiranaLogoSVG(54,54));</script>
+        </div>
+        <h2 class="text-2xl font-extrabold text-navy">Masuk sebagai Guru</h2>
+        <p class="text-xs text-slate-500 mt-1 mb-6">Kelola sesi kuis dan lihat dugaan pola kesalahan siswa.</p>
+
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3 text-xs text-amber-900 text-left mb-6">
+          <span class="font-bold">💡 Data Demo:</span> Gunakan <code class="bg-amber-100 px-1 py-0.5 rounded font-mono font-bold">guru@kirana.demo</code> dengan kata sandi apa saja.
+        </div>
+
+        <form onsubmit="event.preventDefault(); goToScreen(4);" class="space-y-4 text-left">
+          <div>
+            <label class="block text-xs font-bold text-navy mb-1">Email Guru</label>
+            <input type="email" value="guru@kirana.demo" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-navy focus:outline-none focus:border-turquoise">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-navy mb-1">Kata Sandi</label>
+            <input type="password" value="password123" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2.5 text-sm font-semibold text-navy focus:outline-none focus:border-turquoise">
+          </div>
+          <button type="submit" class="w-full bg-royal-blue hover:bg-blue-700 text-white font-extrabold py-3.5 rounded-2xl text-sm transition-all shadow-md mt-2">
+            Masuk →
+          </button>
+        </form>
+
+        <div class="mt-6 pt-4 border-t border-slate-100 text-xs text-slate-500">
+          Siswa tidak perlu akun. <button onclick="goToScreen(3)" class="text-turquoise font-bold hover:underline">Masuk kuis di sini</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 3: INPUT KODE KUIS SISWA ==================== -->
+    <section id="screen-3" class="screen-page w-full min-h-[80vh] flex items-center justify-center p-6 hidden">
+      <div class="max-w-md w-full bg-white border-2 border-slate-200 rounded-3xl p-8 shadow-soft text-center">
+        <div class="w-24 h-24 mx-auto animate-float mb-2 flex items-center justify-center">
+          <script>document.write(getKiranaLogoSVG(84,84));</script>
+        </div>
+
+        <div class="bg-turquoise-light border border-turquoise/30 rounded-2xl p-3 mb-4 text-xs font-bold text-turquoise">
+          "Masukkan kode dari gurumu ya! 🔑"
+        </div>
+
+        <h2 class="text-2xl font-extrabold text-navy">Masuk Kuis</h2>
+        <p class="text-xs text-slate-500 mt-1 mb-6">Ketik kode kuis dari gurumu. Kalau punya QR atau tautan, cukup buka itu saja.</p>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-navy mb-1 text-left">Kode Kuis</label>
+            <input type="text" id="quizCodeInput" value="KRN-4821" placeholder="KRN-0000" class="w-full bg-slate-50 border-2 border-turquoise rounded-2xl px-4 py-3.5 text-center font-mono text-xl font-extrabold text-navy tracking-widest focus:outline-none">
+          </div>
+
+          <div class="flex items-center justify-center gap-2 text-xs">
+            <span class="text-slate-400">Coba kode demo:</span>
+            <button onclick="document.getElementById('quizCodeInput').value='KRN-4821'" class="bg-slate-100 hover:bg-slate-200 font-mono font-bold text-navy px-2.5 py-1 rounded-lg">KRN-4821 (terbuka)</button>
+          </div>
+
+          <button onclick="goToScreen(8)" class="w-full bg-coral-red hover:bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl text-sm transition-all shadow-md">
+            Cek Kode ✨
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 4: DASHBOARD UTAMA GURU ==================== -->
+    <section id="screen-4" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6 flex flex-col justify-between">
+          <div class="space-y-6">
+            <div class="cursor-pointer" onclick="goToScreen(1)">
+              <script>document.write(getKiranaLogoSVG(36,36));</script>
+            </div>
+            <nav class="space-y-1 text-xs font-bold text-slate-600">
+              <button onclick="goToScreen(4)" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-turquoise font-extrabold shadow-2xs">Dashboard</button>
+              <button onclick="goToScreen(5)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Sesi Kuis</button>
+              <button onclick="goToScreen(11)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Hasil & Diagnosis</button>
+              <button onclick="goToScreen(13)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Panduan Penggunaan</button>
+              <button onclick="goToScreen(14)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Pengaturan Akun</button>
+            </nav>
+          </div>
+          <div class="pt-6 border-t border-slate-200 text-xs">
+            <div class="font-bold text-navy">Bu Wulan</div>
+            <div class="text-slate-400">guru@kirana.demo</div>
+          </div>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-navy">Selamat pagi, Bu Wulan</h1>
+              <p class="text-xs text-slate-500">Ringkasan sesi kuis dan pengumpulan jawaban siswa.</p>
+            </div>
+            <button onclick="goToScreen(6)" class="bg-navy hover:bg-slate-800 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs shadow-xs">
+              + Buat Sesi Baru
+            </button>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white border border-slate-200 border-t-4 border-t-turquoise rounded-2xl p-4 shadow-2xs">
+              <div class="text-xs font-bold text-slate-400">Total Sesi</div>
+              <div class="text-3xl font-black text-navy mt-1">4</div>
+              <div class="text-[10px] text-slate-400 mt-1">Semua sesi pernah dibuat</div>
+            </div>
+            <div class="bg-white border border-slate-200 border-t-4 border-t-meadow-green rounded-2xl p-4 shadow-2xs">
+              <div class="text-xs font-bold text-slate-400">Sesi Terbuka</div>
+              <div class="text-3xl font-black text-navy mt-1">1</div>
+              <div class="text-[10px] text-slate-400 mt-1">Masih menerima siswa</div>
+            </div>
+            <div class="bg-white border border-slate-200 border-t-4 border-t-sun-yellow rounded-2xl p-4 shadow-2xs">
+              <div class="text-xs font-bold text-slate-400">Total Pengumpulan</div>
+              <div class="text-3xl font-black text-navy mt-1">23</div>
+              <div class="text-[10px] text-slate-400 mt-1">Jumlah submission</div>
+            </div>
+            <div class="bg-white border border-slate-200 border-t-4 border-t-slate-300 rounded-2xl p-4 shadow-2xs">
+              <div class="text-xs font-bold text-slate-400">Sesi Ditutup</div>
+              <div class="text-3xl font-black text-navy mt-1">3</div>
+              <div class="text-[10px] text-slate-400 mt-1">Hasil tetap bisa dilihat</div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="font-bold text-navy text-sm">Sesi Terbaru</h2>
+              <button onclick="goToScreen(5)" class="text-xs font-bold text-turquoise hover:underline">Lihat semua sesi →</button>
+            </div>
+            <div class="overflow-x-auto">
+              <table class="w-full text-left text-xs">
+                <thead>
+                  <tr class="border-b border-slate-100 text-slate-400 font-semibold">
+                    <th class="py-2.5">Kode Sesi</th>
+                    <th class="py-2.5">Operasi</th>
+                    <th class="py-2.5">Dibuat</th>
+                    <th class="py-2.5">Status</th>
+                    <th class="py-2.5">Mengumpulkan</th>
+                    <th class="py-2.5 text-right">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 font-medium">
+                  <tr>
+                    <td class="py-3 font-mono font-bold text-navy">KRN-4821</td>
+                    <td class="py-3">Pengurangan</td>
+                    <td class="py-3 text-slate-400">7 Nov 2026</td>
+                    <td class="py-3"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">Terbuka</span></td>
+                    <td class="py-3">6 siswa</td>
+                    <td class="py-3 text-right"><button onclick="goToScreen(7)" class="text-royal-blue font-bold hover:underline">Lihat Detail</button></td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 font-mono font-bold text-navy">KRN-3307</td>
+                    <td class="py-3">Penjumlahan</td>
+                    <td class="py-3 text-slate-400">5 Nov 2026</td>
+                    <td class="py-3"><span class="bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">Ditutup</span></td>
+                    <td class="py-3">9 siswa</td>
+                    <td class="py-3 text-right"><button onclick="goToScreen(7)" class="text-royal-blue font-bold hover:underline">Lihat Detail</button></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900">
+            <span class="font-bold">💡 Hasil diagnosis adalah dugaan:</span> Kirana menyusun dugaan pola dari bukti respons siswa. Periksa kembali bersama siswa dengan memintanya menunjukkan langkah pengerjaan.
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 5: DAFTAR SESI KUIS ==================== -->
+    <section id="screen-5" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+          <nav class="space-y-1 text-xs font-bold text-slate-600">
+            <button onclick="goToScreen(4)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Dashboard</button>
+            <button onclick="goToScreen(5)" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-turquoise font-extrabold shadow-2xs">Sesi Kuis</button>
+            <button onclick="goToScreen(11)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Hasil & Diagnosis</button>
+          </nav>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-navy">Sesi Kuis</h1>
+              <p class="text-xs text-slate-500">Semua sesi milikmu, terbaru di atas.</p>
+            </div>
+            <button onclick="goToScreen(6)" class="bg-navy hover:bg-slate-800 text-white font-extrabold px-5 py-2.5 rounded-xl text-xs shadow-xs">
+              + Buat Sesi Baru
+            </button>
+          </div>
+
+          <div class="flex flex-wrap gap-3">
+            <input type="text" placeholder="Cari kode sesi... (Contoh: KRN-4821)" class="bg-white border border-slate-200 rounded-xl px-3.5 py-2 text-xs font-semibold text-navy w-64">
+            <select class="bg-white border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-navy">
+              <option>Semua Operasi</option>
+              <option>Pengurangan</option>
+              <option>Penjumlahan</option>
+            </select>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-slate-100 text-slate-400 font-semibold">
+                  <th class="py-2.5">Kode Sesi</th>
+                  <th class="py-2.5">Operasi</th>
+                  <th class="py-2.5">Dibuat</th>
+                  <th class="py-2.5">Status</th>
+                  <th class="py-2.5">Mengumpulkan</th>
+                  <th class="py-2.5 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr>
+                  <td class="py-3 font-mono font-bold text-navy">KRN-4821</td>
+                  <td class="py-3">Pengurangan Bersusun</td>
+                  <td class="py-3 text-slate-400">7 Nov 2026</td>
+                  <td class="py-3"><span class="bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">Terbuka</span></td>
+                  <td class="py-3">6 siswa</td>
+                  <td class="py-3 text-right"><button onclick="goToScreen(7)" class="text-royal-blue font-bold hover:underline">Lihat Detail</button></td>
+                </tr>
+                <tr>
+                  <td class="py-3 font-mono font-bold text-navy">KRN-3307</td>
+                  <td class="py-3">Penjumlahan Bersusun</td>
+                  <td class="py-3 text-slate-400">5 Nov 2026</td>
+                  <td class="py-3"><span class="bg-slate-100 text-slate-600 font-bold px-2 py-0.5 rounded-full">Ditutup</span></td>
+                  <td class="py-3">9 siswa</td>
+                  <td class="py-3 text-right"><button onclick="goToScreen(7)" class="text-royal-blue font-bold hover:underline">Lihat Detail</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 6: WIZARD BUAT SESI BARU ==================== -->
+    <section id="screen-6" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+          <nav class="space-y-1 text-xs font-bold text-slate-600">
+            <button onclick="goToScreen(4)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Dashboard</button>
+            <button onclick="goToScreen(5)" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-turquoise font-extrabold shadow-2xs">Sesi Kuis</button>
+          </nav>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <h1 class="text-2xl font-extrabold text-navy">Buat Sesi Kuis Baru</h1>
+          
+          <div class="flex items-center gap-2 text-xs font-bold text-slate-400 border-b border-slate-200 pb-4">
+            <span class="text-turquoise font-black">1. Pilih Operasi</span>
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            <span>2. Informasi Paket</span>
+            <i class="fa-solid fa-chevron-right text-[10px]"></i>
+            <span>3. Konfirmasi</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div onclick="selectOperation('pengurangan')" id="opCardSub" class="bg-white border-2 border-turquoise rounded-3xl p-6 cursor-pointer shadow-soft hover:scale-[1.01] transition-all">
+              <div class="w-10 h-10 rounded-xl bg-turquoise-light text-turquoise flex items-center justify-center font-bold text-lg mb-3">−</div>
+              <h3 class="font-extrabold text-navy text-lg">Pengurangan Bersusun</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-4">Mengamati prosedur pengurangan bersusun, termasuk meminjam bila relevan.</p>
+              <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center font-mono text-2xl font-bold text-navy">
+                71 − 38 = ?
+              </div>
+            </div>
+
+            <div onclick="selectOperation('penjumlahan')" id="opCardAdd" class="bg-white border-2 border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-turquoise shadow-soft transition-all">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold text-lg mb-3">+</div>
+              <h3 class="font-extrabold text-navy text-lg">Penjumlahan Bersusun</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-4">Mengamati prosedur penjumlahan bersusun, termasuk menyimpan bila relevan.</p>
+              <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 text-center font-mono text-2xl font-bold text-navy">
+                47 + 36 = ?
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs flex items-center justify-between">
+            <div class="text-xs text-slate-600">
+              <span class="font-bold text-navy">Paket Soal:</span> 15 Soal Pilihan Ganda • Akses Tamu Tanpa Akun
+            </div>
+            <button onclick="goToScreen(7)" class="bg-coral-red hover:bg-rose-600 text-white font-extrabold px-6 py-3 rounded-xl text-xs shadow-xs">
+              Buat Sesi Kuis →
+            </button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 7: DETAIL SESI & BAGIKAN QR ==================== -->
+    <section id="screen-7" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+          <nav class="space-y-1 text-xs font-bold text-slate-600">
+            <button onclick="goToScreen(4)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Dashboard</button>
+            <button onclick="goToScreen(5)" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-turquoise font-extrabold shadow-2xs">Sesi Kuis</button>
+            <button onclick="goToScreen(11)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Hasil & Diagnosis</button>
+          </nav>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-4 text-xs text-emerald-900 font-bold flex items-center gap-2">
+            <i class="fa-solid fa-circle-check text-emerald-600"></i>
+            Sesi berhasil dibuat. Bagikan kode atau QR kepada siswa.
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-navy">Sesi KRN-4821</h1>
+              <p class="text-xs text-slate-500">Pengurangan Bersusun • 15 soal • Dibuat 7 Nov 2026</p>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="goToScreen(11)" class="bg-turquoise text-white font-bold px-4 py-2 rounded-xl text-xs">Lihat Hasil</button>
+              <button class="border border-slate-200 text-navy font-bold px-4 py-2 rounded-xl text-xs">Tutup Sesi</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center shadow-soft">
+              <div class="text-xs font-bold text-slate-400">Kode Sesi</div>
+              <div class="font-mono text-3xl font-black text-navy my-3">KRN-4821</div>
+              <button onclick="navigator.clipboard.writeText('KRN-4821')" class="bg-slate-100 hover:bg-slate-200 text-navy font-bold text-xs px-4 py-2 rounded-xl w-full">Salin Kode</button>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center shadow-soft">
+              <div class="text-xs font-bold text-slate-400">Tautan Bergabung</div>
+              <div class="text-xs font-mono text-slate-600 truncate my-4">kirana.app/kuis/KRN-4821</div>
+              <button onclick="navigator.clipboard.writeText('https://kirana.app/kuis/KRN-4821')" class="bg-slate-100 hover:bg-slate-200 text-navy font-bold text-xs px-4 py-2 rounded-xl w-full">Salin Tautan</button>
+            </div>
+
+            <div class="bg-white border border-slate-200 rounded-3xl p-6 text-center shadow-soft">
+              <div class="text-xs font-bold text-slate-400 mb-2">QR Code</div>
+              <div class="w-24 h-24 bg-slate-900 mx-auto rounded-xl flex items-center justify-center text-white font-mono text-xs">
+                [ QR CODE ]
+              </div>
+              <button class="bg-slate-100 hover:bg-slate-200 text-navy font-bold text-xs px-4 py-2 rounded-xl w-full mt-3">Layar Penuh QR</button>
+            </div>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+            <h2 class="font-bold text-navy text-sm mb-3">Pengumpulkan Real-time (6 Siswa)</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="bg-slate-50 p-3 rounded-xl text-xs font-bold text-navy flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Fajar (09.20)</div>
+              <div class="bg-slate-50 p-3 rounded-xl text-xs font-bold text-navy flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Ayu (09.18)</div>
+              <div class="bg-slate-50 p-3 rounded-xl text-xs font-bold text-navy flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Dimas (09.17)</div>
+              <div class="bg-slate-50 p-3 rounded-xl text-xs font-bold text-navy flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Sekar (09.16)</div>
+              <div class="bg-slate-50 p-3 rounded-xl text-xs font-bold text-navy flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Bima (09.15)</div>
+              <div class="bg-slate-50 p-3 rounded-xl text-xs font-bold text-navy flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Rara (09.14)</div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 8: ONBOARDING SISWA NAMA & IKON (SCREEN C1) ==================== -->
+    <section id="screen-8" class="screen-page w-full min-h-[80vh] flex items-center justify-center p-6 hidden">
+      <div class="max-w-md w-full bg-white border-2 border-slate-200 rounded-3xl p-8 shadow-soft text-center">
+        <div class="w-24 h-24 mx-auto animate-float mb-2 flex items-center justify-center">
+          <script>document.write(getKiranaLogoSVG(84,84));</script>
+        </div>
+
+        <div class="bg-turquoise-light border border-turquoise/30 rounded-2xl p-2.5 mb-4 text-xs font-bold text-turquoise">
+          Kamu masuk ke kuis: Pengurangan Bersusun (KRN-4821)
+        </div>
+
+        <h2 class="text-2xl font-extrabold text-navy">Siapa Namamu?</h2>
+        <p class="text-xs text-slate-500 mt-1 mb-6">Tulis nama panggilanmu dan pilih ikon karakter favoritmu!</p>
+
+        <div class="space-y-5 text-left">
+          <div>
+            <label class="block text-xs font-bold text-navy mb-1">Nama Panggilan *</label>
+            <input type="text" id="studentNameInput" value="Rara" placeholder="Contoh: Rara" class="w-full bg-slate-50 border-2 border-slate-200 focus:border-turquoise rounded-2xl px-4 py-3 text-sm font-bold text-navy focus:outline-none">
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-navy mb-2">Pilih Ikon Karaktermu:</label>
+            <div class="grid grid-cols-2 gap-3">
+              <div onclick="selectGender('female')" id="avatarFemale" class="avatar-card avatar-card-selected-female border-2 border-pink-300 bg-pink-50 rounded-2xl p-3 text-center cursor-pointer">
+                <div class="w-10 h-10 bg-pink-200 rounded-full flex items-center justify-center mx-auto text-lg mb-1">👧</div>
+                <div class="text-xs font-extrabold text-pink-700">Perempuan</div>
+              </div>
+              <div onclick="selectGender('male')" id="avatarMale" class="avatar-card border-2 border-slate-200 bg-slate-50 rounded-2xl p-3 text-center cursor-pointer">
+                <div class="w-10 h-10 bg-sky-200 rounded-full flex items-center justify-center mx-auto text-lg mb-1">👦</div>
+                <div class="text-xs font-extrabold text-sky-700">Laki-Laki</div>
+              </div>
+            </div>
+          </div>
+
+          <button onclick="goToScreen(9)" class="w-full bg-coral-red hover:bg-rose-600 text-white font-extrabold py-3.5 rounded-2xl text-sm transition-all shadow-md mt-2">
+            Mulai Mengerjakan 🚀
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 9: PLAYER KUIS SISWA - SOAL BERSUSUN (SCREEN C2) ==================== -->
+    <section id="screen-9" class="screen-page w-full min-h-[90vh] py-6 px-4 hidden">
+      <!-- Top Bar HUD -->
+      <div class="max-w-2xl mx-auto flex items-center justify-between mb-4">
+        <div class="cursor-pointer" onclick="goToScreen(1)">
+          <script>document.write(getKiranaLogoSVG(34,34));</script>
+        </div>
+        <div class="flex-1 max-w-xs mx-4">
+          <div class="flex justify-between text-[11px] font-bold text-slate-500 mb-1">
+            <span>Soal 4 dari 15</span>
+            <span>27% selesai</span>
+          </div>
+          <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-full bg-royal-blue w-1/4 rounded-full"></div>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="bg-slate-100 text-slate-600 font-mono text-[10px] font-bold px-2 py-1 rounded">Data demo</span>
+          <span class="bg-pink-100 text-pink-700 font-bold text-xs px-2.5 py-1 rounded-full">RA</span>
+          <span class="text-xs font-bold text-navy hidden sm:inline">Rara · KRN-4821</span>
+        </div>
+      </div>
+
+      <!-- SINGLE CENTERED VERTICAL STACK CARD -->
+      <div class="max-w-2xl mx-auto bg-white border-2 border-slate-200 rounded-3xl p-6 sm:p-8 shadow-soft text-center flex flex-col items-center">
+        
+        <span class="bg-blue-50 text-royal-blue text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2">SOAL 4</span>
+        <h2 class="text-xl font-extrabold text-navy mb-1">Hitung pengurangan berikut</h2>
+        <p class="text-xs text-slate-400 mb-6">Kerjakan sesuai cara yang kamu pahami.</p>
+
+        <!-- Vertical Math Monospace Box -->
+        <div class="bg-slate-50/50 border border-slate-100 rounded-2xl p-6 w-full max-w-xs mx-auto mb-8 text-center font-mono text-5xl font-extrabold text-navy leading-snug tracking-wider">
+          <div class="text-right pr-6">71</div>
+          <div class="text-right pr-6"><span class="mr-4 text-slate-400">−</span>38</div>
+          <div class="border-b-4 border-navy w-full my-2"></div>
+          <div class="text-right pr-6 text-turquoise">?</div>
+        </div>
+
+        <!-- Option Grid (Horizontal Tiles Row) -->
+        <div class="w-full text-left mb-4">
+          <label class="block text-xs font-bold text-navy mb-2">Pilih hasilmu</label>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <button onclick="selectQuizOption(this, 43)" class="option-card bg-white border-2 border-slate-200 rounded-2xl p-4 text-center text-xl font-bold text-navy">
+              43
+            </button>
+            <button onclick="selectQuizOption(this, 32)" class="option-card bg-white border-2 border-slate-200 rounded-2xl p-4 text-center text-xl font-bold text-navy">
+              32
+            </button>
+            <button onclick="selectQuizOption(this, 33)" class="option-card option-selected bg-white border-2 border-royal-blue rounded-2xl p-4 text-center text-xl font-bold text-navy relative">
+              33
+              <span class="block text-[10px] font-bold text-royal-blue mt-0.5">✓ Dipilih</span>
+            </button>
+            <button onclick="selectQuizOption(this, 47)" class="option-card bg-white border-2 border-slate-200 rounded-2xl p-4 text-center text-xl font-bold text-navy">
+              47
+            </button>
+          </div>
+        </div>
+
+        <!-- Dashed Special Option -->
+        <button onclick="selectQuizOption(this, 'none')" class="w-full bg-white border-2 border-dashed border-slate-300 hover:border-slate-400 text-slate-600 font-bold text-xs py-3 rounded-2xl mb-4 transition-all">
+          Hasil saya tidak ada di pilihan
+        </button>
+
+        <!-- Dynamic Status Subtext -->
+        <div id="quizStatusText" class="text-xs font-semibold text-emerald-600 mb-6 flex items-center justify-center gap-1">
+          <i class="fa-solid fa-check text-[10px]"></i> Pilihanmu: 33 · masih bisa diganti
+        </div>
+
+        <!-- Bottom Controls Bar -->
+        <div class="w-full flex items-center justify-between border-t border-slate-100 pt-6">
+          <button onclick="toggleHint()" class="bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-200 font-bold text-xs px-4 py-3 rounded-2xl flex items-center gap-2">
+            💡 Bantuan Kiki
+          </button>
+          <div class="flex gap-2">
+            <button onclick="goToScreen(10)" class="border-2 border-slate-200 text-navy font-bold text-xs px-5 py-3 rounded-2xl hover:bg-slate-50">Lewati</button>
+            <button onclick="goToScreen(10)" class="bg-royal-blue hover:bg-blue-700 text-white font-extrabold text-xs px-6 py-3 rounded-2xl shadow-md">Lanjut →</button>
+          </div>
+        </div>
+
+        <!-- Mascot Speech Box (Hidden Scaffolding) -->
+        <div id="hintBox" class="mt-4 w-full bg-turquoise-light border border-turquoise/30 rounded-2xl p-3 text-xs text-navy text-left hidden">
+          <span class="font-bold text-turquoise">💡 Petunjuk Kiki:</span> 1 puluhan sudah dipinjam ($70 \rightarrow 60$). Lalu hitung $11 - 8 = 3$, dan $60 - 30 = 30$. Totalnya $33$!
+        </div>
+
+      </div>
+
+      <div class="text-center text-[11px] text-slate-400 mt-4">
+        Di laptop: tekan <code class="bg-slate-100 px-1 py-0.5 rounded">Tab</code> untuk berpindah pilihan, <code class="bg-slate-100 px-1 py-0.5 rounded">Spasi</code> untuk memilih, <code class="bg-slate-100 px-1 py-0.5 rounded">Enter</code> untuk lanjut.
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 10: RINGKASAN & KUMPULKAN JAWABAN ==================== -->
+    <section id="screen-10" class="screen-page w-full min-h-[80vh] flex items-center justify-center p-6 hidden">
+      <div class="max-w-md w-full bg-white border-2 border-slate-200 rounded-3xl p-8 shadow-soft text-center">
+        <h2 class="text-2xl font-extrabold text-navy">Soal 15 dari 15 selesai</h2>
+        <h3 class="text-lg font-bold text-slate-600 mb-6">Siap dikumpulkan?</h3>
+
+        <div class="space-y-3 mb-6 text-left">
+          <div class="bg-emerald-50 border border-emerald-200 p-3.5 rounded-2xl flex justify-between items-center text-xs font-bold text-emerald-900">
+            <span>✓ Memilih jawaban</span>
+            <span class="text-sm font-black">12</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 p-3.5 rounded-2xl flex justify-between items-center text-xs font-bold text-amber-900">
+            <span>? Hasil tidak ada di pilihan</span>
+            <span class="text-sm font-black">1</span>
+          </div>
+          <div class="bg-slate-50 border border-slate-200 p-3.5 rounded-2xl flex justify-between items-center text-xs font-bold text-slate-600">
+            <span>→ Dilewati</span>
+            <span class="text-sm font-black">2</span>
+          </div>
+        </div>
+
+        <div class="text-left mb-6">
+          <div class="text-xs font-bold text-navy mb-2">Soal yang kamu lewati:</div>
+          <div class="flex gap-2">
+            <button onclick="goToScreen(9)" class="bg-slate-100 border border-slate-200 text-navy font-bold text-xs px-3 py-1.5 rounded-xl">Kembali ke soal 7</button>
+            <button onclick="goToScreen(9)" class="bg-slate-100 border border-slate-200 text-navy font-bold text-xs px-3 py-1.5 rounded-xl">Kembali ke soal 12</button>
+          </div>
+        </div>
+
+        <button onclick="triggerConfetti(); goToScreen(11);" class="w-full bg-meadow-green hover:bg-emerald-600 text-white font-extrabold py-3.5 rounded-2xl text-sm transition-all shadow-md">
+          Kumpulkan Jawaban 🎉
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 11: DASHBOARD HASIL & DIAGNOSIS KELAS ==================== -->
+    <section id="screen-11" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+          <nav class="space-y-1 text-xs font-bold text-slate-600">
+            <button onclick="goToScreen(4)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Dashboard</button>
+            <button onclick="goToScreen(5)" class="w-full text-left px-3.5 py-2.5 rounded-xl hover:bg-white text-slate-600">Sesi Kuis</button>
+            <button onclick="goToScreen(11)" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-turquoise font-extrabold shadow-2xs">Hasil & Diagnosis</button>
+          </nav>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <h1 class="text-2xl font-extrabold text-navy">Hasil & Diagnosis Kelas</h1>
+              <p class="text-xs text-slate-500">Pilih sesi, lalu buka detail siswa untuk melihat dugaan pola dan buktinya.</p>
+            </div>
+            <select class="bg-white border border-slate-200 font-bold rounded-xl px-3.5 py-2 text-xs text-navy">
+              <option>Sesi KRN-4821 - Pengurangan (6 pengumpulkan)</option>
+            </select>
+          </div>
+
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+            <table class="w-full text-left text-xs">
+              <thead>
+                <tr class="border-b border-slate-100 text-slate-400 font-semibold">
+                  <th class="py-2.5">Siswa</th>
+                  <th class="py-2.5">Benar</th>
+                  <th class="py-2.5">Pilihan Salah</th>
+                  <th class="py-2.5">Di Luar Opsi</th>
+                  <th class="py-2.5">Dilewati</th>
+                  <th class="py-2.5">Hasil Diagnosis</th>
+                  <th class="py-2.5 text-right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr>
+                  <td class="py-3 font-bold text-navy">Rara <span class="block text-[10px] font-normal text-slate-400">09.14</span></td>
+                  <td class="py-3 text-emerald-600 font-bold">7</td>
+                  <td class="py-3 text-rose-500 font-bold">5</td>
+                  <td class="py-3 text-amber-600 font-bold">1</td>
+                  <td class="py-3 text-slate-400 font-bold">2</td>
+                  <td class="py-3"><span class="bg-amber-50 text-amber-800 border border-amber-200 font-bold px-2 py-0.5 rounded-full text-[11px]">1 pola didukung</span></td>
+                  <td class="py-3 text-right"><button onclick="goToScreen(12)" class="text-royal-blue font-bold hover:underline">Lihat Detail</button></td>
+                </tr>
+                <tr>
+                  <td class="py-3 font-bold text-navy">Bima <span class="block text-[10px] font-normal text-slate-400">09.15</span></td>
+                  <td class="py-3 text-emerald-600 font-bold">4</td>
+                  <td class="py-3 text-rose-500 font-bold">9</td>
+                  <td class="py-3 text-amber-600 font-bold">1</td>
+                  <td class="py-3 text-slate-400 font-bold">1</td>
+                  <td class="py-3"><span class="bg-amber-50 text-amber-800 border border-amber-200 font-bold px-2 py-0.5 rounded-full text-[11px]">2 pola didukung</span></td>
+                  <td class="py-3 text-right"><button onclick="goToScreen(12)" class="text-royal-blue font-bold hover:underline">Lihat Detail</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 12: DETAIL DIAGNOSIS SISWA & TARL (RARA) ==================== -->
+    <section id="screen-12" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+          <nav class="space-y-1 text-xs font-bold text-slate-600">
+            <button onclick="goToScreen(11)" class="w-full text-left px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-turquoise font-extrabold shadow-2xs">← Hasil Diagnosis</button>
+          </nav>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-pink-100 text-pink-700 rounded-full font-bold flex items-center justify-center">RA</div>
+            <div>
+              <h1 class="text-xl font-extrabold text-navy">Rara • Diagnosis Pengurangan (KRN-4821)</h1>
+              <p class="text-xs text-slate-400">Dikumpulkan 7 Nov 2026, 09.14</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-4 gap-3">
+            <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-center"><div class="text-xs text-emerald-700 font-bold">Benar</div><div class="text-xl font-black text-emerald-800">7</div></div>
+            <div class="bg-rose-50 border border-rose-200 rounded-xl p-3 text-center"><div class="text-xs text-rose-700 font-bold">Salah</div><div class="text-xl font-black text-rose-800">5</div></div>
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-center"><div class="text-xs text-amber-700 font-bold">Di Luar Opsi</div><div class="text-xl font-black text-amber-800">1</div></div>
+            <div class="bg-slate-100 border border-slate-200 rounded-xl p-3 text-center"><div class="text-xs text-slate-600 font-bold">Dilewati</div><div class="text-xl font-black text-slate-700">2</div></div>
+          </div>
+
+          <!-- Diagnostic Result Box -->
+          <div class="bg-white border-2 border-amber-300 rounded-3xl p-6 shadow-soft space-y-4">
+            <span class="bg-amber-100 text-amber-900 font-extrabold text-[10px] px-3 py-1 rounded-full uppercase">POLA DIDUKUNG (1)</span>
+            <h2 class="text-lg font-extrabold text-navy">Lupa mengurangi angka setelah meminjam</h2>
+            <p class="text-xs text-slate-600">Siswa cenderung menghitung satuan dengan meminjam, namun angka puluhan tidak dikurangi 1.</p>
+            
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-950 font-bold">
+              💡 SARAN PEMERIKSAAN TARL: Minta siswa menunjukkan angka mana yang berubah setelah meminjam menggunakan alat peraga blok puluhan.
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 13: PANDUAN PENGGUNAAN GURU ==================== -->
+    <section id="screen-13" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <h1 class="text-2xl font-extrabold text-navy">Panduan Penggunaan</h1>
+          <p class="text-xs text-slate-500">Enam hal yang perlu diketahui untuk memakai Kirana di kelas.</p>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+              <div class="w-7 h-7 bg-turquoise/20 text-turquoise rounded-lg font-bold flex items-center justify-center text-xs mb-2">1</div>
+              <h3 class="font-bold text-navy text-sm mb-1">Membuat Sesi</h3>
+              <p class="text-xs text-slate-500">Pilih operasi penjumlahan atau pengurangan bersusun untuk 15 soal.</p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+              <div class="w-7 h-7 bg-turquoise/20 text-turquoise rounded-lg font-bold flex items-center justify-center text-xs mb-2">2</div>
+              <h3 class="font-bold text-navy text-sm mb-1">Membagikan Kuis</h3>
+              <p class="text-xs text-slate-500">Tampilkan QR code di layar kelas atau bagikan kode 7 karakter.</p>
+            </div>
+            <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-2xs">
+              <div class="w-7 h-7 bg-turquoise/20 text-turquoise rounded-lg font-bold flex items-center justify-center text-xs mb-2">3</div>
+              <h3 class="font-bold text-navy text-sm mb-1">Memantau Sesi</h3>
+              <p class="text-xs text-slate-500">Lihat daftar pengumpulkan real-time saat jam pelajaran berlangsung.</p>
+            </div>
+          </div>
+        </main>
+      </div>
+    </section>
+
+    <!-- ==================== SCREEN 14: PENGATURAN AKUN GURU ==================== -->
+    <section id="screen-14" class="screen-page w-full hidden">
+      <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-50 border-r border-slate-200 p-6">
+          <div class="cursor-pointer mb-6" onclick="goToScreen(1)">
+            <script>document.write(getKiranaLogoSVG(36,36));</script>
+          </div>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-8 space-y-6">
+          <h1 class="text-2xl font-extrabold text-navy">Pengaturan Akun</h1>
+
+          <div class="max-w-md bg-white border border-slate-200 rounded-3xl p-6 shadow-soft space-y-4">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-navy text-white rounded-2xl font-bold flex items-center justify-center text-lg">W</div>
+              <div>
+                <div class="font-extrabold text-navy text-base">Bu Wulan</div>
+                <div class="text-xs text-slate-400">Guru SD • Akun Demo</div>
+              </div>
+            </div>
+            <div class="border-t border-slate-100 pt-4 text-xs space-y-2">
+              <div class="flex justify-between"><span class="text-slate-400">Email:</span><span class="font-bold text-navy">guru@kirana.demo</span></div>
+              <div class="flex justify-between"><span class="text-slate-400">Jenis Akun:</span><span class="font-bold text-navy">Akun Demo (Lokal)</span></div>
+            </div>
+            <button onclick="goToScreen(1)" class="w-full bg-slate-100 hover:bg-slate-200 text-rose-600 font-bold text-xs py-3 rounded-2xl transition-all">
+              ← Keluar / Logout
+            </button>
+          </div>
+        </main>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ==================== FLOATING TOOLBAR: SCREEN SELECTOR & EXPORT TO JPG ==================== -->
+  <div class="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 bg-navy/95 backdrop-blur-md text-white p-2.5 rounded-2xl shadow-2xl border border-slate-700 flex flex-col sm:flex-row items-center gap-2 max-w-[95vw] md:max-w-max">
+    <div class="flex items-center gap-1.5 overflow-x-auto max-w-full">
+      <span class="text-[10px] font-black text-turquoise px-1.5 whitespace-nowrap">SCREEN:</span>
+      <button onclick="goToScreen(1)" id="navBtn1" class="px-2.5 py-1 rounded-xl text-xs font-bold bg-turquoise text-white">1.Beranda</button>
+      <button onclick="goToScreen(2)" id="navBtn2" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">2.Login</button>
+      <button onclick="goToScreen(3)" id="navBtn3" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">3.Kode</button>
+      <button onclick="goToScreen(4)" id="navBtn4" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">4.Dashboard</button>
+      <button onclick="goToScreen(5)" id="navBtn5" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">5.Sesi</button>
+      <button onclick="goToScreen(6)" id="navBtn6" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">6.Wizard</button>
+      <button onclick="goToScreen(7)" id="navBtn7" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">7.Detail</button>
+      <button onclick="goToScreen(8)" id="navBtn8" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">8.C1-Nama</button>
+      <button onclick="goToScreen(9)" id="navBtn9" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">9.C2-Kuis</button>
+      <button onclick="goToScreen(10)" id="navBtn10" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">10.Ringkasan</button>
+      <button onclick="goToScreen(11)" id="navBtn11" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">11.Diagnosis</button>
+      <button onclick="goToScreen(12)" id="navBtn12" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">12.TaRL</button>
+      <button onclick="goToScreen(13)" id="navBtn13" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">13.Panduan</button>
+      <button onclick="goToScreen(14)" id="navBtn14" class="px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700">14.Akun</button>
+    </div>
+
+    <!-- EXPORT TO JPG BUTTONS -->
+    <div class="flex items-center gap-1.5 border-t sm:border-t-0 sm:border-l border-slate-700 pt-2 sm:pt-0 sm:pl-2.5 w-full sm:w-auto justify-end">
+      <button onclick="exportCurrentScreenJPG()" class="bg-coral-red hover:bg-rose-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-xl shadow-xs whitespace-nowrap flex items-center gap-1.5">
+        <i class="fa-solid fa-download text-[10px]"></i> Download JPG
+      </button>
+      <button onclick="exportAllScreensJPG()" class="bg-meadow-green hover:bg-emerald-600 text-white font-extrabold text-xs px-3 py-1.5 rounded-xl shadow-xs whitespace-nowrap flex items-center gap-1.5">
+        <i class="fa-solid fa-file-export text-[10px]"></i> Download All (14 JPG)
+      </button>
+    </div>
+  </div>
+
+  <script>
+    let currentScreen = 1;
+
+    function goToScreen(screenNum) {
+      currentScreen = screenNum;
+      document.querySelectorAll('.screen-page').forEach(page => page.classList.add('hidden'));
+      const targetPage = document.getElementById(`screen-${screenNum}`);
+      if (targetPage) {
+        targetPage.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      for (let i = 1; i <= 14; i++) {
+        const btn = document.getElementById(`navBtn${i}`);
+        if (btn) {
+          if (i === screenNum) {
+            btn.className = "px-2.5 py-1 rounded-xl text-xs font-bold bg-turquoise text-white shadow-xs";
+          } else {
+            btn.className = "px-2.5 py-1 rounded-xl text-xs font-bold hover:bg-slate-700 text-slate-300";
+          }
+        }
+      }
+    }
+
+    // Export single current screen as high-res JPG
+    async function exportCurrentScreenJPG() {
+      const targetPage = document.getElementById(`screen-${currentScreen}`);
+      if (!targetPage) return;
+
+      try {
+        const canvas = await html2canvas(targetPage, {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#FFFFFF',
+          windowWidth: 1440
+        });
+        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        const link = document.createElement('a');
+        link.href = imgData;
+        link.download = `Kirana_Screen_${currentScreen}.jpg`;
+        link.click();
+      } catch (err) {
+        console.error('Export Error:', err);
+      }
+    }
+
+    // Batch Export All 14 Screens as JPG
+    async function exportAllScreensJPG() {
+      const originalScreen = currentScreen;
+      for (let i = 1; i <= 14; i++) {
+        goToScreen(i);
+        await new Promise(r => setTimeout(r, 200));
+        const targetPage = document.getElementById(`screen-${i}`);
+        if (targetPage) {
+          try {
+            const canvas = await html2canvas(targetPage, {
+              scale: 2,
+              useCORS: true,
+              backgroundColor: '#FFFFFF',
+              windowWidth: 1440
+            });
+            const imgData = canvas.toDataURL('image/jpeg', 0.95);
+            const link = document.createElement('a');
+            link.href = imgData;
+            link.download = `Kirana_Page_${i}.jpg`;
+            link.click();
+          } catch (err) {
+            console.error(`Export Error Screen ${i}:`, err);
+          }
+        }
+      }
+      goToScreen(originalScreen);
+    }
+
+    function selectGender(gender) {
+      const femaleCard = document.getElementById('avatarFemale');
+      const maleCard = document.getElementById('avatarMale');
+      if (gender === 'female') {
+        femaleCard.className = "avatar-card avatar-card-selected-female border-2 border-pink-300 bg-pink-50 rounded-2xl p-3 text-center cursor-pointer";
+        maleCard.className = "avatar-card border-2 border-slate-200 bg-slate-50 rounded-2xl p-3 text-center cursor-pointer";
+      } else {
+        maleCard.className = "avatar-card avatar-card-selected-male border-2 border-sky-300 bg-sky-50 rounded-2xl p-3 text-center cursor-pointer";
+        femaleCard.className = "avatar-card border-2 border-slate-200 bg-slate-50 rounded-2xl p-3 text-center cursor-pointer";
+      }
+    }
+
+    function selectQuizOption(element, value) {
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.classList.remove('option-selected', 'border-royal-blue');
+        card.classList.add('border-slate-200');
+        const badge = card.querySelector('span');
+        if (badge) badge.remove();
+      });
+
+      if (value !== 'none') {
+        element.classList.add('option-selected');
+        element.insertAdjacentHTML('beforeend', '<span class="block text-[10px] font-bold text-royal-blue mt-0.5">✓ Dipilih</span>');
+      }
+
+      const statusText = document.getElementById('quizStatusText');
+      if (statusText) {
+        statusText.innerHTML = value === 'none' 
+          ? '<i class="fa-solid fa-info-circle text-[10px]"></i> Pilihanmu: Hasil di luar opsi'
+          : `<i class="fa-solid fa-check text-[10px]"></i> Pilihanmu: ${value} · masih bisa diganti`;
+      }
+    }
+
+    function toggleHint() {
+      const hintBox = document.getElementById('hintBox');
+      if (hintBox) {
+        hintBox.classList.toggle('hidden');
+      }
+    }
+
+    function triggerConfetti() {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    function selectOperation(op) {
+      const cardSub = document.getElementById('opCardSub');
+      const cardAdd = document.getElementById('opCardAdd');
+      if (op === 'pengurangan') {
+        cardSub.className = "bg-white border-2 border-turquoise rounded-3xl p-6 cursor-pointer shadow-soft hover:scale-[1.01] transition-all";
+        cardAdd.className = "bg-white border-2 border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-turquoise shadow-soft transition-all";
+      } else {
+        cardAdd.className = "bg-white border-2 border-turquoise rounded-3xl p-6 cursor-pointer shadow-soft hover:scale-[1.01] transition-all";
+        cardSub.className = "bg-white border-2 border-slate-200 rounded-3xl p-6 cursor-pointer hover:border-turquoise shadow-soft transition-all";
+      }
+    }
+  </script>
+</body>
+</html>

@@ -1,4 +1,33 @@
-.venv/
+# --- Python ---
 __pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# --- Jupyter ---
 .ipynb_checkpoints/
+
+# --- Hasil training (model, checkpoint) ---
+# dataset/ dan reports/ sengaja tetap dilacak.
 artifacts/
+*.pkl
+*.joblib
+*.ckpt
+*.pt
+*.h5
+
+# --- Rahasia & konfigurasi lokal ---
+.env
+.env.*
+!.env.example
+
+# --- Log, editor & OS ---
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
