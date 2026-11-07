@@ -1,0 +1,8 @@
+/.env
+.venv/
+node_modules/
+.npm-cache/
+__pycache__/
+.ipynb_checkpoints/
+.local/
+data/

@@ -1,0 +1,3 @@
+# Keep input hashes stable across checkouts, including Windows.
+dataset/*.csv -text
+simulation.py -text
