@@ -169,6 +169,8 @@ export interface HasilSiswa extends Pengumpulan {
   jumlahPola: number;
   /** P2.2: false jika model ML tidak termuat saat hasil dihitung; status hanya dari aturan hitung. */
   modelAktif: boolean;
+  /** Penilaian semua pola; dipakai rekap kelas. */
+  penilaian: PatternAssessment[];
 }
 
 /** Detail diagnosis satu siswa (D2). */

@@ -7,6 +7,9 @@ SKENARIO_PENGUJIAN_P2.md
 DAMPAK_TOMBOL_DI_LUAR_OPSI.md
 DAMPAK_TANPA_LEWATI.md
 AKUMULASI_HASIL_KELAS.md
+SKENARIO_PENGUJIAN_REKAP.md
+HASIL_KELAS_DUMMY.md
+kelas_dummy_log.json
 
 # Catatan: ml/notebooks/train_kirana.ipynb sudah terlacak git, jadi tidak bisa diabaikan lewat file ini.
 # Perubahan lokalnya diabaikan dengan: git update-index --skip-worktree ml/notebooks/train_kirana.ipynb

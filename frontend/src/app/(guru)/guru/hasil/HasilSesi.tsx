@@ -3,6 +3,7 @@ import { namaKategori } from "@/lib/types";
 
 import { useParams, useRouter } from "next/navigation";
 import { LabelDiagnosis } from "@/components/diagnosis/LabelDiagnosis";
+import { RekapKelas } from "@/components/diagnosis/RekapKelas";
 import { Icon } from "@/components/ui/Icon";
 import { Tombol, TombolLink } from "@/components/ui/Tombol";
 import { formatJam, formatTanggal, namaOperasi } from "@/lib/format";
@@ -159,6 +160,7 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
 
   return (
     <div className="flex flex-col gap-3">
+      <RekapKelas sesi={sesi} hasil={baris} />
       {adaTanpaModel && (
         <div role="status" className="flex items-start gap-2.5 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
           <Icon nama="peringatan" ukuran={18} />
