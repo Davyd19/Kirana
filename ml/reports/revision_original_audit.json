@@ -1,0 +1,182 @@
+{
+  "database_available": true,
+  "attempts": [
+    {
+      "audit_session": 1,
+      "operation": "addition",
+      "counts": {
+        "correct": 13,
+        "wrong": 2
+      },
+      "status": "insufficient_evidence",
+      "patterns": [
+        {
+          "pattern": "A1",
+          "exact": 0,
+          "unique": 0,
+          "shown": 11,
+          "answered": 11,
+          "score": 0.0005471805694340283,
+          "threshold": 0.74
+        },
+        {
+          "pattern": "A2",
+          "exact": 1,
+          "unique": 1,
+          "shown": 12,
+          "answered": 12,
+          "score": 0.003947426803109777,
+          "threshold": 0.61
+        },
+        {
+          "pattern": "A3",
+          "exact": 1,
+          "unique": 1,
+          "shown": 10,
+          "answered": 10,
+          "score": 0.02682284159638233,
+          "threshold": 0.64
+        },
+        {
+          "pattern": "A4",
+          "exact": 0,
+          "unique": 0,
+          "shown": 12,
+          "answered": 12,
+          "score": 0.000427517374892522,
+          "threshold": 0.71
+        }
+      ]
+    },
+    {
+      "audit_session": 2,
+      "operation": "subtraction",
+      "counts": {
+        "wrong": 12,
+        "correct": 3
+      },
+      "status": "insufficient_evidence",
+      "patterns": [
+        {
+          "pattern": "S1",
+          "exact": 5,
+          "unique": 4,
+          "shown": 13,
+          "answered": 13,
+          "score": 0.8998285271392337,
+          "threshold": 0.92
+        },
+        {
+          "pattern": "S2",
+          "exact": 3,
+          "unique": 3,
+          "shown": 11,
+          "answered": 11,
+          "score": 0.03653601014933345,
+          "threshold": 0.9
+        },
+        {
+          "pattern": "S3",
+          "exact": 3,
+          "unique": 3,
+          "shown": 7,
+          "answered": 7,
+          "score": 0.22243059686194389,
+          "threshold": 0.56
+        },
+        {
+          "pattern": "S4",
+          "exact": 1,
+          "unique": 0,
+          "shown": 6,
+          "answered": 6,
+          "score": 6.473516846433627e-05,
+          "threshold": 0.79
+        },
+        {
+          "pattern": "S5",
+          "exact": 1,
+          "unique": 1,
+          "shown": 6,
+          "answered": 6,
+          "score": 0.009044661182493977,
+          "threshold": 0.63
+        },
+        {
+          "pattern": "S6",
+          "exact": 0,
+          "unique": 0,
+          "shown": 5,
+          "answered": 5,
+          "score": 0.0004246882765883309,
+          "threshold": 0.75
+        }
+      ]
+    },
+    {
+      "audit_session": 3,
+      "operation": "subtraction",
+      "counts": {
+        "wrong": 12,
+        "correct": 3
+      },
+      "status": "insufficient_evidence",
+      "patterns": [
+        {
+          "pattern": "S1",
+          "exact": 4,
+          "unique": 2,
+          "shown": 14,
+          "answered": 14,
+          "score": 0.062219867240147976,
+          "threshold": 0.92
+        },
+        {
+          "pattern": "S2",
+          "exact": 3,
+          "unique": 3,
+          "shown": 12,
+          "answered": 12,
+          "score": 0.0285993537828965,
+          "threshold": 0.9
+        },
+        {
+          "pattern": "S3",
+          "exact": 1,
+          "unique": 1,
+          "shown": 8,
+          "answered": 8,
+          "score": 0.0031614430554820173,
+          "threshold": 0.56
+        },
+        {
+          "pattern": "S4",
+          "exact": 3,
+          "unique": 1,
+          "shown": 6,
+          "answered": 6,
+          "score": 0.011705518432817478,
+          "threshold": 0.79
+        },
+        {
+          "pattern": "S5",
+          "exact": 2,
+          "unique": 2,
+          "shown": 5,
+          "answered": 5,
+          "score": 0.07314084154036254,
+          "threshold": 0.63
+        },
+        {
+          "pattern": "S6",
+          "exact": 0,
+          "unique": 0,
+          "shown": 5,
+          "answered": 5,
+          "score": 0.000241735375123427,
+          "threshold": 0.75
+        }
+      ]
+    }
+  ]
+}

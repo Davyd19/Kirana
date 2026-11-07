@@ -1,9 +1,13 @@
 import express from 'express';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+const envFile = fileURLToPath(new URL('.env', import.meta.url));
+if (existsSync(envFile)) process.loadEnvFile(envFile);
 import { pathToFileURL } from 'node:url';
 
 export function createGateway({
   upstream = process.env.KIRANA_FLASK_URL ?? 'http://127.0.0.1:5000',
-  frontend = process.env.KIRANA_FRONTEND_URL ?? 'http://localhost:5173',
+  frontend = process.env.KIRANA_FRONTEND_URL ?? 'http://localhost:3000',
   timeoutMs = 7000,
 } = {}) {
   const upstreamOrigin = new URL(upstream).origin;
@@ -30,7 +34,7 @@ export function createGateway({
       return res.status(400).json({ error: 'Bad Request', message: 'Alamat API tidak valid.' });
     }
     const headers = {};
-    for (const name of ['authorization', 'content-type']) {
+    for (const name of ['authorization', 'content-type', 'cookie', 'origin']) {
       if (req.get(name)) headers[name] = req.get(name);
     }
     const body = ['GET', 'HEAD'].includes(req.method) ? undefined : req.body;
@@ -40,6 +44,7 @@ export function createGateway({
       });
       const type = upstreamResponse.headers.get('content-type');
       if (type) res.set('Content-Type', type);
+      for (const cookie of upstreamResponse.headers.getSetCookie()) res.append('Set-Cookie', cookie);
       const bytes = Buffer.from(await upstreamResponse.arrayBuffer());
       return res.status(upstreamResponse.status).send(bytes);
     } catch (error) {
@@ -58,6 +63,6 @@ export function createGateway({
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const host = process.env.KIRANA_GATEWAY_HOST ?? '127.0.0.1';
-  const port = Number(process.env.KIRANA_GATEWAY_PORT ?? '3000');
+  const port = Number(process.env.KIRANA_GATEWAY_PORT ?? '3001');
   createGateway().listen(port, host, () => console.log(`Kirana Express listening at http://${host}:${port}`));
 }

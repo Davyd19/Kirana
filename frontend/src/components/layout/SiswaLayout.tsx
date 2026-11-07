@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { Icon } from "@/components/ui/Icon";
 
 /**
  * Kerangka halaman berkartu di tengah, gaya baru (A2, A3, C1, C3).
@@ -54,16 +53,6 @@ export function GelembungInfo({ children }: { children: ReactNode }) {
   return (
     <div className="rounded-2xl border border-turquoise/30 bg-turquoise-light px-3 py-2.5 text-xs font-bold text-turquoise-ink">
       {children}
-    </div>
-  );
-}
-
-/** Catatan data demo kuning (desain baru). Ikon vektor, bukan emoji. */
-export function CatatanDemoBaru({ children }: { children: ReactNode }) {
-  return (
-    <div className="flex items-start gap-2 rounded-2xl border border-amber-200 bg-amber-50 p-3 text-left text-xs leading-relaxed text-amber-900">
-      <Icon nama="lampu" ukuran={16} className="mt-px flex-none text-amber-700" />
-      <span>{children}</span>
     </div>
   );
 }

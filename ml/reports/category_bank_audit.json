@@ -1,0 +1,236 @@
+[
+  {
+    "split": "train",
+    "operation": "addition",
+    "category": "tens",
+    "families": 205,
+    "shown_opportunities": {
+      "A1": 135,
+      "A2": 92,
+      "A3": 0,
+      "A4": 131
+    }
+  },
+  {
+    "split": "train",
+    "operation": "addition",
+    "category": "hundreds",
+    "families": 280,
+    "shown_opportunities": {
+      "A1": 156,
+      "A2": 117,
+      "A3": 72,
+      "A4": 148
+    }
+  },
+  {
+    "split": "train",
+    "operation": "addition",
+    "category": "thousands",
+    "families": 210,
+    "shown_opportunities": {
+      "A1": 111,
+      "A2": 97,
+      "A3": 62,
+      "A4": 115
+    }
+  },
+  {
+    "split": "train",
+    "operation": "subtraction",
+    "category": "tens",
+    "families": 210,
+    "shown_opportunities": {
+      "S1": 104,
+      "S2": 104,
+      "S3": 22,
+      "S4": 22,
+      "S5": 0,
+      "S6": 0
+    }
+  },
+  {
+    "split": "train",
+    "operation": "subtraction",
+    "category": "hundreds",
+    "families": 280,
+    "shown_opportunities": {
+      "S1": 178,
+      "S2": 182,
+      "S3": 51,
+      "S4": 30,
+      "S5": 50,
+      "S6": 94
+    }
+  },
+  {
+    "split": "train",
+    "operation": "subtraction",
+    "category": "thousands",
+    "families": 210,
+    "shown_opportunities": {
+      "S1": 121,
+      "S2": 130,
+      "S3": 38,
+      "S4": 24,
+      "S5": 39,
+      "S6": 108
+    }
+  },
+  {
+    "split": "validation",
+    "operation": "addition",
+    "category": "tens",
+    "families": 45,
+    "shown_opportunities": {
+      "A1": 31,
+      "A2": 20,
+      "A3": 0,
+      "A4": 29
+    }
+  },
+  {
+    "split": "validation",
+    "operation": "addition",
+    "category": "hundreds",
+    "families": 60,
+    "shown_opportunities": {
+      "A1": 43,
+      "A2": 28,
+      "A3": 9,
+      "A4": 41
+    }
+  },
+  {
+    "split": "validation",
+    "operation": "addition",
+    "category": "thousands",
+    "families": 45,
+    "shown_opportunities": {
+      "A1": 26,
+      "A2": 24,
+      "A3": 16,
+      "A4": 26
+    }
+  },
+  {
+    "split": "validation",
+    "operation": "subtraction",
+    "category": "tens",
+    "families": 45,
+    "shown_opportunities": {
+      "S1": 26,
+      "S2": 26,
+      "S3": 2,
+      "S4": 2,
+      "S5": 0,
+      "S6": 0
+    }
+  },
+  {
+    "split": "validation",
+    "operation": "subtraction",
+    "category": "hundreds",
+    "families": 60,
+    "shown_opportunities": {
+      "S1": 37,
+      "S2": 45,
+      "S3": 10,
+      "S4": 9,
+      "S5": 9,
+      "S6": 16
+    }
+  },
+  {
+    "split": "validation",
+    "operation": "subtraction",
+    "category": "thousands",
+    "families": 45,
+    "shown_opportunities": {
+      "S1": 28,
+      "S2": 30,
+      "S3": 7,
+      "S4": 4,
+      "S5": 9,
+      "S6": 21
+    }
+  },
+  {
+    "split": "test",
+    "operation": "addition",
+    "category": "tens",
+    "families": 45,
+    "shown_opportunities": {
+      "A1": 34,
+      "A2": 27,
+      "A3": 0,
+      "A4": 33
+    }
+  },
+  {
+    "split": "test",
+    "operation": "addition",
+    "category": "hundreds",
+    "families": 60,
+    "shown_opportunities": {
+      "A1": 35,
+      "A2": 24,
+      "A3": 17,
+      "A4": 33
+    }
+  },
+  {
+    "split": "test",
+    "operation": "addition",
+    "category": "thousands",
+    "families": 45,
+    "shown_opportunities": {
+      "A1": 24,
+      "A2": 19,
+      "A3": 17,
+      "A4": 24
+    }
+  },
+  {
+    "split": "test",
+    "operation": "subtraction",
+    "category": "tens",
+    "families": 45,
+    "shown_opportunities": {
+      "S1": 20,
+      "S2": 20,
+      "S3": 5,
+      "S4": 5,
+      "S5": 0,
+      "S6": 0
+    }
+  },
+  {
+    "split": "test",
+    "operation": "subtraction",
+    "category": "hundreds",
+    "families": 60,
+    "shown_opportunities": {
+      "S1": 38,
+      "S2": 41,
+      "S3": 9,
+      "S4": 4,
+      "S5": 11,
+      "S6": 16
+    }
+  },
+  {
+    "split": "test",
+    "operation": "subtraction",
+    "category": "thousands",
+    "families": 45,
+    "shown_opportunities": {
+      "S1": 25,
+      "S2": 30,
+      "S3": 11,
+      "S4": 5,
+      "S5": 5,
+      "S6": 22
+    }
+  }
+]

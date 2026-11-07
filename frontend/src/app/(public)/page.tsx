@@ -22,7 +22,7 @@ const LANGKAH = [
 
 const KEUNGGULAN = [
   { judul: "Siswa tidak perlu akun", isi: "Cukup pindai QR dan isi nama panggilan." },
-  { judul: "Satu paket soal per sesi", isi: "Semua siswa dengan kode yang sama mengerjakan 15 soal yang sama." },
+  { judul: "Kuis semi-adaptif", isi: "9 soal inti yang sama dalam sesi, lalu 6 soal lanjutan sesuai respons siswa." },
   { judul: "Lebih dari jumlah benar", isi: "Pilihan salah, hasil di luar opsi, dan soal dilewati dicatat terpisah." },
   { judul: "Dugaan disertai bukti", isi: "Setiap dugaan pola menampilkan contoh soal dan jawaban siswa yang mendukungnya." },
   { judul: "Saran pemeriksaan lanjutan", isi: "Satu langkah konkret untuk mengecek dugaan bersama siswa." },
@@ -76,9 +76,9 @@ export default function LandingPage() {
             <div className="w-full rounded-xl border border-amber-200 bg-amber-50 p-3 text-left text-xs font-medium text-amber-900">
               <div className="mb-0.5 flex items-center gap-1.5 font-bold text-amber-950">
                 <Icon nama="segitiga" ukuran={14} tebal={2.5} />
-                DUGAAN POLA CONTOH
+                DIAGNOSIS SETELAH 15 SOAL
               </div>
-              “Lupa mengurangi angka setelah meminjam” (4 dari 5 kesempatan mendukung).
+              Laporan guru menampilkan dugaan yang didukung jawaban siswa. Model dievaluasi pada data sintetis; akurasi pada siswa nyata belum divalidasi.
             </div>
           </div>
         </section>

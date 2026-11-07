@@ -1,10 +1,10 @@
 "use client";
+import { namaKategori } from "@/lib/types";
 
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { QRCodeCanvas, QRCodeSVG } from "qrcode.react";
 import { useRef, useState } from "react";
-import { CatatanDemo } from "@/components/ui/CatatanDemo";
 import { Dialog } from "@/components/ui/Dialog";
 import { Icon } from "@/components/ui/Icon";
 import { StatusBadge } from "@/components/ui/StatusBadge";
@@ -28,10 +28,10 @@ export function DetailSesi() {
     return (
       <div role="status" aria-busy="true" className="flex flex-col gap-6">
         <span className="sr-only">Memuat detail sesi</span>
-        <div className="h-10 w-72 max-w-full rounded-input bg-[#E4E8EF]" />
+        <div className="h-10 w-72 max-w-full rounded-xl bg-[#E4E8EF]" />
         <div className="flex flex-wrap gap-6">
-          <div className="h-72 flex-[999_1_520px] rounded-card bg-[#E4E8EF]" />
-          <div className="h-72 flex-[1_1_300px] rounded-card bg-[#E4E8EF]" />
+          <div className="h-72 flex-[999_1_520px] rounded-2xl bg-[#E4E8EF]" />
+          <div className="h-72 flex-[1_1_300px] rounded-2xl bg-[#E4E8EF]" />
         </div>
       </div>
     );
@@ -39,13 +39,13 @@ export function DetailSesi() {
 
   if (hasil.status === "gagal") {
     return (
-      <div className="flex flex-col items-start gap-4 rounded-card border border-border bg-surface p-6">
+      <div className="flex flex-col items-start gap-4 rounded-2xl border border-slate-200 bg-white p-6">
         <strong className="text-[17px]">{hasil.pesan}</strong>
         <div className="flex flex-wrap gap-2.5">
-          <Tombol varian="sekunder" onClick={muatUlang}>
+          <Tombol varian="garis" onClick={muatUlang}>
             Coba lagi
           </Tombol>
-          <TombolLink href="/guru/sesi" varian="sekunder">
+          <TombolLink href="/guru/sesi" varian="garis">
             Kembali ke daftar sesi
           </TombolLink>
         </div>
@@ -76,6 +76,7 @@ function IsiDetail({
   const [sesi, setSesi] = useState(data.sesi);
   const [dialogTutup, setDialogTutup] = useState(false);
   const [menutup, setMenutup] = useState(false);
+  const [galat, setGalat] = useState("");
   const [layarPenuh, setLayarPenuh] = useState(false);
   const [tersalin, setTersalin] = useState<"kode" | "tautan" | null>(null);
   const kanvasRef = useRef<HTMLCanvasElement>(null);
@@ -83,7 +84,7 @@ function IsiDetail({
   // Status terbaru bisa datang dari tombol Tutup Sesi (state lokal) atau Muat ulang.
   const status = sesi.status === "ditutup" || data.sesi.status === "ditutup" ? "ditutup" : "terbuka";
   const terbuka = status === "terbuka";
-  const tautan = `${window.location.origin}/kuis/${sesi.kode}`;
+  const tautan = data.sesi.joinUrl;
 
   async function salin(teks: string, jenis: "kode" | "tautan") {
     try {
@@ -113,10 +114,13 @@ function IsiDetail({
   async function konfirmasiTutup() {
     if (menutup) return;
     setMenutup(true);
+    setGalat("");
     try {
       setSesi(await tutupSesi(sesi.id));
       setBanner(false);
       setDialogTutup(false);
+    } catch (error) {
+      setGalat(error instanceof Error ? error.message : "Sesi belum dapat ditutup. Coba lagi.");
     } finally {
       setMenutup(false);
     }
@@ -128,14 +132,14 @@ function IsiDetail({
     <>
       <Link
         href="/guru/sesi"
-        className="flex min-h-8 items-center gap-1.5 self-start text-sm font-bold text-primary no-underline hover:text-primary-hover"
+        className="flex min-h-8 items-center gap-1.5 self-start text-sm font-bold text-turquoise-ink no-underline hover:text-navy"
       >
         <Icon nama="panah-kiri" ukuran={16} tebal={2.5} />
         Kembali ke daftar sesi
       </Link>
 
       {banner && terbuka && (
-        <div role="status" className="-mt-3 flex items-center justify-between gap-3 rounded-input bg-success-soft px-4 py-3.5 text-[15px] font-semibold text-[#0F4A2A]">
+        <div role="status" className="-mt-3 flex items-center justify-between gap-3 rounded-xl bg-success-soft px-4 py-3.5 text-[15px] font-semibold text-[#0F4A2A]">
           <span className="flex items-center gap-2.5">
             <Icon nama="centang" ukuran={20} tebal={2.5} />
             Sesi berhasil dibuat. Bagikan kode atau QR kepada siswa.
@@ -159,16 +163,16 @@ function IsiDetail({
             </h1>
             <StatusBadge status={status} />
           </div>
-          <p className="m-0 text-[15px] text-muted">
-            {namaOperasiBersusun(sesi.operasi)} · {sesi.jumlahSoal} soal · dibuat {formatTanggalJam(sesi.dibuatPada)}
+          <p className="m-0 text-[15px] text-slate-500">
+            {namaOperasiBersusun(sesi.operasi)} · {namaKategori(sesi.numberCategory)} · {sesi.jumlahSoal} soal · dibuat {formatTanggalJam(sesi.dibuatPada)}
           </p>
         </div>
         <div className="flex flex-wrap gap-2.5">
-          <TombolLink href={`/guru/hasil/${sesi.id}`} varian="gelap">
+          <TombolLink href={`/guru/hasil/${sesi.id}`} varian="navy">
             Lihat Hasil
           </TombolLink>
           {terbuka && (
-            <Tombol varian="sekunder" onClick={() => setDialogTutup(true)}>
+            <Tombol varian="garis" onClick={() => setDialogTutup(true)}>
               <Icon nama="gembok" ukuran={18} tebal={2.2} />
               Tutup Sesi
             </Tombol>
@@ -179,7 +183,7 @@ function IsiDetail({
       <div className="flex flex-wrap items-start gap-6">
         <section
           aria-labelledby="bagikan"
-          className="flex min-w-0 flex-[999_1_520px] flex-col gap-5 rounded-card border border-border bg-surface p-[clamp(20px,3vw,28px)]"
+          className="flex min-w-0 flex-[999_1_520px] flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-[clamp(20px,3vw,28px)]"
         >
           <h2 id="bagikan" className="m-0 text-lg font-extrabold">
             Bagikan ke siswa
@@ -188,7 +192,7 @@ function IsiDetail({
             <>
               <div className="flex flex-wrap items-center gap-6">
                 <figure className="mx-auto my-0 flex flex-none flex-col items-center gap-2">
-                  <div className="rounded-opsi border-[1.5px] border-border-strong bg-surface p-3.5">
+                  <div className="rounded-opsi border-[1.5px] border-slate-300 bg-white p-3.5">
                     <QRCodeCanvas
                       ref={kanvasRef}
                       value={tautan}
@@ -199,15 +203,15 @@ function IsiDetail({
                       aria-label={`QR untuk membuka kuis ${sesi.kode}`}
                     />
                   </div>
-                  <figcaption className="text-[13px] text-muted">Pindai dengan kamera HP</figcaption>
+                  <figcaption className="text-[13px] text-slate-500">Pindai dengan kamera HP</figcaption>
                 </figure>
                 <div className="flex min-w-0 flex-[1_1_260px] flex-col gap-4">
                   <div className="flex flex-col gap-1">
-                    <span className="text-sm font-semibold text-muted">Kode sesi</span>
+                    <span className="text-sm font-semibold text-slate-500">Kode sesi</span>
                     <span className="angka text-[clamp(32px,4vw,42px)] font-semibold tracking-[0.08em]">{sesi.kode}</span>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label htmlFor="tautan" className="text-sm font-semibold text-muted">
+                    <label htmlFor="tautan" className="text-sm font-semibold text-slate-500">
                       Tautan bergabung
                     </label>
                     <input
@@ -215,23 +219,23 @@ function IsiDetail({
                       readOnly
                       value={tautan}
                       onFocus={(e) => e.currentTarget.select()}
-                      className="angka box-border h-12 w-full min-w-0 rounded-[10px] border-[1.5px] border-border-strong bg-page px-3.5 text-sm text-ink"
+                      className="angka box-border h-12 w-full min-w-0 rounded-[10px] border-[1.5px] border-slate-300 bg-slate-50 px-3.5 text-sm text-navy"
                     />
                   </div>
                   <div className="grid grid-cols-2 gap-2.5">
-                    <Tombol varian="sekunder" className={kelasTombolKecil} onClick={() => salin(sesi.kode, "kode")}>
+                    <Tombol varian="garis" className={kelasTombolKecil} onClick={() => salin(sesi.kode, "kode")}>
                       <Icon nama={tersalin === "kode" ? "centang" : "salin"} ukuran={16} />
                       {tersalin === "kode" ? "Kode tersalin" : "Salin kode"}
                     </Tombol>
-                    <Tombol varian="sekunder" className={kelasTombolKecil} onClick={() => salin(tautan, "tautan")}>
+                    <Tombol varian="garis" className={kelasTombolKecil} onClick={() => salin(tautan, "tautan")}>
                       <Icon nama={tersalin === "tautan" ? "centang" : "salin"} ukuran={16} />
                       {tersalin === "tautan" ? "Tautan tersalin" : "Salin tautan"}
                     </Tombol>
-                    <Tombol varian="sekunder" className={kelasTombolKecil} onClick={unduhQr}>
+                    <Tombol varian="garis" className={kelasTombolKecil} onClick={unduhQr}>
                       <Icon nama="unduh" ukuran={16} />
                       Unduh QR
                     </Tombol>
-                    <Tombol varian="sekunder" className={kelasTombolKecil} onClick={() => setLayarPenuh(true)}>
+                    <Tombol varian="garis" className={kelasTombolKecil} onClick={() => setLayarPenuh(true)}>
                       <Icon nama="layar-penuh" ukuran={16} />
                       Layar penuh
                     </Tombol>
@@ -245,20 +249,16 @@ function IsiDetail({
                   </p>
                 </div>
               </div>
-              <CatatanDemo>
-                <strong>Mode demo:</strong> data tersimpan di browser ini saja. Untuk mencoba alur lengkap, buka tautan
-                di tab biasa pada browser yang sama (bukan mode privat). Siswa di perangkat lain bisa mengerjakan
-                KRN-4821, tetapi pengumpulannya tidak muncul di sini.
-              </CatatanDemo>
+              <p className="text-sm text-slate-500">Peserta bergabung: {data.sesi.jumlahPeserta}. Siswa yang sudah mulai tetap boleh menyelesaikan kuis setelah sesi ditutup.</p>
             </>
           ) : (
-            <div className="flex items-start gap-3.5 rounded-input bg-page p-[18px]">
-              <span className="flex-none text-ink-2">
+            <div className="flex items-start gap-3.5 rounded-xl bg-slate-50 p-[18px]">
+              <span className="flex-none text-slate-600">
                 <Icon nama="gembok" ukuran={22} />
               </span>
               <div className="flex flex-col gap-1">
                 <strong className="text-base">Sesi sudah ditutup</strong>
-                <span className="text-[15px] leading-normal text-ink-2">
+                <span className="text-[15px] leading-normal text-slate-600">
                   Kode <span className="angka">{sesi.kode}</span> dan QR tidak lagi menerima peserta baru. Hasil yang
                   sudah terkumpul tetap bisa dilihat.
                 </span>
@@ -282,15 +282,16 @@ function IsiDetail({
         labelledBy="dlg-judul"
         describedBy="dlg-isi"
       >
+        {galat && <p role="alert" className="text-danger">{galat}</p>}
         <h2 id="dlg-judul" className="m-0 text-[22px] font-extrabold">
           Tutup sesi <span className="angka">{sesi.kode}</span>?
         </h2>
-        <p id="dlg-isi" className="m-0 text-[15px] leading-[1.55] text-ink-2">
+        <p id="dlg-isi" className="m-0 text-[15px] leading-[1.55] text-slate-600">
           Siswa baru tidak bisa bergabung lagi. Hasil {data.pengumpulan.length} siswa yang sudah mengumpulkan tetap
           tersimpan. Sesi yang ditutup tidak bisa dibuka kembali.
         </p>
         <div className="mt-1.5 flex flex-wrap justify-end gap-2.5">
-          <Tombol varian="sekunder" onClick={() => setDialogTutup(false)} disabled={menutup}>
+          <Tombol varian="garis" onClick={() => setDialogTutup(false)} disabled={menutup}>
             Batal
           </Tombol>
           <Tombol
@@ -318,10 +319,10 @@ function IsiDetail({
           aria-label={`QR untuk membuka kuis ${sesi.kode}`}
         />
         <span className="angka text-[clamp(36px,7vw,72px)] font-semibold tracking-[0.08em]">{sesi.kode}</span>
-        <span className="text-lg text-muted">
+        <span className="text-lg text-slate-500">
           atau buka <span className="angka">{window.location.host}/join</span> lalu ketik kode di atas
         </span>
-        <Tombol varian="sekunder" onClick={() => setLayarPenuh(false)}>
+        <Tombol varian="garis" onClick={() => setLayarPenuh(false)}>
           <Icon nama="tutup" ukuran={18} />
           Tutup layar penuh
         </Tombol>
@@ -364,7 +365,7 @@ function BagianPengumpulan({
         </button>
       </div>
       <p aria-live="polite" className="m-0 text-xs text-slate-500">
-        Terakhir diperbarui {formatJam(diperbarui)} · tidak otomatis, tekan Muat ulang
+        Terakhir diperbarui {formatJam(diperbarui)} · diperbarui otomatis setiap 5 detik
       </p>
 
       {pengumpulan.length === 0 ? (

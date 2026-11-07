@@ -1,16 +1,17 @@
 "use client";
+import { namaKategori } from "@/lib/types";
 
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { SoalBersusun } from "@/components/soal/SoalBersusun";
-import { DataDemoBadge } from "@/components/ui/DataDemoBadge";
+import { ErrorBanner } from "@/components/ui/ErrorBanner";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { Tombol } from "@/components/ui/Tombol";
 import { namaOperasi } from "@/lib/format";
 import type { Attempt, Respons, SesiSiswa, Soal } from "@/lib/types";
-import { simpanRespons, simpanUrutan } from "@/services/kirana";
-import { LayarDitutup, LayarJaringan, LayarMemuat, LayarTidakValid } from "../../LayarStatus";
+import { simpanRespons } from "@/services/kirana";
+import { LayarJaringan, LayarMemuat, LayarTidakValid } from "../../LayarStatus";
 import { useKuis } from "../../KuisProvider";
 
 /** C2 · Siswa mengerjakan satu soal per layar (desain baru, tanpa bantuan dan avatar). */
@@ -30,8 +31,10 @@ export function KerjakanSoal() {
       ? `/kuis/${kode}`
       : siap.attempt.dikumpulkanPada
         ? `/kuis/${kode}/selesai`
-        : !urutanValid
-          ? `/kuis/${kode}/kerjakan/1`
+        : siap.attempt.respons.length === 15
+          ? `/kuis/${kode}/konfirmasi`
+          : !urutanValid || urutan !== siap.attempt.urutanTerakhir
+          ? `/kuis/${kode}/kerjakan/${siap.attempt.urutanTerakhir}`
           : null;
   useEffect(() => {
     if (tujuan) router.replace(tujuan);
@@ -40,7 +43,6 @@ export function KerjakanSoal() {
   if (keadaan.fase === "memuat") return <LayarMemuat />;
   if (keadaan.fase === "tidak_valid") return <LayarTidakValid />;
   if (keadaan.fase === "jaringan") return <LayarJaringan pesan={keadaan.pesan} onCobaLagi={muatUlang} />;
-  if (keadaan.sesi.status !== "terbuka") return <LayarDitutup kode={keadaan.sesi.kode} />;
   if (tujuan || !keadaan.attempt) return <LayarMemuat teks="Mengarahkan…" />;
 
   return (
@@ -77,50 +79,35 @@ function LayarSoal({
 }) {
   const router = useRouter();
   const s = soal[urutan - 1];
-  const total = soal.length;
+  const total = sesi.jumlahSoal;
   const [pilihan, setPilihan] = useState<Pilihan>(() => pilihanAwal(attempt.respons.find((r) => r.soalId === s.id)));
   const [pindah, setPindah] = useState(false);
+  const [galat, setGalat] = useState("");
+  const mengirim = useRef(false);
   const judulRef = useRef<HTMLHeadingElement>(null);
 
-  // Catat posisi terakhir agar siswa bisa melanjutkan setelah memuat ulang.
   const kode = sesi.kode;
-  useEffect(() => {
-    simpanUrutan(kode, urutan).then(onTersimpan);
-    judulRef.current?.focus();
-  }, [kode, urutan, onTersimpan]);
-
-  const dijawab = attempt.respons.filter((r) => soal.some((x) => x.id === r.soalId)).length;
+  useEffect(() => { judulRef.current?.focus(); }, [urutan]);
+  const dijawab = attempt.respons.length;
   const persen = Math.round((dijawab / total) * 100);
-
-  async function simpan(r: Respons) {
-    onTersimpan(await simpanRespons(kode, r, urutan));
+  function pilihOpsi(opsiId: string) { if (!mengirim.current) setPilihan({ jenis: "opsi", opsiId }); }
+  function pilihLuar() { if (!mengirim.current) setPilihan({ jenis: "di_luar_opsi" }); }
+  async function kirim(respons: Respons) {
+    if (mengirim.current) return;
+    mengirim.current = true;
+    setPindah(true); setGalat("");
+    try {
+      onTersimpan(await simpanRespons(kode, respons, urutan));
+      router.replace(urutan < total ? `/kuis/${kode}/kerjakan/${urutan + 1}` : `/kuis/${kode}/konfirmasi`);
+    } catch (error) {
+      setGalat(error instanceof Error ? error.message : "Jawaban belum terkirim. Coba lagi.");
+      setPindah(false); mengirim.current = false;
+    }
   }
-
-  function pilihOpsi(opsiId: string) {
-    setPilihan({ jenis: "opsi", opsiId });
-    simpan({ jenis: "opsi", soalId: s.id, opsiId });
-  }
-
-  function pilihLuar() {
-    setPilihan({ jenis: "di_luar_opsi" });
-    simpan({ jenis: "di_luar_opsi", soalId: s.id });
-  }
-
-  function berikutnya() {
-    setPindah(true);
-    router.push(urutan < total ? `/kuis/${kode}/kerjakan/${urutan + 1}` : `/kuis/${kode}/konfirmasi`);
-  }
-
-  async function lewati() {
-    if (pindah) return;
-    setPilihan(null);
-    await simpan({ jenis: "dilewati", soalId: s.id });
-    berikutnya();
-  }
-
+  function lewati() { void kirim({ jenis: "dilewati", soalId: s.id }); }
   function lanjut() {
-    if (!pilihan || pindah) return;
-    berikutnya();
+    if (!pilihan) return;
+    void kirim(pilihan.jenis === "opsi" ? { jenis: "opsi", soalId: s.id, opsiId: pilihan.opsiId } : { jenis: "di_luar_opsi", soalId: s.id });
   }
 
   // Enter pada pilihan = lanjut (Spasi = memilih), sesuai petunjuk keyboard.
@@ -163,7 +150,7 @@ function LayarSoal({
           </div>
         </div>
         <div className="flex items-center gap-2">
-          <DataDemoBadge />
+
           <span className="text-xs font-bold text-navy">
             {attempt.nama} · <span className="angka">{kode}</span>
           </span>
@@ -178,7 +165,7 @@ function LayarSoal({
         <h1 ref={judulRef} tabIndex={-1} className="m-0 mb-1 text-xl font-extrabold text-navy focus:outline-none">
           Hitung {namaOperasi(sesi.operasi).toLowerCase()} berikut
         </h1>
-        <p className="m-0 mb-6 text-xs text-slate-500">Kerjakan sesuai cara yang kamu pahami.</p>
+        <p className="m-0 mb-6 text-xs text-slate-500">{namaKategori(sesi.numberCategory)} · Kerjakan sesuai cara yang kamu pahami.</p>
 
         <div className="mx-auto mb-8 flex w-full max-w-xs justify-center rounded-2xl border border-slate-100 bg-slate-50/50 p-6">
           <SoalBersusun atas={s.operandAtas} bawah={s.operandBawah} tanda={s.tanda} gaya="baru" />
@@ -244,15 +231,16 @@ function LayarSoal({
           {statusTeks}
         </p>
 
+        {galat && <ErrorBanner>{galat} Pilihanmu tetap ada; tekan Lanjut atau Lewati untuk mencoba lagi.</ErrorBanner>}
         <div className="flex w-full items-center justify-end gap-2 border-t border-slate-100 pt-6 max-[600px]:sticky max-[600px]:bottom-0 max-[600px]:bg-white max-[600px]:pb-[env(safe-area-inset-bottom,0px)]">
-          <Tombol varian="garis" tinggi={48} onClick={lewati} aria-disabled={pindah} className="max-[600px]:flex-1">
+          <Tombol varian="garis" tinggi={48} onClick={lewati} disabled={pindah} className="max-[600px]:flex-1">
             Lewati
           </Tombol>
           <Tombol
             varian="biru"
             tinggi={48}
             onClick={lanjut}
-            disabled={!pilihan}
+            disabled={!pilihan || pindah}
             aria-busy={pindah}
             className="max-[600px]:flex-1"
           >

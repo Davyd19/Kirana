@@ -1,106 +1,125 @@
 # Backend Kirana
 
-Frontend memanggil Express. Express meneruskan permintaan API ke Flask. Flask mengelola kuis, skoring, dan diagnosis serta menyimpan sesi di MySQL.
+## Persiapan Windows
 
-## Struktur
+Gunakan Python 3.13, Node.js 22.9 atau lebih baru, dan MySQL 8 (misalnya Laragon). Aktifkan MySQL terlebih dahulu. Tidak perlu menjalankan Apache.
 
-| Lokasi | Tanggung jawab |
-|---|---|
-| `server.mjs` | Server Express yang menerima permintaan frontend. |
-| `app.py` | Perintah untuk memulai Flask. |
-| `src/api.py` dan `src/storage.py` | Rute dan otorisasi Flask, transaksi MySQL, serta penyimpanan sesi dan respons. |
-| `src/quiz.py` | Bank soal, opsi, pemilihan adaptif, dan pencatatan bukti. |
-| `src/settings.py` | Konfigurasi koneksi MySQL. |
-| `tests/` | Pengujian Flask dan Express. |
-
-Training, notebook, dan model ada di [folder ml](../ml/README.md). Flask memuat model tersebut saat mulai. Perintah lama `python train.py` di folder backend tetap mengarah ke training yang sama.
-
-## Menjalankan di Windows
-
-Buka PowerShell di `Source Code/Kirana/backend`. Gunakan Node.js 22, Python 3.13, dan MySQL 8.4.
+Buka PowerShell:
 
 ```powershell
-npm ci
+cd 'C:\Davyd\Kirana\Source Code\Kirana\backend'
 py -3.13 -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+npm ci
 ```
 
-Backend membaca bank soal dari `../ml/dataset/questions.csv` dan membentuk opsi diagnostik dengan prosedur di `../ml/simulation.py`. Keduanya sudah ada di repositori. `KIRANA_DATA_DIR` dapat menunjuk ke folder lain yang berisi `dataset/questions.csv`.
+Jika `.venv` sudah tersedia, lewati pembuatan venv. Perintah memakai Python venv secara langsung sehingga tidak memerlukan Activate.ps1.
 
-### Siapkan MySQL
-
-Nyalakan MySQL di Laragon. Masuk melalui klien MySQL dengan akun administrator, lalu jalankan sekali. Ganti kata sandi contoh dengan kata sandi yang kamu pilih.
+Buat database dan pengguna menggunakan akun pengelola MySQL, jika belum ada:
 
 ```sql
 CREATE DATABASE IF NOT EXISTS kirana CHARACTER SET utf8mb4;
-CREATE USER IF NOT EXISTS 'kirana'@'127.0.0.1' IDENTIFIED BY 'ganti_password_ini';
-GRANT CREATE, SELECT, INSERT, UPDATE, REFERENCES ON kirana.* TO 'kirana'@'127.0.0.1';
+CREATE USER IF NOT EXISTS 'kirana'@'127.0.0.1' IDENTIFIED BY 'ganti_password_database';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, ALTER, INDEX, REFERENCES
+ON kirana.* TO 'kirana'@'127.0.0.1';
 ```
 
-Jika kamu sudah mempunyai database dan akun sendiri, gunakan nama serta kredensial akun itu. Flask membuat tabel `sessions`, `attempts`, dan `turns` saat mulai.
+Samakan password database dengan `KIRANA_DB_PASSWORD` pada `.env`. Jika memakai akun MySQL yang sudah ada, isi konfigurasi akun tersebut; jangan jalankan contoh SQL dengan password placeholder.
 
-Salin [`.env.example`](.env.example) menjadi `.env` di folder backend, lalu isi kredensial MySQL milikmu. File `.env` diabaikan oleh Git.
+File `.env` lokal sudah dipertahankan dan dilengkapi konfigurasi yang belum ada. Pada checkout baru, salin `.env.example` menjadi `.env`. File ini tidak masuk Git.
 
-```powershell
-Copy-Item .env.example .env
+```dotenv
+KIRANA_DB_HOST=127.0.0.1
+KIRANA_DB_PORT=3306
+KIRANA_DB_NAME=kirana
+KIRANA_DB_USER=kirana
+KIRANA_DB_PASSWORD='password_database'
+KIRANA_FRONTEND_URL=http://localhost:3000
+KIRANA_GATEWAY_HOST=127.0.0.1
+KIRANA_GATEWAY_PORT=3001
+KIRANA_FLASK_URL=http://127.0.0.1:5000
+KIRANA_FLASK_PORT=5000
+KIRANA_SEED_EMAIL=guru@kirana.local
+KIRANA_SEED_NAME=Guru Kirana
+KIRANA_SEED_PASSWORD='password_login_guru'
 ```
 
-Pakai port MySQL dari Laragon jika berbeda dari 3306. Tulis kata sandi yang mengandung spasi atau `#` dalam tanda kutip. Variabel lingkungan yang sudah diatur di terminal diutamakan jika namanya sama dengan pengaturan di `.env`.
+Password database dan password guru berbeda fungsi. Pada workspace ini password awal guru telah dibuat acak dalam `.env`; lihat atau ganti nilainya sebelum pertama menjalankan seeder. Tidak ada password yang ditampilkan di log.
 
-### Mulai Flask dan Express
-
-Jalankan Flask dan Express di terminal terpisah, dari folder backend.
+Jalankan migrasi dan seeder:
 
 ```powershell
-# Terminal 1
-$env:KIRANA_FRONTEND_URL = 'http://localhost:5173'
+.\.venv\Scripts\python.exe migrate.py
+.\.venv\Scripts\python.exe seed.py
+```
+
+Migrasi hanya menambah tabel/kolom; tidak menghapus data lama. Sesi lama tanpa pemilik tidak otomatis diberikan kepada akun seeder. Seeder berulang tidak menggandakan akun atau mengganti sandi akun yang sudah ada. Mengubah `.env` setelah akun dibuat tidak mengubah sandi database guru.
+
+## Menjalankan
+
+Terminal pertama di folder backend:
+
+```powershell
 .\.venv\Scripts\python.exe app.py
 ```
 
+Terminal kedua di folder backend:
+
 ```powershell
-# Terminal 2
-$env:KIRANA_FRONTEND_URL = 'http://localhost:5173'
 npm start
 ```
 
-Express tersedia di `http://127.0.0.1:3000/api` dan Flask di `127.0.0.1:5000`. Periksa dengan `Invoke-RestMethod http://127.0.0.1:3000/api/health`. Alamat layanan dapat diatur lewat `KIRANA_FLASK_PORT`, `KIRANA_FLASK_URL`, dan `KIRANA_GATEWAY_PORT`.
-
-### Mencoba QR dari ponsel
-
-Jalankan frontend agar bisa dibuka melalui jaringan lokal dan sediakan rute `/join/:token`. Atur `KIRANA_FRONTEND_URL` di **kedua terminal** ke alamat frontend yang dapat dibuka dari ponsel, misalnya `http://192.168.1.10:5173` dengan IP komputer yang sebenarnya. Jika browser ponsel memanggil Express langsung, set `$env:KIRANA_GATEWAY_HOST = '0.0.0.0'` sebelum menjalankan Express dan arahkan frontend ke `http://192.168.1.10:3000/api`. Pastikan perangkat berada di jaringan yang sama dan port dapat diakses. Buat sesi baru setelah mengganti URL supaya QR membawa alamat baru. Konfigurasi ini ditujukan untuk pengujian lokal.
-
-## Kontrak API
-
-Semua rute di bawah relatif terhadap alamat Express. Kirim JSON dengan `Content-Type: application/json`. Gunakan `Authorization: Bearer <token>` untuk rute yang membutuhkan token guru atau siswa.
-
-| Permintaan | Masukan dan keluaran |
-|---|---|
-| `GET /api/health` | Status layanan dan `diagnosis_available`. |
-| `POST /api/sessions` | `{"operation":"subtraction"}` atau `addition`. Mengembalikan `session_id`, `operation`, `question_count`, `join_url`, `join_qr_svg`, dan `teacher_token`. Tampilkan SVG sebagai gambar dan `join_url` sebagai tautan yang bisa disalin. |
-| `GET /api/join/:token` | Token dari segmen terakhir tautan. Mengembalikan operasi dan jumlah soal. |
-| `POST /api/join/:token` | `{"nickname":"Ayu"}`. Mengembalikan `attempt_id`, `student_token`, operasi, jumlah soal, dan soal pertama. |
-| `GET /api/attempts/:id/current` | Token siswa. Mengembalikan `question`, `ready_to_finish`, dan `submitted`. |
-| `PUT /api/attempts/:id/responses/:position` | Token siswa. Kirim `{"kind":"selected","option_id":"0"}`, `{"kind":"outside_options"}`, atau `{"kind":"skipped"}`. Mengembalikan `accepted_position`, `question` berikutnya, dan `ready_to_finish`. |
-| `POST /api/attempts/:id/finish` | Token siswa. Setelah 15 respons, mengembalikan `{"submitted":true}`. Aman dikirim ulang. |
-| `GET /api/sessions/:id/results` | Token guru. Mengembalikan `results` untuk peserta yang sudah mengumpulkan. |
-
-Soal berisi `id`, `position` (1–15), `operation`, `operand_1`, `operand_2`, dan empat `options` dengan pasangan `id` dan `value`. Kirim ID opsi sebagai string. Simpan token siswa dan ID percobaan di klien, lalu panggil `current` setelah memuat ulang. Jika pengiriman terganggu, ulangi payload yang sama. Payload berbeda untuk posisi yang sudah dijawab menghasilkan `409`. Setelah respons ke-15, `question` bernilai `null` dan `ready_to_finish` bernilai `true`.
-
-Setiap hasil guru punya `summary` dengan `correct`, `wrong`, `outside_options`, dan `skipped`, serta `diagnosis` dengan status `supported`, `insufficient_evidence`, `no_pattern_detected`, atau `unavailable`. `patterns` memuat bukti dan contoh untuk setiap dugaan yang didukung. `unresolved_patterns` tersedia saat model aktif dan menunjukkan pola yang masih kurang bukti. Kunci jawaban muncul hanya pada contoh di laporan guru.
-
-## Pengujian backend
-
-Untuk tes API lengkap, siapkan database MySQL terpisah agar sesi uji terisolasi dari data aplikasi. Contoh SQL untuk akun lokal di atas:
-
-```sql
-CREATE DATABASE IF NOT EXISTS kirana_test CHARACTER SET utf8mb4;
-GRANT CREATE, SELECT, INSERT, UPDATE, REFERENCES ON kirana_test.* TO 'kirana'@'127.0.0.1';
-```
+Jalankan frontend mengikuti panduannya. Lihat kesehatan melalui **alamat frontend**:
 
 ```powershell
-$env:KIRANA_TEST_DB_NAME = 'kirana_test'
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-npm test
+Invoke-RestMethod http://localhost:3000/api/health
 ```
 
-Tes integrasi dilewati jika `KIRANA_TEST_DB_NAME` belum diatur. Tes kebijakan kuis dan Express dapat dijalankan terpisah.
+`diagnosis_available` dan `category_diagnosis_available` menunjukkan dua cabang model yang berhasil dimuat. Flask mengutamakan satu berkas `ml/artifacts/kirana_model.joblib`, yang dapat diarahkan melalui `KIRANA_MODEL_BUNDLE_PATH`. Sebelum berkas itu ada, Flask masih membaca artefak v1 dan kategori lama jika tersedia. Versi dependensi dan skema wajib cocok. Artefak joblib hanya boleh berasal dari training yang dipercaya. Jika model belum tersedia, kuis dan skor tetap berjalan. Restart Flask setelah mengganti artefak; tidak ada training ulang otomatis.
+
+Semua variabel backend dibaca dari `.env`; variabel terminal mengunggulinya. Restart Express dan Flask setelah konfigurasi diubah.
+
+## Demo VS Code Forward Ports
+
+1. Jalankan ketiga layanan, buka tab **Ports** VS Code, lalu forward port **3000** saja.
+2. Atur visibilitas port agar peserta demo dapat membuka alamatnya tanpa akun VS Code pemilik. Jangan membagikan password guru kepada siswa.
+3. Salin alamat HTTPS publik tersebut ke `KIRANA_FRONTEND_URL` dalam `.env` (tanpa `/join`, query, atau slash akhir).
+4. Restart Express dan Flask. Akses guru dan siswa melalui alamat publik yang sama; setelah mengganti alamat, login guru kembali.
+5. Buat atau buka ulang detail sesi. URL dan QR mengikuti alamat terbaru; kode/token sesi tetap sama. Bagikan ulang QR jika domain tunnel berubah.
+6. MySQL, port 3001, dan port 5000 tidak perlu diteruskan.
+
+Gunakan frontend hasil `npm run build` dan `npm start` saat demo agar tidak tergantung server pengembangan. Domain tunnel lama tidak dapat dialihkan oleh aplikasi jika sudah tidak aktif.
+
+## Pengujian
+
+```powershell
+npm test
+.\.venv\Scripts\python.exe tests\run_mysql_tests.py --mysql-bin C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin
+```
+
+Runner membuat instance MySQL terisolasi pada port kosong, menjalankan tes, lalu menghentikannya. Data tes berada di `.local/mysql-integration-*`; database aplikasi tidak digunakan.
+
+Untuk pengujian browser end-to-end, jalankan `npm ci` dan `npm run build` di frontend terlebih dahulu, lalu:
+
+```powershell
+.\.venv\Scripts\python.exe tests\run_mysql_tests.py --mysql-bin C:\laragon\bin\mysql\mysql-8.4.3-winx64\bin --browser
+```
+
+Runner memilih port kosong dan direktori .next-test terpisah, menjalankan ketiga layanan dan akun guru khusus tes, menguji melalui Microsoft Edge headless, kemudian menghentikan layanan. Gunakan `KIRANA_BROWSER_CHANNEL=chrome` jika ingin Chrome terpasang. Laporan gagal berada di `frontend/test-results`. Pemeriksaan ini tidak melakukan training.
+
+
+## Menjalankan revisi kategori
+
+1. Jalankan `migrate.py` memakai Python venv, lalu restart Flask dan Express. Migrasi menambah kategori dan versi kebijakan tanpa mengubah soal/respons lama.
+2. Build ulang frontend (`npm run build`) lalu jalankan frontend. Pembuatan sesi wajib memilih operasi dan kategori.
+3. Sesi lama bertanda Campuran—sesi lama tetap bisa diselesaikan. Laporan menyertakan versi penilaian dan fingerprint artefak.
+4. Untuk sesi kategori baru, artefak v1 tidak digunakan untuk skor. Sampai model kategori selesai dilatih, laporan memakai bukti aturan dengan status dugaan awal, ambigu, belum cukup, atau tidak terukur.
+5. Ikuti notebook `ml/notebooks/train_kirana.ipynb` untuk training sendiri. Ekspor menghasilkan `ml/artifacts/kirana_model.joblib` berisi model sesi lama dan kategori. Restart Flask setelah ekspor; periksa kedua indikator pada `/api/health`. `KIRANA_MODEL_PATH` dan `KIRANA_CATEGORY_MODEL_PATH` hanya dipakai sebagai jalur transisi sebelum model gabungan tersedia.
+
+Audit ulang respons asli secara read-only:
+
+```powershell
+.\.venv\Scripts\python.exe audit_diagnosis.py --limit 20
+```
+
+Audit menghasilkan diagnosis_audit_latest.json tanpa nama atau token dan membandingkan respons dengan baseline model lama; tidak menimpa audit tiga percobaan awal. Tidak ada respons siswa yang diubah.

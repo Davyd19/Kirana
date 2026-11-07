@@ -4,7 +4,7 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import { normalkanKode } from "@/lib/kode";
 import { KiranaError, type Attempt, type SesiSiswa, type Soal } from "@/lib/types";
-import { ambilAttempt, ambilInfoSesi, ambilSoal } from "@/services/kirana";
+import { ambilAttempt, ambilInfoSesi } from "@/services/kirana";
 
 export type KeadaanKuis =
   | { fase: "memuat" }
@@ -22,9 +22,9 @@ interface NilaiKuis {
 const KuisContext = createContext<NilaiKuis | null>(null);
 
 /**
- * Memuat sesi, paket soal, dan progres siswa SEKALI untuk semua rute
+ * Memuat sesi, soal yang sudah tersedia dan progres siswa untuk semua rute
  * /kuis/[kode]/*, supaya pindah antarsoal tidak memuat ulang data.
- * Kode di URL dinormalkan (misalnya "krn4821" -> "KRN-4821").
+ * Kode di URL dinormalkan (misalnya "krnabc234" -> "KRN-ABC234").
  */
 export function KuisProvider({ children }: { children: ReactNode }) {
   const params = useParams<{ kode: string }>();
@@ -49,8 +49,9 @@ export function KuisProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!kode) return;
     let batal = false;
-    Promise.all([ambilInfoSesi(kode), ambilSoal(kode), ambilAttempt(kode)])
-      .then(([sesi, soal, attempt]) => {
+    Promise.all([ambilInfoSesi(kode), ambilAttempt(kode)])
+      .then(([sesi, attempt]) => {
+        const soal = attempt?.soal ?? [];
         if (!batal) setHasil({ untuk: kunci, keadaan: { fase: "siap", sesi, soal, attempt } });
       })
       .catch((err) => {
@@ -74,7 +75,7 @@ export function KuisProvider({ children }: { children: ReactNode }) {
   const muatUlang = useCallback(() => setPercobaan((n) => n + 1), []);
 
   const setAttempt = useCallback((attempt: Attempt) => {
-    setHasil((h) => (h && h.keadaan.fase === "siap" ? { ...h, keadaan: { ...h.keadaan, attempt } } : h));
+    setHasil((h) => (h && h.keadaan.fase === "siap" ? { ...h, keadaan: { ...h.keadaan, attempt, soal: attempt.soal } } : h));
   }, []);
 
   const nilai = useMemo(() => ({ kode, keadaan, muatUlang, setAttempt }), [kode, keadaan, muatUlang, setAttempt]);

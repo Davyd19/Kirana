@@ -40,7 +40,7 @@ export function tulis<T>(kunci: string, nilai: T): void {
   try {
     window.localStorage.setItem(PREFIX + kunci, JSON.stringify(nilai));
   } catch {
-    // Storage penuh atau diblokir: data demo tidak tersimpan.
+    // Storage penuh atau diblokir; pemanggil memeriksa kredensial setelah menyimpan.
   }
   beritahu();
 }

@@ -3,14 +3,12 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
-import { DataDemoBadge } from "@/components/ui/DataDemoBadge";
 import { Dialog } from "@/components/ui/Dialog";
 import { Icon, type NamaIcon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
-import { Tombol } from "@/components/ui/Tombol";
 import type { AuthState } from "@/lib/types";
 import { useAuth } from "@/lib/useAuth";
-import { keluar, resetDataDemo } from "@/services/kirana";
+import { keluar } from "@/services/kirana";
 
 /** Menu sidebar lama (nama, ikon, urutan). Pengaturan Akun sudah dihapus. */
 const MENU: { href: string; label: string; ikon: NamaIcon }[] = [
@@ -19,17 +17,6 @@ const MENU: { href: string; label: string; ikon: NamaIcon }[] = [
   { href: "/guru/hasil", label: "Hasil & Diagnosis", ikon: "hasil" },
   { href: "/guru/panduan", label: "Panduan Penggunaan", ikon: "panduan" },
 ];
-
-/**
- * Halaman yang memakai gaya lama penuh (latar abu #F5F6F8):
- * Detail Sesi (B4), Hasil & Diagnosis (D1), Panduan (D3).
- * Halaman lain memakai latar putih desain baru.
- */
-function pakaiGayaLama(pathname: string): boolean {
-  if (pathname === "/guru/panduan") return true;
-  if (/^\/guru\/hasil(\/[^/]+)?$/.test(pathname)) return true;
-  return /^\/guru\/sesi\/[^/]+$/.test(pathname) && pathname !== "/guru/sesi/buat";
-}
 
 function Memuat({ teks }: { teks: string }) {
   return (
@@ -45,13 +32,11 @@ function IsiSidebar({
   pathname,
   onNavigasi,
   onKeluar,
-  onReset,
 }: {
   auth: AuthState;
   pathname: string;
   onNavigasi?: () => void;
   onKeluar: () => void;
-  onReset: () => void;
 }) {
   const inisial = auth.guru.nama.replace(/^(Bu|Pak)\s+/i, "").charAt(0).toUpperCase();
   return (
@@ -60,7 +45,7 @@ function IsiSidebar({
         <Link href="/guru/dashboard" aria-label="Kirana, ke dashboard" className="no-underline" onClick={onNavigasi}>
           <Logo tinggi={36} />
         </Link>
-        <DataDemoBadge />
+
       </div>
 
       <Link
@@ -118,14 +103,7 @@ function IsiSidebar({
           <Icon nama="keluar" />
           Keluar
         </button>
-        <button
-          type="button"
-          onClick={onReset}
-          className="flex min-h-10 items-center gap-3 rounded-xl px-3 text-xs font-semibold text-slate-600 hover:bg-white hover:text-navy"
-        >
-          <Icon nama="muat-ulang" ukuran={16} />
-          Reset data demo
-        </button>
+
       </div>
     </div>
   );
@@ -142,10 +120,7 @@ export function GuruLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [laciBuka, setLaciBuka] = useState(false);
-  const [konfirmasiReset, setKonfirmasiReset] = useState(false);
-  const [mereset, setMereset] = useState(false);
-  // Dinaikkan setelah reset data demo agar halaman aktif dipasang ulang dan memuat seed baru.
-  const [versiData, setVersiData] = useState(0);
+  const [galat, setGalat] = useState("");
 
   useEffect(() => {
     if (auth === null) router.replace("/login");
@@ -156,28 +131,16 @@ export function GuruLayout({ children }: { children: ReactNode }) {
 
   async function onKeluar() {
     setLaciBuka(false);
-    await keluar();
-    router.replace("/login");
-  }
-
-  async function onReset() {
-    if (mereset) return;
-    setMereset(true);
-    await resetDataDemo();
-    setVersiData((v) => v + 1);
-    setMereset(false);
-    setKonfirmasiReset(false);
-    router.push("/guru/dashboard");
+    try {
+      await keluar();
+      router.replace("/login");
+    } catch (error) { setGalat(error instanceof Error ? error.message : "Belum dapat keluar. Coba lagi."); }
   }
 
   const props = {
     auth,
     pathname,
     onKeluar,
-    onReset: () => {
-      setLaciBuka(false);
-      setKonfirmasiReset(true);
-    },
   };
 
   return (
@@ -204,7 +167,7 @@ export function GuruLayout({ children }: { children: ReactNode }) {
         <Link href="/guru/dashboard" aria-label="Kirana, ke dashboard" className="no-underline">
           <Logo tinggi={32} />
         </Link>
-        <DataDemoBadge />
+
       </header>
 
       <Dialog buka={laciBuka} onTutup={() => setLaciBuka(false)} laci label="Navigasi guru" className="gaya-baru bg-slate-50">
@@ -221,35 +184,13 @@ export function GuruLayout({ children }: { children: ReactNode }) {
         <IsiSidebar {...props} onNavigasi={() => setLaciBuka(false)} />
       </Dialog>
 
-      <Dialog
-        buka={konfirmasiReset}
-        onTutup={() => !mereset && setKonfirmasiReset(false)}
-        labelledBy="reset-judul"
-        describedBy="reset-isi"
-        className="gaya-baru"
-      >
-        <h2 id="reset-judul" className="m-0 text-xl font-extrabold text-navy">
-          Kembalikan data demo?
-        </h2>
-        <p id="reset-isi" className="m-0 text-sm leading-relaxed text-slate-600">
-          Semua sesi dan pengumpulan di browser ini kembali ke data awal (KRN-4821 dan tiga sesi lain). Sesi yang
-          kamu buat akan terhapus. Kamu tetap masuk sebagai {auth.guru.nama}.
-        </p>
-        <div className="mt-1.5 flex flex-wrap justify-end gap-2.5">
-          <Tombol varian="garis" tinggi={44} onClick={() => setKonfirmasiReset(false)} disabled={mereset}>
-            Batal
-          </Tombol>
-          <Tombol varian="navy" tinggi={44} onClick={onReset} aria-busy={mereset} aria-disabled={mereset}>
-            {mereset ? "Mengembalikan…" : "Ya, reset data"}
-          </Tombol>
-        </div>
-      </Dialog>
 
-      <div className={`min-w-0 flex-1 ${pakaiGayaLama(pathname) ? "bg-page" : "bg-white"}`}>
+
+      <div className="gaya-baru min-w-0 flex-1 bg-white">
         <main
-          key={versiData}
           className="mx-auto box-border flex max-w-[1120px] flex-col gap-7 px-10 pt-8 pb-12 max-[700px]:px-4 max-[700px]:pt-5 max-[700px]:pb-8"
         >
+          {galat && <p role="alert" className="text-danger">{galat}</p>}
           {children}
         </main>
       </div>

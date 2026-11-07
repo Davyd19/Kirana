@@ -16,7 +16,7 @@ type Galat =
   | { jenis: "kosong" | "format" | "tidak_ditemukan" | "ditutup"; pesan: string }
   | { jenis: "jaringan"; pesan: string };
 
-const KODE_DEMO = "KRN-4821";
+
 
 /** A3 · Masuk kuis dengan kode manual (desain baru). */
 export function FormJoin() {
@@ -118,7 +118,7 @@ export function FormJoin() {
                 setKode(e.target.value.toUpperCase());
                 if (galatField) setGalat(null);
               }}
-              placeholder="KRN-0000"
+              placeholder="KRN-ABC234"
               autoComplete="off"
               autoCapitalize="characters"
               spellCheck={false}
@@ -136,20 +136,7 @@ export function FormJoin() {
             )}
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 text-xs">
-            <span className="text-slate-500">Coba kode demo:</span>
-            <button
-              type="button"
-              onClick={() => {
-                setKode(KODE_DEMO);
-                setGalat(null);
-                inputRef.current?.focus();
-              }}
-              className="angka min-h-9 rounded-lg bg-slate-100 px-2.5 font-bold text-navy hover:bg-slate-200"
-            >
-              {KODE_DEMO} (terbuka)
-            </button>
-          </div>
+
 
           <AksiBawah>
             <Tombol type="submit" varian="coral" penuh tinggi={52} aria-busy={memuat} aria-disabled={memuat}>

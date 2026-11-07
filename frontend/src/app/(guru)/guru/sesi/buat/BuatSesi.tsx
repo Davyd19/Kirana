@@ -8,7 +8,7 @@ import { ErrorBanner } from "@/components/ui/ErrorBanner";
 import { Icon } from "@/components/ui/Icon";
 import { Tombol, TombolLink } from "@/components/ui/Tombol";
 import { namaOperasi, namaOperasiBersusun } from "@/lib/format";
-import { KiranaError, type Operasi, type Sesi } from "@/lib/types";
+import { KiranaError, namaKategori, type NumberCategory, type Operasi, type Sesi } from "@/lib/types";
 import { buatSesi } from "@/services/kirana";
 
 type Fase = "diam" | "memuat" | "gagal" | "berhasil";
@@ -57,6 +57,7 @@ function Langkah({ no, label, selesai, aktif }: { no: number; label: string; sel
 /** B3 · Buat sesi: layout lama (pilih → info → konfirmasi), styling baru. */
 export function BuatSesi() {
   const router = useRouter();
+  const [category, setCategory] = useState<NumberCategory | null>(null);
   const [op, setOp] = useState<Operasi | null>(null);
   const [fase, setFase] = useState<Fase>("diam");
   const [pesan, setPesan] = useState("");
@@ -73,11 +74,11 @@ export function BuatSesi() {
 
   async function buat() {
     // Kunci ganda: state untuk tampilan, ref untuk klik ganda yang sangat cepat.
-    if (!op || sedangMembuat.current || sibuk) return;
+    if (!op || !category || sedangMembuat.current || sibuk) return;
     sedangMembuat.current = true;
     setFase("memuat");
     try {
-      const sesi = await buatSesi(op);
+      const sesi = await buatSesi(op, category);
       setDibuat(sesi);
       setFase("berhasil");
       router.push(`/guru/sesi/${sesi.id}?baru=1`);
@@ -154,6 +155,12 @@ export function BuatSesi() {
             </div>
           </section>
 
+          <fieldset className="rounded-2xl border border-slate-200 bg-white p-5">
+            <legend className="px-2 font-bold text-navy">Kategori bilangan (wajib)</legend>
+            <div className="flex flex-wrap gap-3">{(["tens", "hundreds", "thousands"] as NumberCategory[]).map(c => <label key={c} className="flex min-h-12 cursor-pointer items-center gap-2 rounded-xl border border-slate-200 px-4"><input type="radio" name="category" value={c} checked={category === c} disabled={sibuk} onChange={() => setCategory(c)} />{namaKategori(c)}</label>)}</div>
+            <p className="mt-3 text-xs text-slate-500">Berdasarkan bilangan terbesar pada soal. Hasil boleh memiliki jumlah digit berbeda; seluruh 15 soal tetap dalam kategori ini.</p>
+          </fieldset>
+
           <section aria-labelledby="l2" className="flex flex-col gap-3.5 rounded-3xl border border-slate-200 bg-white p-[clamp(20px,3vw,28px)] shadow-soft">
             <h2 id="l2" className="m-0 text-base font-extrabold text-navy">
               2 · Informasi paket
@@ -164,9 +171,9 @@ export function BuatSesi() {
                   <strong className="text-navy">{namaOperasiBersusun(op)}</strong> · 15 soal pilihan ganda, satu soal per
                   layar
                 </li>
-                <li>Paket soal ditentukan sebelum siswa mulai</li>
-                <li>Semua siswa dalam sesi ini menerima paket yang sama</li>
-                <li>Sesi baru dapat memakai paket yang berbeda</li>
+                <li>9 soal inti disiapkan saat sesi dibuat</li>
+                <li>6 soal lanjutan dipilih berdasarkan respons setiap siswa</li>
+                <li>Jawaban dikunci setelah siswa menekan Lanjut</li>
               </ul>
             ) : (
               <p className="m-0 text-sm text-slate-600">Pilih operasi terlebih dahulu untuk melihat informasi paket.</p>
@@ -184,6 +191,7 @@ export function BuatSesi() {
           <dl className="m-0">
             {[
               ["Operasi", op ? namaOperasi(op) : "Belum dipilih"],
+              ["Kategori", category ? namaKategori(category) : "Belum dipilih"],
               ["Jumlah soal", "15"],
               ["Format", "Pilihan ganda"],
               ["Akses siswa", "Tamu, tanpa akun"],
@@ -215,7 +223,7 @@ export function BuatSesi() {
               penuh
               tinggi={52}
               onClick={buat}
-              disabled={!op}
+              disabled={!op || !category}
               aria-busy={fase === "memuat"}
               aria-disabled={fase === "memuat"}
             >

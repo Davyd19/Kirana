@@ -49,3 +49,11 @@ next-env.d.ts
 .vscode/
 .idea/
 Thumbs.db
+
+!.env.example
+.npm-cache/
+
+/test-results/
+/playwright-report/
+
+/.next-test/

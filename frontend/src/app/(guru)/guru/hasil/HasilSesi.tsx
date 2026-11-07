@@ -1,4 +1,5 @@
 "use client";
+import { namaKategori } from "@/lib/types";
 
 import { useParams, useRouter } from "next/navigation";
 import { LabelDiagnosis } from "@/components/diagnosis/LabelDiagnosis";
@@ -21,7 +22,7 @@ export function HasilSesi() {
     <>
       <div className="flex flex-col gap-1.5">
         <h1 className="m-0 text-[clamp(26px,3vw,32px)] font-extrabold tracking-[-0.02em]">Hasil &amp; Diagnosis</h1>
-        <p className="m-0 text-[15px] text-muted">
+        <p className="m-0 text-[15px] text-slate-500">
           Pilih sesi, lalu buka detail siswa untuk melihat dugaan pola dan buktinya.
         </p>
       </div>
@@ -29,24 +30,24 @@ export function HasilSesi() {
       {daftar.status === "memuat" && (
         <div role="status" aria-busy="true" className="flex flex-col gap-3">
           <span className="sr-only">Memuat hasil</span>
-          <div className="h-[86px] rounded-card bg-[#E4E8EF]" />
-          <div className="h-64 rounded-card bg-[#E4E8EF]" />
+          <div className="h-[86px] rounded-2xl bg-[#E4E8EF]" />
+          <div className="h-64 rounded-2xl bg-[#E4E8EF]" />
         </div>
       )}
 
       {daftar.status === "gagal" && (
-        <div role="alert" className="flex flex-wrap items-center justify-between gap-4 rounded-card border border-border bg-surface p-6">
+        <div role="alert" className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-6">
           <span className="text-[15px] font-semibold text-danger-ink">Daftar sesi belum berhasil dimuat.</span>
-          <Tombol varian="sekunder" onClick={muatUlang}>
+          <Tombol varian="garis" onClick={muatUlang}>
             Coba lagi
           </Tombol>
         </div>
       )}
 
       {daftar.status === "siap" && semua.length === 0 && (
-        <div className="flex flex-col items-center gap-2 rounded-card border border-border bg-surface p-9 text-center">
+        <div className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-9 text-center">
           <strong className="text-[17px]">Belum ada sesi kuis.</strong>
-          <span className="text-[15px] text-muted">Buat sesi pertamamu untuk mulai mengamati hasil pengerjaan siswa.</span>
+          <span className="text-[15px] text-slate-500">Buat sesi pertamamu untuk mulai mengamati hasil pengerjaan siswa.</span>
           <TombolLink href="/guru/sesi/buat" className="mt-2">
             Buat Sesi Baru
           </TombolLink>
@@ -54,9 +55,9 @@ export function HasilSesi() {
       )}
 
       {daftar.status === "siap" && semua.length > 0 && !terpilih && (
-        <div className="flex flex-col items-center gap-2 rounded-card border border-border bg-surface p-9 text-center">
+        <div className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-9 text-center">
           <strong className="text-[17px]">Sesi tidak ditemukan.</strong>
-          <TombolLink href="/guru/hasil" varian="sekunder" className="mt-2">
+          <TombolLink href="/guru/hasil" varian="garis" className="mt-2">
             Lihat sesi terbaru
           </TombolLink>
         </div>
@@ -64,30 +65,30 @@ export function HasilSesi() {
 
       {terpilih && (
         <>
-          <div className="flex flex-wrap items-end justify-between gap-4 rounded-card border border-border bg-surface px-5 py-[18px] max-[700px]:flex-col max-[700px]:items-stretch">
+          <div className="flex flex-wrap items-end justify-between gap-4 rounded-2xl border border-slate-200 bg-white px-5 py-[18px] max-[700px]:flex-col max-[700px]:items-stretch">
             <div className="flex min-w-0 flex-[1_1_280px] flex-col gap-1.5 max-[700px]:flex-none">
-              <label htmlFor="pilih-sesi" className="text-[13px] font-bold text-ink-2">
+              <label htmlFor="pilih-sesi" className="text-[13px] font-bold text-slate-600">
                 Sesi
               </label>
               <select
                 id="pilih-sesi"
                 value={terpilih.id}
                 onChange={(e) => router.push(`/guru/hasil/${e.target.value}`)}
-                className="box-border h-12 w-full min-w-0 rounded-input border-[1.5px] border-border-strong bg-surface px-3 text-[15px] text-ink"
+                className="box-border h-12 w-full min-w-0 rounded-xl border-[1.5px] border-slate-300 bg-white px-3 text-[15px] text-navy"
               >
                 {semua.map((s) => (
                   <option key={s.id} value={s.id}>
-                    {s.kode} · {namaOperasi(s.operasi)} · {formatTanggal(s.dibuatPada)} ·{" "}
+                    {s.kode} · {namaOperasi(s.operasi)} · {namaKategori(s.numberCategory)} · {formatTanggal(s.dibuatPada)} ·{" "}
                     {s.status === "terbuka" ? "Terbuka" : "Ditutup"}
                   </option>
                 ))}
               </select>
             </div>
             <div className="flex flex-wrap items-center gap-2.5">
-              <span className="text-sm text-ink-2">
+              <span className="text-sm text-slate-600">
                 <strong className="angka">{terpilih.jumlahPengumpulan}</strong> pengumpulan · {terpilih.jumlahSoal} soal
               </span>
-              <TombolLink href={`/guru/sesi/${terpilih.id}`} varian="sekunder" tinggi={44} className="text-sm!">
+              <TombolLink href={`/guru/sesi/${terpilih.id}`} varian="garis" tinggi={44} className="text-sm!">
                 Detail sesi
               </TombolLink>
             </div>
@@ -100,7 +101,7 @@ export function HasilSesi() {
   );
 }
 
-const th = "border-b border-border px-3.5 py-3 text-left text-[13px] font-bold text-muted";
+const th = "border-b border-slate-200 px-3.5 py-3 text-left text-[13px] font-bold text-slate-500";
 const td = "border-b border-divider p-3.5 text-[15px]";
 const tdAngka = `${td} angka text-right font-semibold`;
 
@@ -112,16 +113,16 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
       <div role="status" aria-busy="true" className="flex flex-col gap-2.5">
         <span className="sr-only">Memuat hasil siswa</span>
         {[0, 1, 2].map((i) => (
-          <div key={i} className="h-16 rounded-input bg-[#E4E8EF]" />
+          <div key={i} className="h-16 rounded-xl bg-[#E4E8EF]" />
         ))}
       </div>
     );
   }
   if (hasil.status === "gagal") {
     return (
-      <div role="alert" className="flex flex-wrap items-center justify-between gap-4 rounded-card border border-border bg-surface p-6">
+      <div role="alert" className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-6">
         <span className="text-[15px] font-semibold text-danger-ink">Hasil siswa belum berhasil dimuat.</span>
-        <Tombol varian="sekunder" onClick={muatUlang}>
+        <Tombol varian="garis" onClick={muatUlang}>
           Coba lagi
         </Tombol>
       </div>
@@ -133,9 +134,9 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
 
   if (baris.length === 0) {
     return (
-      <div className="flex flex-col items-center gap-2 rounded-card border border-border bg-surface p-9 text-center">
+      <div className="flex flex-col items-center gap-2 rounded-2xl border border-slate-200 bg-white p-9 text-center">
         <strong className="text-[17px]">Belum ada siswa yang mengumpulkan jawaban.</strong>
-        <span className="text-[15px] text-muted">Hasil akan muncul di sini setelah siswa mengumpulkan.</span>
+        <span className="text-[15px] text-slate-500">Hasil akan muncul di sini setelah siswa mengumpulkan.</span>
       </div>
     );
   }
@@ -144,7 +145,7 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
 
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-x-auto rounded-card border border-border bg-surface max-[700px]:hidden">
+      <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white max-[700px]:hidden">
         <table className="w-full border-collapse">
           <caption className="sr-only">Hasil siswa sesi {sesi.kode}</caption>
           <thead>
@@ -166,7 +167,7 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
                 <th scope="row" className={`${td} text-left`}>
                   <div className="flex flex-col gap-0.5">
                     <span className="font-bold">{p.nama}</span>
-                    <span className="text-[13px] font-medium text-muted">Dikumpulkan {formatJam(p.dikumpulkanPada)}</span>
+                    <span className="text-[13px] font-medium text-slate-500">Dikumpulkan {formatJam(p.dikumpulkanPada)}</span>
                   </div>
                 </th>
                 <td className={tdAngka}>{p.ringkasan.benar}</td>
@@ -179,7 +180,7 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
                 <td className={`${td} text-right`}>
                   <TombolLink
                     href={urlDetail(p)}
-                    varian="sekunder"
+                    varian="garis"
                     aria-label={`Lihat detail ${p.nama}`}
                     className="h-10! px-3.5! text-sm!"
                   >
@@ -194,10 +195,10 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
 
       <ul className="m-0 hidden list-none flex-col gap-3 p-0 max-[700px]:flex">
         {baris.map((p) => (
-          <li key={p.pesertaId} className="flex flex-col gap-3 rounded-card border border-border bg-surface p-4">
+          <li key={p.pesertaId} className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white p-4">
             <div className="flex items-baseline justify-between gap-2">
               <strong className="text-[17px]">{p.nama}</strong>
-              <span className="text-[13px] text-muted">{formatJam(p.dikumpulkanPada)}</span>
+              <span className="text-[13px] text-slate-500">{formatJam(p.dikumpulkanPada)}</span>
             </div>
             <dl className="m-0 grid grid-cols-4 gap-1.5 text-center">
               {[
@@ -207,7 +208,7 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
                 ["Lewat", p.ringkasan.dilewati],
               ].map(([l, n]) => (
                 <div key={l}>
-                  <dt className="text-xs text-muted">{l}</dt>
+                  <dt className="text-xs text-slate-500">{l}</dt>
                   <dd className="angka m-0 text-lg font-semibold">{n}</dd>
                 </div>
               ))}
@@ -215,14 +216,14 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
             <div>
               <LabelDiagnosis status={p.status} jumlahPola={p.jumlahPola} />
             </div>
-            <TombolLink href={urlDetail(p)} varian="sekunder" tinggi={44} className="text-sm!">
+            <TombolLink href={urlDetail(p)} varian="garis" tinggi={44} className="text-sm!">
               Lihat Detail
             </TombolLink>
           </li>
         ))}
       </ul>
 
-      <p className="m-0 text-[13px] text-muted">
+      <p className="m-0 text-[13px] text-slate-500">
         Hasil diagnosis adalah dugaan berdasarkan pola jawaban. Pastikan dengan berbicara langsung bersama siswa.
       </p>
     </div>

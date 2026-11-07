@@ -10,6 +10,13 @@ import random
 from ml.paths import DATA_DIR
 from ml.simulation import CATALOG, predict
 
+POLICY_VERSION = "adaptive-category-v2"
+CATEGORIES = {"tens": (10, 99), "hundreds": (100, 999), "thousands": (1000, 9999)}
+
+def number_category(a, b):
+    return next((name for name, (low, high) in CATEGORIES.items() if low <= max(a, b) <= high), None)
+
+
 CORE_SIZE = 9
 QUIZ_SIZE = 15
 SPLITS = ("train", "validation", "test")
@@ -169,3 +176,24 @@ class QuizBank:
             if item is not None:
                 return item
         return self.pick(self.items, used, rng)
+
+
+def category_banks(banks):
+    result = dict(banks)
+    for (split, op), bank in banks.items():
+        for category in CATEGORIES:
+            items = [item for item in bank.items if number_category(item.a, item.b) == category]
+            if len({item.family for item in items}) >= QUIZ_SIZE:
+                result[split, op, category] = QuizBank(op, items)
+    return result
+
+
+def bank_coverage(banks):
+    rows = []
+    for (split, op), bank in banks.items():
+        for category in CATEGORIES:
+            items = [item for item in bank.items if number_category(item.a, item.b) == category]
+            rows.append({"split": split, "operation": op, "category": category,
+                         "families": len({i.family for i in items}),
+                         "shown_opportunities": {p: sum(p in i.exposed for i in items) for p in CATALOG[op]}})
+    return rows

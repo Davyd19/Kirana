@@ -4,13 +4,13 @@ Folder ini berisi simulasi pilihan ganda, training, dan prediksi. [Backend](../b
 
 | Lokasi | Isi |
 |---|---|
-| `notebooks/train_kirana_mcq.ipynb` | Alur interaktif simulasi, training, dan evaluasi. |
-| `train.py` dan `training.py` | Perintah dan fungsi training dari terminal. |
+| `notebooks/train_kirana.ipynb` | Satu alur audit, simulasi, training, evaluasi, dan ekspor. |
+| `train.py` dan `unified_training.py` | Perintah dan alur training dari terminal. `training.py` dan `category_training.py` adalah fungsi simulasi untuk dua kebijakan kuis. |
 | `diagnosis.py` | Pemuatan model dan prediksi pola. |
 | `simulation.py` | Prosedur penjumlahan dan pengurangan serta simulasi respons. |
 | `dataset/` | Empat CSV dataset sintetis Kirana. |
 | `reports/evaluation.json` | Metrik validation dan test, seed, versi paket, dan hash sumber. |
-| `artifacts/kirana_mcq_v1.joblib` | Model lokal yang digunakan Flask. |
+| `artifacts/kirana_model.joblib` | Satu artefak deployment berisi cabang sesi lama dan kategori baru. |
 
 ## Menjalankan di Windows
 
@@ -29,9 +29,9 @@ Untuk membuka notebook di JupyterLab:
 .\ml\.venv\Scripts\python.exe -m jupyterlab
 ```
 
-Buka [notebook pilihan ganda](notebooks/train_kirana_mcq.ipynb). Jalankan dua bagian pertama untuk membaca laporan yang sudah tersedia. Untuk melatih ulang, jalankan sel simulasi, training, dan test. Ubah `EXPORT_MODEL` menjadi `True` untuk menulis artefak dari notebook.
+Buka [notebook Kirana](notebooks/train_kirana.ipynb), lalu jalankan sel berurutan. `EXPORT_MODEL = False` secara bawaan. Periksa laporan validation dan test sebelum mengubahnya menjadi `True` dan menjalankan sel ekspor. Dari terminal, `ml/train.py` menjalankan evaluasi saja; tambahkan `--export` untuk menulis model.
 
-Setelah mengekspor model baru, mulai ulang Flask agar memuatnya. Gunakan artefak tepercaya hasil training sendiri. `KIRANA_MODEL_PATH` dapat mengarahkan Flask ke artefak lain yang kompatibel. Ketika model belum tersedia, API tetap menghitung skor dan mengembalikan diagnosis `unavailable`.
+Model gabungan memuat dua estimator per operasi: cabang `legacy` memakai kebijakan sesi lama, cabang `category` memakai ambang Puluhan/Ratusan/Ribuan. Jika model v1 lokal tersedia, notebook menyalin estimator dan ambang itu tanpa melatih ulang cabang lama; hash asalnya dicatat. Jika belum tersedia, cabang lama dilatih ulang pada split lama dan hasil test dicatat. File v1 tidak dihapus. Flask mengutamakan `kirana_model.joblib` setelah diekspor; sebelum itu ia memakai artefak lama yang tersedia. Restart Flask setelah ekspor. Gunakan lingkungan Python yang sama untuk training dan inferensi.
 
 ## Dataset
 
@@ -44,7 +44,7 @@ Semua CSV revisi disertakan di `ml/dataset/`.
 | `synthetic_responses.csv` | 300.000 | Respons angka bebas dari eksperimen dataset revisi. |
 | `student_features.csv` | 20.000 | Ringkasan fitur untuk eksperimen jawaban angka bebas. |
 
-Backend dan training pilihan ganda memakai CSV ini dan logika dari `ml/simulation.py`. File tersebut menggabungkan prosedur dan mekanisme respons yang digunakan dari simulator asli. Untuk memakai CSV lain, arahkan `KIRANA_DATA_DIR` atau `--data-dir` ke folder yang berisi subfolder `dataset/`.
+Backend dan training pilihan ganda memakai CSV ini dan logika dari `ml/simulation.py`. File tersebut menggabungkan prosedur dan mekanisme respons yang digunakan dari simulator asli. Untuk memakai CSV lain, arahkan `KIRANA_DATA_DIR` ke folder yang berisi subfolder `dataset/`.
 
 ## Evaluasi sintetis
 
@@ -58,3 +58,31 @@ Simulasi memakai profil dan simulator asli. Respons acak dipetakan ke tebakan pa
 | Pengurangan | Semi-adaptif | 0,8483 | 0,8899 | 18 | 40 dari 299 | 342 dari 1.679 |
 
 Hasil di atas berasal dari simulasi. Lihat [laporan evaluasi lengkap](reports/evaluation.json) untuk hasil per pola dan konfigurasi eksperimen.
+
+
+## Revisi kategori adaptif v2
+
+Notebook `notebooks/train_kirana.ipynb` menyiapkan model untuk sesi Puluhan/Ratusan/Ribuan sekaligus mempertahankan cabang sesi lama. Jangan gunakan hasil evaluasi lama untuk mengklaim kinerja kategori baru.
+
+Jalankan dari root source code:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m jupyterlab
+```
+
+Jika Jupyter belum terpasang, jalankan `.\backend\.venv\Scripts\python.exe -m pip install jupyterlab` dari root source code. Buka notebook utama, jalankan persiapan dan audit, lalu simulasi, training, dan evaluasi secara berurutan. Simulasi menggunakan fungsi simulator asli dan pemilih backend; tidak mengubah CSV maupun jawaban siswa asli.
+
+Dua model logistik multilabel dilatih, satu per operasi. Sampel tiga kategori digabung hanya di dalam split yang sama. Ambang ditentukan per kategori pada validation, kemudian dikunci untuk test. Evaluasi melaporkan pola yang terukur saja dan mencantumkan pola tidak terukur terpisah. Profil siswa yang muncul pada beberapa kategori tetap berada pada split asal; keluarga soal divalidasi saat membaca bank.
+
+Periksa precision/recall, dugaan keliru, keberhasilan menemukan kedua target terukur pada MIXED, frekuensi menahan dugaan, dan false calls dugaan awal. Skor model tidak dikalibrasi sebagai kepastian siswa nyata. Syarat supported tetap dua kecocokan + satu pembeda + ambang; dugaan awal tidak disamakan dengan diagnosis tervalidasi.
+
+`EXPORT_MODEL = False` secara bawaan. Ubah ke True setelah meninjau evaluasi, lalu jalankan sel ekspor. File baru: `ml/artifacts/kirana_model.joblib`; artefak lama tidak ditimpa. Sel ekspor memuat ulang artefak dan membandingkan skor/ambang. Restart Flask setelah ekspor. Dependensi training dan inferensi harus sama.
+
+Alternatif CLI yang secara eksplisit melakukan training:
+
+```powershell
+.\backend\.venv\Scripts\python.exe -m ml.unified_training
+# Tambahkan --export hanya jika ingin menulis artefak.
+```
+
+Laporan training baru ditulis ke `ml/reports/category_evaluation.json`. Pada implementasi revisi ini training dan ekspor TIDAK dijalankan. `category_bank_audit.json` adalah audit bank, bukan hasil akurasi. `revision_original_audit.json` adalah audit read-only tiga percobaan asli tanpa nama/token.

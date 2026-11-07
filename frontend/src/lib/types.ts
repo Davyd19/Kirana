@@ -1,8 +1,11 @@
 /**
  * Kontrak data frontend Kirana (lihat PRD bagian "Data yang dibutuhkan frontend").
  * Tipe di sini yang dipakai komponen. Kunci jawaban dan pemetaan opsi ke pola
- * TIDAK ada di sini; itu urusan backend (sementara: src/mocks/).
+ * TIDAK ada di sini; itu urusan backend.
  */
+
+export type NumberCategory = "tens" | "hundreds" | "thousands";
+export const namaKategori = (category: NumberCategory | null) => category === "tens" ? "Puluhan" : category === "hundreds" ? "Ratusan" : category === "thousands" ? "Ribuan" : "Campuran — sesi lama";
 
 export type Operasi = "penjumlahan" | "pengurangan";
 export type StatusSesi = "terbuka" | "ditutup";
@@ -11,8 +14,13 @@ export const JUMLAH_SOAL = 15;
 
 /** Sesi kuis seperti yang dilihat guru. */
 export interface Sesi {
+  numberCategory: NumberCategory | null;
+  quizPolicyVersion: string;
   id: string;
-  kode: string; // format KRN-####
+  joinUrl: string;
+  joinQrSvg: string;
+  jumlahPeserta: number;
+  kode: string; // format KRN-XXXXXX
   operasi: Operasi;
   status: StatusSesi;
   jumlahSoal: number;
@@ -23,6 +31,7 @@ export interface Sesi {
 
 /** Info sesi yang aman ditampilkan ke siswa sebelum mulai. */
 export interface SesiSiswa {
+  numberCategory: NumberCategory | null;
   kode: string;
   operasi: Operasi;
   status: StatusSesi;
@@ -56,6 +65,7 @@ export type Respons =
 
 /** Progres pengerjaan siswa di browser ini (kirana:attempt:<kode>). */
 export interface Attempt {
+  soal: Soal[];
   pesertaId: string;
   nama: string;
   respons: Respons[];
@@ -90,7 +100,7 @@ export interface AuthState {
   masukPada: string;
 }
 
-/* ---------- Hasil diagnosis (dari layanan diagnosis; sementara src/mocks/diagnosis.ts) ---------- */
+/* ---------- Hasil diagnosis (dari layanan diagnosis) ---------- */
 
 export interface ContohBukti {
   soalId: string;
@@ -120,7 +130,7 @@ export interface KelompokAmbigu {
   saranPembeda: string;
 }
 
-export type StatusBukti = "pola_didukung" | "ambigu" | "belum_cukup" | "tanpa_pola";
+export type StatusBukti = "dugaan_awal" | "tidak_tersedia" | "pola_didukung" | "ambigu" | "belum_cukup" | "tanpa_pola";
 
 export type JenisRincian = "benar" | "salah" | "di_luar_opsi" | "dilewati";
 
@@ -136,6 +146,11 @@ export interface RincianJawaban {
 }
 
 export interface HasilDiagnosis {
+  assessments: PatternAssessment[];
+  timeline: EvidencePoint[];
+  ambiguousGroups: { patterns: string[]; shared_answers: number; reason: string }[];
+  modelCompatibility: string;
+  policyVersion: string;
   status: StatusBukti;
   ringkasan: Ringkasan;
   pola: PolaDidukung[]; // urutan dari layanan diagnosis
@@ -161,12 +176,6 @@ export interface DetailDiagnosis {
   hasil: HasilDiagnosis;
 }
 
-/** Pintasan mode demo ke siswa contoh untuk tiap kondisi diagnosis. */
-export interface ContohKondisi {
-  label: string;
-  sesiId: string;
-  pesertaId: string;
-}
 
 /** Kesalahan yang ditampilkan ke pengguna. */
 export class KiranaError extends Error {
@@ -183,4 +192,16 @@ export class KiranaError extends Error {
     super(pesan);
     this.name = "KiranaError";
   }
+}
+
+export interface PatternAssessment {
+  pattern: string; name: string;
+  status: "supported" | "preliminary" | "ambiguous" | "insufficient_evidence" | "not_measurable" | "no_pattern_detected";
+  reasons: string[]; score: number | null; threshold: number | null;
+  matching_answers: number; distinguishing_answers: number; shown_opportunities: number; answered_opportunities: number;
+  examples: { position: number; operand_1: number; operand_2: number; selected_value: number; correct_value: number }[];
+}
+export interface EvidencePoint {
+  position: number; operand_1: number; operand_2: number; kind: string; selected_value: number | null; correct_value: number;
+  matching_answers: Record<string, number>; distinguishing_answers: Record<string, number>; new_distinguishing: string[];
 }

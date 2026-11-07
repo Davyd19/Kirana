@@ -69,11 +69,12 @@ class Database:
         with self.transaction(write=True) as store:
             for statement in SCHEMA:
                 store.execute(statement)
+            migrate(store)
 
     @contextmanager
     def transaction(self, *, write=False):
         with pymysql.connect(**self.config, charset="utf8mb4", cursorclass=DictCursor,
-                             connect_timeout=5, autocommit=False) as connection:
+                             connect_timeout=5, autocommit=False, init_command="SET time_zone = '+00:00'") as connection:
             try:
                 with connection.cursor() as cursor:
                     cursor.execute("START TRANSACTION" if write else "START TRANSACTION READ ONLY")
@@ -152,4 +153,36 @@ class QuizStore:
         )
 
     def submit_attempt(self, attempt_id):
-        self.execute("UPDATE attempts SET submitted = 1 WHERE id = %s", (attempt_id,))
+        self.execute("UPDATE attempts SET submitted = 1, submitted_at = COALESCE(submitted_at, UTC_TIMESTAMP()) WHERE id = %s", (attempt_id,))
+
+
+def migrate(store):
+    """Additive, repeatable migration; legacy sessions remain unowned."""
+    store.execute("""CREATE TABLE IF NOT EXISTS teachers (
+        id VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin PRIMARY KEY,
+        email VARCHAR(254) NOT NULL UNIQUE, name VARCHAR(100) NOT NULL,
+        password_hash VARCHAR(255) NOT NULL
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4""")
+    store.execute("""CREATE TABLE IF NOT EXISTS teacher_logins (
+        token_hash CHAR(64) CHARACTER SET ascii COLLATE ascii_bin PRIMARY KEY,
+        teacher_id VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
+        expires_at DATETIME NOT NULL,
+        FOREIGN KEY (teacher_id) REFERENCES teachers(id)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4""")
+    columns = {
+        "sessions": {
+            "teacher_id": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin NULL",
+            "join_token": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin NULL",
+            "code": "VARCHAR(10) CHARACTER SET ascii COLLATE ascii_bin NULL UNIQUE",
+            "created_at": "DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP",
+            "closed_at": "DATETIME NULL",
+            "number_category": "VARCHAR(16) NULL",
+            "quiz_policy_version": "VARCHAR(40) NOT NULL DEFAULT 'adaptive-v1'",
+        },
+        "attempts": {"submitted_at": "DATETIME NULL"},
+    }
+    for table, fields in columns.items():
+        existing = {row["Field"] for row in store.fetch_all(f"SHOW COLUMNS FROM {table}", ())}
+        for name, definition in fields.items():
+            if name not in existing:
+                store.execute(f"ALTER TABLE {table} ADD COLUMN {name} {definition}")

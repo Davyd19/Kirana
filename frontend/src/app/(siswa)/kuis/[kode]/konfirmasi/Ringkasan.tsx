@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AksiBawah, KartuSiswa, SiswaLayout } from "@/components/layout/SiswaLayout";
@@ -25,7 +24,7 @@ export function Ringkasan() {
       ? `/kuis/${kode}`
       : siap.attempt.dikumpulkanPada
         ? `/kuis/${kode}/selesai`
-        : null;
+        : siap.attempt.respons.length < 15 ? `/kuis/${kode}/kerjakan/${siap.attempt.urutanTerakhir}` : null;
   useEffect(() => {
     if (tujuan) router.replace(tujuan);
   }, [tujuan, router]);
@@ -123,7 +122,7 @@ function IsiRingkasan({
           </h1>
           <p className="m-0 text-lg font-bold text-slate-600">Siap dikumpulkan?</p>
           <p className="m-0 text-xs text-slate-500">
-            Periksa ringkasan di bawah. Setelah dikumpulkan, jawaban tidak bisa diubah.
+            Periksa ringkasan di bawah. Jawaban yang sudah dilanjutkan terkunci.
           </p>
         </div>
 
@@ -160,13 +159,7 @@ function IsiRingkasan({
             <span className="text-xs font-bold text-navy">Soal yang kamu lewati:</span>
             <div className="flex flex-wrap gap-2">
               {nomorDilewati.map((n) => (
-                <Link
-                  key={n}
-                  href={`/kuis/${sesi.kode}/kerjakan/${n}`}
-                  className="flex min-h-11 items-center rounded-xl border border-slate-200 bg-slate-100 px-3 text-xs font-bold text-navy no-underline hover:bg-slate-200"
-                >
-                  Kembali ke soal {n}
-                </Link>
+                <span key={n} className="rounded-xl bg-slate-100 p-3">Soal {n}</span>
               ))}
             </div>
             <span className="text-xs text-slate-500">Tidak apa-apa jika memang belum bisa dijawab.</span>
@@ -177,12 +170,7 @@ function IsiRingkasan({
           <Tombol varian="biru" penuh tinggi={52} onClick={kirim} aria-busy={fase === "memuat"} aria-disabled={fase === "memuat"}>
             {fase === "memuat" ? "Mengumpulkan…" : fase === "gagal" ? "Coba kumpulkan lagi" : "Kumpulkan Jawaban"}
           </Tombol>
-          <Link
-            href={`/kuis/${sesi.kode}/kerjakan/${soal.length}`}
-            className="flex min-h-11 items-center justify-center text-xs font-bold text-slate-500 no-underline hover:text-navy"
-          >
-            Kembali ke soal terakhir
-          </Link>
+
         </AksiBawah>
       </KartuSiswa>
     </SiswaLayout>

@@ -4,10 +4,14 @@ import type { StatusBukti } from "@/lib/types";
 /** Teks label singkat sesuai status dari layanan diagnosis. */
 export function teksLabelDiagnosis(status: StatusBukti, jumlahPola: number): string {
   switch (status) {
+    case "dugaan_awal":
+      return "Dugaan awal";
     case "pola_didukung":
       return `${jumlahPola} pola didukung`;
     case "ambigu":
       return "Kemungkinan ambigu";
+    case "tidak_tersedia":
+      return "Diagnosis belum tersedia";
     case "belum_cukup":
       return "Bukti belum cukup";
     case "tanpa_pola":
@@ -37,6 +41,8 @@ export function LabelDiagnosis({ status, jumlahPola }: { status: StatusBukti; ju
           {teks}
         </span>
       );
+    case "tidak_tersedia":
+    case "dugaan_awal":
     case "belum_cukup":
       return (
         <span className={`${dasar} bg-divider text-ink-2`}>

@@ -1,16 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { AksiBawah, CatatanDemoBaru, KartuSiswa, SiswaLayout } from "@/components/layout/SiswaLayout";
+import { AksiBawah, KartuSiswa, SiswaLayout } from "@/components/layout/SiswaLayout";
 import { ErrorBanner } from "@/components/ui/ErrorBanner";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
 import { Tombol, TombolLink } from "@/components/ui/Tombol";
 import { KiranaError } from "@/lib/types";
 import { useAuth } from "@/lib/useAuth";
-import { masuk } from "@/services/kirana";
+import { ambilAuth, masuk } from "@/services/kirana";
 
 type Fase = "diam" | "memuat" | "gagal" | "berhasil";
 
@@ -20,10 +19,9 @@ const kelasInput = (galat: boolean) =>
   }`;
 
 export function FormLogin() {
-  const router = useRouter();
   const auth = useAuth();
 
-  const [email, setEmail] = useState("guru@kirana.demo");
+  const [email, setEmail] = useState("");
   const [sandi, setSandi] = useState("");
   const [tampilSandi, setTampilSandi] = useState(false);
   const [dicoba, setDicoba] = useState(false);
@@ -36,8 +34,8 @@ export function FormLogin() {
   // Sudah login sebelumnya: langsung ke dashboard.
   const sudahMasuk = !!auth && fase !== "berhasil";
   useEffect(() => {
-    if (sudahMasuk) router.replace("/guru/dashboard");
-  }, [sudahMasuk, router]);
+    if (sudahMasuk) window.location.replace("/guru/dashboard");
+  }, [sudahMasuk]);
 
   const emailKosong = dicoba && !email.trim();
   const sandiKosong = dicoba && !sandi;
@@ -59,11 +57,20 @@ export function FormLogin() {
     setFase("memuat");
     try {
       await masuk(email, sandi);
+      // Pastikan cookie yang melewati Next.js dan Express sudah terbaca.
+      try {
+        await ambilAuth();
+      } catch (error) {
+        if (error instanceof KiranaError && error.kodeError === "kredensial_salah") {
+          throw new KiranaError("jaringan", "Login diterima, tetapi sesi belum tersimpan di browser. Muat ulang halaman dan coba lagi.");
+        }
+        throw error;
+      }
       setFase("berhasil");
-      router.replace("/guru/dashboard");
+      window.location.replace("/guru/dashboard");
     } catch (err) {
       setPesanGagal(
-        err instanceof KiranaError ? err.message : "Belum bisa masuk. Silakan coba lagi.",
+        err instanceof KiranaError ? err.message : "Sesi guru belum dapat dibuka. Silakan coba lagi.",
       );
       setFase("gagal");
     }
@@ -92,11 +99,7 @@ export function FormLogin() {
           <p className="m-0 text-xs text-slate-500">Kelola sesi kuis dan lihat dugaan pola kesalahan siswa.</p>
         </div>
 
-        <CatatanDemoBaru>
-          <span className="font-bold">Data demo:</span> login lokal tanpa keamanan produksi. Gunakan{" "}
-          <code className="rounded bg-amber-100 px-1 py-0.5 font-bold">guru@kirana.demo</code> dengan kata sandi apa
-          saja.
-        </CatatanDemoBaru>
+
 
         {fase === "gagal" && <ErrorBanner id="login-galat">{pesanGagal}</ErrorBanner>}
 

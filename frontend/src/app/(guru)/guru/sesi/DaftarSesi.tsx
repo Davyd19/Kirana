@@ -1,4 +1,5 @@
 "use client";
+import { namaKategori } from "@/lib/types";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -58,7 +59,7 @@ export function DaftarSesi() {
               type="search"
               value={q}
               onChange={(e) => setQ(e.target.value)}
-              placeholder="Contoh: KRN-4821"
+              placeholder="Contoh: KRN-ABC234"
               className={`${kelasKontrol} angka pl-11`}
             />
           </div>
@@ -151,7 +152,7 @@ function TabelSesi({ baris }: { baris: Sesi[] }) {
             {baris.map((s) => (
               <tr key={s.id}>
                 <th scope="row" className={`${td} angka text-left font-semibold`}>{s.kode}</th>
-                <td className={td}>{namaOperasi(s.operasi)}</td>
+                <td className={td}>{namaOperasi(s.operasi)} · {namaKategori(s.numberCategory)}</td>
                 <td className={`${td} text-muted`}>{formatTanggal(s.dibuatPada)}</td>
                 <td className={td}><StatusBadge status={s.status} /></td>
                 <td className={`${td} angka text-right`}>{s.jumlahSoal}</td>
@@ -178,7 +179,7 @@ function TabelSesi({ baris }: { baris: Sesi[] }) {
               <StatusBadge status={s.status} />
             </div>
             <span className="text-sm text-muted">
-              {namaOperasi(s.operasi)} · {s.jumlahSoal} soal · {formatTanggal(s.dibuatPada)} · {s.jumlahPengumpulan}{" "}
+              {namaOperasi(s.operasi)} · {namaKategori(s.numberCategory)} · {s.jumlahSoal} soal · {formatTanggal(s.dibuatPada)} · {s.jumlahPengumpulan}{" "}
               pengumpulan
             </span>
             <div className="grid grid-cols-2 gap-2">

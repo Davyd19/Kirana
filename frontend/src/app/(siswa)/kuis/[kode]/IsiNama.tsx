@@ -1,4 +1,5 @@
 "use client";
+import { namaKategori } from "@/lib/types";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -23,7 +24,7 @@ export function IsiNama() {
   if (keadaan.fase === "jaringan") return <LayarJaringan pesan={keadaan.pesan} onCobaLagi={muatUlang} />;
 
   const { sesi, attempt } = keadaan;
-  if (sesi.status !== "terbuka" && !attempt?.dikumpulkanPada) return <LayarDitutup kode={sesi.kode} />;
+  if (sesi.status !== "terbuka" && !attempt) return <LayarDitutup kode={sesi.kode} />;
 
   return (
     <FormNama
@@ -98,7 +99,7 @@ function FormNama({
         </div>
 
         <GelembungInfo>
-          {namaOperasiBersusun(sesi.operasi)} · {sesi.jumlahSoal} soal · pilih satu jawaban tiap soal · boleh dilewati
+          {namaOperasiBersusun(sesi.operasi)} · {namaKategori(sesi.numberCategory)} · {sesi.jumlahSoal} soal · pilih satu jawaban tiap soal · boleh dilewati
         </GelembungInfo>
 
         {sedangMengerjakan ? (
@@ -116,7 +117,7 @@ function FormNama({
                 varian="coral"
                 penuh
                 tinggi={52}
-                onClick={() => router.push(`/kuis/${sesi.kode}/kerjakan/${attempt.urutanTerakhir || 1}`)}
+                onClick={() => router.push(attempt.respons.length === 15 ? `/kuis/${sesi.kode}/konfirmasi` : `/kuis/${sesi.kode}/kerjakan/${attempt.urutanTerakhir || 1}`)}
               >
                 Lanjutkan ke soal {attempt.urutanTerakhir || 1}
                 <Icon nama="panah-kanan" ukuran={16} tebal={2.5} />
