@@ -3,6 +3,7 @@ import { namaKategori } from "@/lib/types";
 
 import { useParams, useRouter } from "next/navigation";
 import { LabelDiagnosis } from "@/components/diagnosis/LabelDiagnosis";
+import { Icon } from "@/components/ui/Icon";
 import { Tombol, TombolLink } from "@/components/ui/Tombol";
 import { formatJam, formatTanggal, namaOperasi } from "@/lib/format";
 import type { HasilSiswa, Sesi } from "@/lib/types";
@@ -101,6 +102,18 @@ export function HasilSesi() {
   );
 }
 
+/** P2.2: "Diagnosis belum tersedia" sudah menjelaskan dirinya; penanda hanya untuk status lain yang dihitung tanpa model. */
+const perluPenandaModel = (p: HasilSiswa) => !p.modelAktif && p.status !== "tidak_tersedia";
+
+function PenandaModel() {
+  return (
+    <span className="inline-flex items-center gap-1 text-[13px] font-semibold text-amber-800">
+      <Icon nama="peringatan" ukuran={14} />
+      Model belum aktif
+    </span>
+  );
+}
+
 const th = "border-b border-slate-200 px-3.5 py-3 text-left text-[13px] font-bold text-slate-500";
 const td = "border-b border-divider p-3.5 text-[15px]";
 const tdAngka = `${td} angka text-right font-semibold`;
@@ -142,9 +155,20 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
   }
 
   const urlDetail = (p: HasilSiswa) => `/guru/hasil/${sesi.id}/siswa/${p.pesertaId}`;
+  const adaTanpaModel = baris.some(perluPenandaModel);
 
   return (
     <div className="flex flex-col gap-3">
+      {adaTanpaModel && (
+        <div role="status" className="flex items-start gap-2.5 rounded-2xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900">
+          <Icon nama="peringatan" ukuran={18} />
+          <p className="m-0">
+            <strong>Model diagnosis belum aktif.</strong> Hasil bertanda &ldquo;Model belum aktif&rdquo; hanya memakai aturan
+            hitung, sehingga belum ada yang dapat berstatus &ldquo;Pola didukung&rdquo;. Minta admin menyalakan ulang layanan
+            diagnosis, lalu muat ulang halaman ini.
+          </p>
+        </div>
+      )}
       <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-white max-[700px]:hidden">
         <table className="w-full border-collapse">
           <caption className="sr-only">Hasil siswa sesi {sesi.kode}</caption>
@@ -175,7 +199,10 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
                 <td className={tdAngka}>{p.ringkasan.diLuarOpsi}</td>
                 <td className={tdAngka}>{p.ringkasan.dilewati}</td>
                 <td className={td}>
-                  <LabelDiagnosis status={p.status} jumlahPola={p.jumlahPola} />
+                  <div className="flex flex-col items-start gap-1">
+                    <LabelDiagnosis status={p.status} jumlahPola={p.jumlahPola} />
+                    {perluPenandaModel(p) && <PenandaModel />}
+                  </div>
                 </td>
                 <td className={`${td} text-right`}>
                   <TombolLink
@@ -213,8 +240,9 @@ function TabelHasil({ sesi }: { sesi: Sesi }) {
                 </div>
               ))}
             </dl>
-            <div>
+            <div className="flex flex-wrap items-center gap-2">
               <LabelDiagnosis status={p.status} jumlahPola={p.jumlahPola} />
+              {perluPenandaModel(p) && <PenandaModel />}
             </div>
             <TombolLink href={urlDetail(p)} varian="garis" tinggi={44} className="text-sm!">
               Lihat Detail

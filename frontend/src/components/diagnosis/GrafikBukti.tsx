@@ -4,7 +4,14 @@ import type { HasilDiagnosis, PatternAssessment } from "@/lib/types";
 const labels: Record<PatternAssessment["status"], string> = { supported: "Pola didukung", preliminary: "Dugaan awal", ambiguous: "Belum dapat dibedakan", insufficient_evidence: "Bukti belum cukup", not_measurable: "Tidak terukur pada kategori ini", no_pattern_detected: "Tidak ada pola terdeteksi" };
 const colors = ["#2563eb", "#0f766e", "#a16207", "#9333ea", "#be123c", "#475569"];
 const card = "flex min-w-0 flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-xs";
-export function GrafikBukti({ hasil, tanda }: { hasil: HasilDiagnosis; tanda: string }) {
+/** P2.1: ambang > 1 berarti pada validation tidak ada ambang yang layak, jadi pola ini tidak pernah bisa "didukung" di kategori ini. */
+const ditahanAmbang = (p: PatternAssessment) => p.status !== "not_measurable" && p.threshold !== null && p.threshold > 1;
+const teksDitahan = (kategori?: string) =>
+  `Pola ini belum dapat dipastikan oleh model pada soal ${kategori ?? "kategori ini"}, sehingga statusnya paling tinggi "Dugaan awal". Gunakan sesi dengan kategori bilangan lain (misalnya Ratusan atau Ribuan) untuk memastikannya.`;
+function CatatanDitahan({ kategori }: { kategori?: string }) {
+  return <p className="rounded-lg bg-amber-50 p-2.5 text-xs text-amber-900"><strong>Ambang menahan pola ini.</strong> {teksDitahan(kategori)}</p>;
+}
+export function GrafikBukti({ hasil, tanda, kategori }: { hasil: HasilDiagnosis; tanda: string; kategori?: string }) {
   const all = hasil.assessments;
   const measured = all.filter(p => p.status !== "not_measurable");
   const model = measured.some(p => p.score !== null);
@@ -23,9 +30,10 @@ export function GrafikBukti({ hasil, tanda }: { hasil: HasilDiagnosis; tanda: st
         <div className="mb-1 flex flex-wrap justify-between gap-2 text-sm"><span><strong>{p.pattern}</strong> · {p.name}</span><strong>{model ? p.score?.toFixed(3) ?? "—" : `${p.matching_answers} kecocokan`}</strong></div>
         <div className="relative h-3 rounded-full bg-slate-100"><div className="h-3 rounded-full bg-turquoise" style={{ width: `${100*(model ? p.score ?? 0 : p.matching_answers/max)}%` }} />{model && p.threshold !== null && p.threshold <= 1 && <span title={`Ambang ${p.threshold.toFixed(3)}`} className="absolute top-[-3px] h-5 border-l-2 border-navy" style={{ left: `${p.threshold*100}%` }} />}</div>
         <p className="mt-1 text-xs text-slate-600">{labels[p.status]} · {p.matching_answers} cocok · {p.distinguishing_answers} pembeda · {p.answered_opportunities}/{p.shown_opportunities} kesempatan dijawab{model && p.threshold !== null ? ` · Ambang ${p.threshold > 1 ? "menahan semua dugaan" : p.threshold.toFixed(3)}` : ""}</p>
+        {model && ditahanAmbang(p) && <div className="mt-1.5"><CatatanDitahan kategori={kategori} /></div>}
       </li>)}</ol>
       {all.filter(p => p.status === "not_measurable").map(p => <p key={p.pattern} className="rounded-xl bg-slate-50 p-3 text-sm"><strong>{p.pattern} · {p.name}</strong> — Tidak terukur pada kategori ini.</p>)}
-      <details><summary className="cursor-pointer py-2 text-sm font-bold">Tabel angka dan alasan setiap pola</summary><div className="overflow-x-auto"><table className="w-full text-left text-sm"><caption className="sr-only">Penilaian semua pola</caption><thead><tr>{["Pola","Status","Skor / ambang","Cocok","Pembeda","Dijawab / ditampilkan","Alasan"].map(v => <th key={v} className="border-b border-slate-200 p-2">{v}</th>)}</tr></thead><tbody>{all.map(p => <tr key={p.pattern}><th className="p-2">{p.pattern}</th><td className="p-2">{labels[p.status]}</td><td className="p-2">{p.score?.toFixed(3) ?? "—"} / {p.threshold?.toFixed(3) ?? "—"}</td><td className="p-2">{p.matching_answers}</td><td className="p-2">{p.distinguishing_answers}</td><td className="p-2">{p.answered_opportunities} / {p.shown_opportunities}</td><td className="min-w-56 p-2">{p.reasons.join(" ")}</td></tr>)}</tbody></table></div></details>
+      <details><summary className="cursor-pointer py-2 text-sm font-bold">Tabel angka dan alasan setiap pola</summary><div className="overflow-x-auto"><table className="w-full text-left text-sm"><caption className="sr-only">Penilaian semua pola</caption><thead><tr>{["Pola","Status","Skor / ambang","Cocok","Pembeda","Dijawab / ditampilkan","Alasan"].map(v => <th key={v} className="border-b border-slate-200 p-2">{v}</th>)}</tr></thead><tbody>{all.map(p => <tr key={p.pattern}><th className="p-2">{p.pattern}</th><td className="p-2">{labels[p.status]}</td><td className="p-2">{p.score?.toFixed(3) ?? "—"} / {ditahanAmbang(p) ? "menahan semua" : p.threshold?.toFixed(3) ?? "—"}</td><td className="p-2">{p.matching_answers}</td><td className="p-2">{p.distinguishing_answers}</td><td className="p-2">{p.answered_opportunities} / {p.shown_opportunities}</td><td className="min-w-56 p-2">{p.reasons.join(" ")}</td></tr>)}</tbody></table></div></details>
     </section>
     <section className={card} aria-labelledby="perkembangan-bukti">
       <h2 id="perkembangan-bukti" className="text-lg font-extrabold">Perkembangan bukti soal 1–15</h2><p className="text-sm text-slate-500">Jumlah kecocokan kumulatif, bukan probabilitas diagnosis. Satu jawaban dapat mendukung beberapa kandidat. Titik berbingkai tebal menandai bukti pembeda baru.</p>
@@ -43,13 +51,13 @@ export function GrafikBukti({ hasil, tanda }: { hasil: HasilDiagnosis; tanda: st
     </section>
   </>;
 }
-export function PenilaianPola({ hasil, tanda }: { hasil: HasilDiagnosis; tanda: string }) {
+export function PenilaianPola({ hasil, tanda, kategori }: { hasil: HasilDiagnosis; tanda: string; kategori?: string }) {
   const candidates = hasil.assessments.filter(p => ["supported","preliminary","ambiguous"].includes(p.status));
   return <>
-    {hasil.modelCompatibility !== "compatible" && <p className="rounded-xl bg-slate-50 p-4 text-sm">{hasil.alasanBelumCukup}</p>}
+    {hasil.modelCompatibility !== "compatible" && <div role="status" className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900"><strong>Model diagnosis belum aktif.</strong> {hasil.alasanBelumCukup} Status tertinggi yang mungkin hanya &ldquo;Dugaan awal&rdquo;.</div>}
     {!candidates.length && <p className="rounded-xl bg-slate-50 p-4">{hasil.assessments.some(p=>p.status==="insufficient_evidence") ? "Bukti belum cukup untuk menetapkan dugaan pola berulang." : "Tidak ada pola terdeteksi pada sesi ini. Ini bukan kepastian bahwa semua materi sudah dikuasai."}</p>}
     {hasil.ambiguousGroups.map(g=><article key={g.patterns.join("-")} className={card}><h3 className="font-bold">Belum dapat dibedakan: {g.patterns.join(" / ")}</h3><p className="text-sm">{g.shared_answers} jawaban bersama. {g.reason} Kandidat ini tidak berarti siswa pasti mengalami semuanya.</p></article>)}
-    {candidates.map(p=><article key={p.pattern} className={card}><div><span className="text-xs font-bold text-turquoise-ink">{labels[p.status]}</span><h3 className="mt-1 text-lg font-extrabold">{p.pattern} · {p.name}</h3></div><p className="text-sm">{p.matching_answers} kecocokan · {p.distinguishing_answers} pembeda · {p.answered_opportunities} kesempatan dijawab</p><ul className="list-disc pl-5 text-sm text-slate-600">{p.reasons.map(reason=><li key={reason}>{reason}</li>)}</ul><div className="flex flex-wrap gap-2">{p.examples.map(e=><span key={e.position} className="rounded-lg bg-slate-50 p-2 text-sm">Soal {e.position}: {e.operand_1} {tanda} {e.operand_2} → {e.selected_value} (benar {e.correct_value})</span>)}</div><p className="text-sm text-slate-600">Minta siswa menjelaskan langkah bersusun pada soal serupa.</p></article>)}
+    {candidates.map(p=><article key={p.pattern} className={card}><div><span className="text-xs font-bold text-turquoise-ink">{labels[p.status]}</span><h3 className="mt-1 text-lg font-extrabold">{p.pattern} · {p.name}</h3></div><p className="text-sm">{p.matching_answers} kecocokan · {p.distinguishing_answers} pembeda · {p.answered_opportunities} kesempatan dijawab</p><ul className="list-disc pl-5 text-sm text-slate-600">{p.reasons.map(reason=><li key={reason}>{reason}</li>)}</ul><div className="flex flex-wrap gap-2">{p.examples.map(e=><span key={e.position} className="rounded-lg bg-slate-50 p-2 text-sm">Soal {e.position}: {e.operand_1} {tanda} {e.operand_2} → {e.selected_value} (benar {e.correct_value})</span>)}</div>{hasil.modelCompatibility === "compatible" && ditahanAmbang(p) && <CatatanDitahan kategori={kategori} />}<p className="text-sm text-slate-600">Minta siswa menjelaskan langkah bersusun pada soal serupa.</p></article>)}
     <p className="text-xs text-slate-500">Versi penilaian: {hasil.policyVersion}. {hasil.policyVersion.startsWith("legacy") ? "Status akhir sesi lama dipertahankan; penilaian per pola adalah penjelasan tambahan versi baru." : ""}</p>
   </>;
 }

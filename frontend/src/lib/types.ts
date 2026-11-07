@@ -167,6 +167,8 @@ export interface HasilDiagnosis {
 export interface HasilSiswa extends Pengumpulan {
   status: StatusBukti;
   jumlahPola: number;
+  /** P2.2: false jika model ML tidak termuat saat hasil dihitung; status hanya dari aturan hitung. */
+  modelAktif: boolean;
 }
 
 /** Detail diagnosis satu siswa (D2). */

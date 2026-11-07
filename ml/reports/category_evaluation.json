@@ -1445,7 +1445,97 @@
     "ml/simulation.py": "2ed96920cae11e0c00d82dad0c927aebb2f9f0f189e8be94dc9df50fc9f178ff"
   },
   "legacy": {
-    "source": "existing_legacy_artifact",
-    "sha256": "4e5815be4d1e1c42d7182b195c6867590028108d81a4bf58ba46da6d9c49df03"
+    "source": "refit_legacy_policy",
+    "seed": 42,
+    "test": {
+      "addition": {
+        "sessions": 1320,
+        "macro_f1": 0.9177480136985916,
+        "true_patterns_found": 1145,
+        "true_patterns": 1320,
+        "false_pattern_calls": 30,
+        "mixed_both_found": 135,
+        "mixed_sessions": 300,
+        "no_target_with_calls": 29,
+        "no_target_sessions": 300,
+        "abstained": 281,
+        "by_pattern": {
+          "A1": {
+            "precision": 0.9823943661971831,
+            "recall": 0.8454545454545455,
+            "f1": 0.9087947882736156,
+            "support": 330
+          },
+          "A2": {
+            "precision": 0.9766666666666667,
+            "recall": 0.8825301204819277,
+            "f1": 0.9272151898734177,
+            "support": 332
+          },
+          "A3": {
+            "precision": 0.9591836734693877,
+            "recall": 0.8597560975609756,
+            "f1": 0.9067524115755627,
+            "support": 328
+          },
+          "A4": {
+            "precision": 0.9797979797979798,
+            "recall": 0.8818181818181818,
+            "f1": 0.9282296650717703,
+            "support": 330
+          }
+        }
+      },
+      "subtraction": {
+        "sessions": 1679,
+        "macro_f1": 0.8898935607068904,
+        "true_patterns_found": 1360,
+        "true_patterns": 1678,
+        "false_pattern_calls": 18,
+        "mixed_both_found": 40,
+        "mixed_sessions": 299,
+        "no_target_with_calls": 17,
+        "no_target_sessions": 300,
+        "abstained": 342,
+        "by_pattern": {
+          "S1": {
+            "precision": 1.0,
+            "recall": 0.8351254480286738,
+            "f1": 0.91015625,
+            "support": 279
+          },
+          "S2": {
+            "precision": 0.99581589958159,
+            "recall": 0.8439716312056738,
+            "f1": 0.9136276391554703,
+            "support": 282
+          },
+          "S3": {
+            "precision": 0.9829059829059829,
+            "recall": 0.8303249097472925,
+            "f1": 0.9001956947162426,
+            "support": 277
+          },
+          "S4": {
+            "precision": 0.9867256637168141,
+            "recall": 0.8109090909090909,
+            "f1": 0.8902195608782435,
+            "support": 275
+          },
+          "S5": {
+            "precision": 0.9730941704035875,
+            "recall": 0.7587412587412588,
+            "f1": 0.8526522593320236,
+            "support": 286
+          },
+          "S6": {
+            "precision": 0.9820627802690582,
+            "recall": 0.7849462365591398,
+            "f1": 0.8725099601593626,
+            "support": 279
+          }
+        }
+      }
+    }
   }
 }

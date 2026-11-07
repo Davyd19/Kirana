@@ -1,0 +1,982 @@
+{
+  "seed": 42,
+  "scenarios": {
+    "ada_tombol": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6426,
+        "false_calls": 155,
+        "preliminary_false": 2294,
+        "outside": 21471,
+        "skipped": 860,
+        "wrong": 54432,
+        "fake_matches": 11522,
+        "fake_sessions": 1467,
+        "macro_f1": 0.8540418716569026,
+        "precision": 0.9764473484272906,
+        "recall": 0.7932354030366622
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8743493130082939,
+          "true_patterns": 992,
+          "true_found": 776,
+          "false_calls": 7,
+          "preliminary_false": 319,
+          "outside": 1600,
+          "skipped": 120,
+          "wrong": 9404,
+          "fake_matches": 1279,
+          "fake_sessions": 168
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.9143229357470932,
+          "true_patterns": 1320,
+          "true_found": 1142,
+          "false_calls": 35,
+          "preliminary_false": 305,
+          "outside": 3556,
+          "skipped": 124,
+          "wrong": 9387,
+          "fake_matches": 1301,
+          "fake_sessions": 163
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.9020468917302413,
+          "true_patterns": 1320,
+          "true_found": 1110,
+          "false_calls": 30,
+          "preliminary_false": 307,
+          "outside": 3827,
+          "skipped": 133,
+          "wrong": 9454,
+          "fake_matches": 1286,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6646872352147821,
+          "true_patterns": 1113,
+          "true_found": 677,
+          "false_calls": 12,
+          "preliminary_false": 719,
+          "outside": 1982,
+          "skipped": 161,
+          "wrong": 8194,
+          "fake_matches": 3117,
+          "fake_sessions": 590
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8789940479004351,
+          "true_patterns": 1678,
+          "true_found": 1349,
+          "false_calls": 39,
+          "preliminary_false": 337,
+          "outside": 4536,
+          "skipped": 162,
+          "wrong": 9050,
+          "fake_matches": 2731,
+          "fake_sessions": 222
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8898508063405696,
+          "true_patterns": 1678,
+          "true_found": 1372,
+          "false_calls": 32,
+          "preliminary_false": 307,
+          "outside": 5970,
+          "skipped": 160,
+          "wrong": 8943,
+          "fake_matches": 1808,
+          "fake_sessions": 168
+        }
+      }
+    },
+    "menebak": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 5742,
+        "false_calls": 193,
+        "preliminary_false": 5928,
+        "outside": 0,
+        "skipped": 859,
+        "wrong": 70603,
+        "fake_matches": 25245,
+        "fake_sessions": 4141,
+        "macro_f1": 0.8013823706586956,
+        "precision": 0.9674810446503791,
+        "recall": 0.7088013825453647
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8734796865684354,
+          "true_patterns": 992,
+          "true_found": 777,
+          "false_calls": 10,
+          "preliminary_false": 531,
+          "outside": 0,
+          "skipped": 120,
+          "wrong": 10588,
+          "fake_matches": 2122,
+          "fake_sessions": 336
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8613517375134978,
+          "true_patterns": 1320,
+          "true_found": 1029,
+          "false_calls": 40,
+          "preliminary_false": 839,
+          "outside": 0,
+          "skipped": 124,
+          "wrong": 12064,
+          "fake_matches": 3493,
+          "fake_sessions": 589
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8412964143472822,
+          "true_patterns": 1320,
+          "true_found": 986,
+          "false_calls": 32,
+          "preliminary_false": 935,
+          "outside": 0,
+          "skipped": 133,
+          "wrong": 12299,
+          "fake_matches": 3626,
+          "fake_sessions": 667
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6583627034471161,
+          "true_patterns": 1113,
+          "true_found": 669,
+          "false_calls": 16,
+          "preliminary_false": 992,
+          "outside": 0,
+          "skipped": 161,
+          "wrong": 9688,
+          "fake_matches": 4232,
+          "fake_sessions": 762
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8236303707808048,
+          "true_patterns": 1678,
+          "true_found": 1217,
+          "false_calls": 50,
+          "preliminary_false": 1262,
+          "outside": 0,
+          "skipped": 161,
+          "wrong": 12524,
+          "fake_matches": 5857,
+          "fake_sessions": 852
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.7501733112950372,
+          "true_patterns": 1678,
+          "true_found": 1064,
+          "false_calls": 45,
+          "preliminary_false": 1369,
+          "outside": 0,
+          "skipped": 160,
+          "wrong": 13440,
+          "fake_matches": 5915,
+          "fake_sessions": 935
+        }
+      }
+    },
+    "melewati": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6179,
+        "false_calls": 120,
+        "preliminary_false": 2329,
+        "outside": 0,
+        "skipped": 22331,
+        "wrong": 54432,
+        "fake_matches": 11522,
+        "fake_sessions": 1467,
+        "macro_f1": 0.8369995422421775,
+        "precision": 0.9809493570408001,
+        "recall": 0.7627453400814714
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8526622619680874,
+          "true_patterns": 992,
+          "true_found": 741,
+          "false_calls": 5,
+          "preliminary_false": 321,
+          "outside": 0,
+          "skipped": 1720,
+          "wrong": 9404,
+          "fake_matches": 1279,
+          "fake_sessions": 168
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8889520419231407,
+          "true_patterns": 1320,
+          "true_found": 1077,
+          "false_calls": 26,
+          "preliminary_false": 314,
+          "outside": 0,
+          "skipped": 3680,
+          "wrong": 9387,
+          "fake_matches": 1301,
+          "fake_sessions": 163
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8715346232775618,
+          "true_patterns": 1320,
+          "true_found": 1036,
+          "false_calls": 19,
+          "preliminary_false": 318,
+          "outside": 0,
+          "skipped": 3960,
+          "wrong": 9454,
+          "fake_matches": 1286,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6601018034923185,
+          "true_patterns": 1113,
+          "true_found": 668,
+          "false_calls": 11,
+          "preliminary_false": 720,
+          "outside": 0,
+          "skipped": 2143,
+          "wrong": 8194,
+          "fake_matches": 3117,
+          "fake_sessions": 590
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8718090639205455,
+          "true_patterns": 1678,
+          "true_found": 1325,
+          "false_calls": 33,
+          "preliminary_false": 343,
+          "outside": 0,
+          "skipped": 4698,
+          "wrong": 9050,
+          "fake_matches": 2731,
+          "fake_sessions": 222
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8769374588714113,
+          "true_patterns": 1678,
+          "true_found": 1332,
+          "false_calls": 26,
+          "preliminary_false": 313,
+          "outside": 0,
+          "skipped": 6130,
+          "wrong": 8943,
+          "fake_matches": 1808,
+          "fake_sessions": 168
+        }
+      }
+    },
+    "menebak_latih_ulang": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6007,
+        "false_calls": 243,
+        "preliminary_false": 5878,
+        "outside": 0,
+        "skipped": 859,
+        "wrong": 70603,
+        "fake_matches": 25245,
+        "fake_sessions": 4141,
+        "macro_f1": 0.8204555077122521,
+        "precision": 0.96112,
+        "recall": 0.7415133934082212
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8707546137777064,
+          "true_patterns": 992,
+          "true_found": 772,
+          "false_calls": 9,
+          "preliminary_false": 532,
+          "outside": 0,
+          "skipped": 120,
+          "wrong": 10588,
+          "fake_matches": 2122,
+          "fake_sessions": 336
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8694724004521559,
+          "true_patterns": 1320,
+          "true_found": 1060,
+          "false_calls": 57,
+          "preliminary_false": 822,
+          "outside": 0,
+          "skipped": 124,
+          "wrong": 12064,
+          "fake_matches": 3493,
+          "fake_sessions": 589
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.871312848852394,
+          "true_patterns": 1320,
+          "true_found": 1060,
+          "false_calls": 51,
+          "preliminary_false": 916,
+          "outside": 0,
+          "skipped": 133,
+          "wrong": 12299,
+          "fake_matches": 3626,
+          "fake_sessions": 667
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6616609402769053,
+          "true_patterns": 1113,
+          "true_found": 691,
+          "false_calls": 38,
+          "preliminary_false": 970,
+          "outside": 0,
+          "skipped": 161,
+          "wrong": 9688,
+          "fake_matches": 4232,
+          "fake_sessions": 762
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8273318047005164,
+          "true_patterns": 1678,
+          "true_found": 1225,
+          "false_calls": 52,
+          "preliminary_false": 1260,
+          "outside": 0,
+          "skipped": 161,
+          "wrong": 12524,
+          "fake_matches": 5857,
+          "fake_sessions": 852
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8222004382138346,
+          "true_patterns": 1678,
+          "true_found": 1199,
+          "false_calls": 36,
+          "preliminary_false": 1378,
+          "outside": 0,
+          "skipped": 160,
+          "wrong": 13440,
+          "fake_matches": 5915,
+          "fake_sessions": 935
+        }
+      }
+    }
+  },
+  "example": {
+    "operation": "subtraction",
+    "category": "hundreds",
+    "students": 1679,
+    "supported_changed": 190,
+    "examples": [
+      {
+        "student_id": "ST00329",
+        "truth": [
+          "S2"
+        ],
+        "profile": {
+          "profile_type": "S2",
+          "dominant_pattern": "S2",
+          "secondary_pattern": "",
+          "pattern_consistency": 0.916
+        },
+        "runs": {
+          "ada_tombol": {
+            "status": "supported",
+            "supported": [
+              "S2"
+            ],
+            "preliminary": [],
+            "scores": {
+              "S1": 0.002,
+              "S2": 1.0,
+              "S3": 0.045,
+              "S4": 0.017,
+              "S5": 0.01,
+              "S6": 0.004
+            },
+            "thresholds": {
+              "S1": 0.78,
+              "S2": 0.93,
+              "S3": 0.7,
+              "S4": 0.75,
+              "S5": 0.65,
+              "S6": 0.75
+            },
+            "counts": {
+              "outside_options": 6,
+              "wrong": 7,
+              "correct": 2
+            },
+            "exact": {
+              "S2": 7,
+              "S3": 1
+            },
+            "unique": {
+              "S2": 6
+            },
+            "questions": [
+              {
+                "no": 1,
+                "soal": "801 - 533",
+                "benar": 268,
+                "opsi": [
+                  168,
+                  268,
+                  332,
+                  378
+                ],
+                "dihitung_siswa": 377,
+                "di_luar_opsi": true,
+                "dicatat": "di luar opsi",
+                "cocok_pola": []
+              },
+              {
+                "no": 2,
+                "soal": "680 - 353",
+                "benar": 327,
+                "opsi": [
+                  227,
+                  327,
+                  330,
+                  337
+                ],
+                "dihitung_siswa": 37,
+                "di_luar_opsi": true,
+                "dicatat": "di luar opsi",
+                "cocok_pola": []
+              },
+              {
+                "no": 3,
+                "soal": "550 - 271",
+                "benar": 279,
+                "opsi": [
+                  279,
+                  281,
+                  321,
+                  389
+                ],
+                "dihitung_siswa": 389,
+                "di_luar_opsi": false,
+                "dicatat": 389,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 4,
+                "soal": "503 - 235",
+                "benar": 268,
+                "opsi": [
+                  268,
+                  332,
+                  368,
+                  378
+                ],
+                "dihitung_siswa": 378,
+                "di_luar_opsi": false,
+                "dicatat": 378,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 5,
+                "soal": "600 - 456",
+                "benar": 144,
+                "opsi": [
+                  144,
+                  200,
+                  244,
+                  254
+                ],
+                "dihitung_siswa": 254,
+                "di_luar_opsi": false,
+                "dicatat": 254,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 6,
+                "soal": "700 - 250",
+                "benar": 450,
+                "opsi": [
+                  450,
+                  451,
+                  500,
+                  550
+                ],
+                "dihitung_siswa": 50,
+                "di_luar_opsi": true,
+                "dicatat": "di luar opsi",
+                "cocok_pola": []
+              },
+              {
+                "no": 7,
+                "soal": "512 - 264",
+                "benar": 248,
+                "opsi": [
+                  248,
+                  308,
+                  352,
+                  368
+                ],
+                "dihitung_siswa": 258,
+                "di_luar_opsi": true,
+                "dicatat": "di luar opsi",
+                "cocok_pola": []
+              },
+              {
+                "no": 8,
+                "soal": "701 - 126",
+                "benar": 575,
+                "opsi": [
+                  475,
+                  575,
+                  625,
+                  675
+                ],
+                "dihitung_siswa": 685,
+                "di_luar_opsi": true,
+                "dicatat": "di luar opsi",
+                "cocok_pola": []
+              },
+              {
+                "no": 9,
+                "soal": "913 - 619",
+                "benar": 294,
+                "opsi": [
+                  294,
+                  304,
+                  306,
+                  314
+                ],
+                "dihitung_siswa": 304,
+                "di_luar_opsi": false,
+                "dicatat": 304,
+                "cocok_pola": [
+                  "S2",
+                  "S3"
+                ]
+              },
+              {
+                "no": 10,
+                "soal": "602 - 278",
+                "benar": 324,
+                "opsi": [
+                  224,
+                  324,
+                  424,
+                  434
+                ],
+                "dihitung_siswa": 9732,
+                "di_luar_opsi": true,
+                "dicatat": 324,
+                "cocok_pola": []
+              },
+              {
+                "no": 11,
+                "soal": "902 - 418",
+                "benar": 484,
+                "opsi": [
+                  384,
+                  484,
+                  584,
+                  594
+                ],
+                "dihitung_siswa": 484,
+                "di_luar_opsi": false,
+                "dicatat": 484,
+                "cocok_pola": []
+              },
+              {
+                "no": 12,
+                "soal": "816 - 199",
+                "benar": 617,
+                "opsi": [
+                  617,
+                  707,
+                  727,
+                  783
+                ],
+                "dihitung_siswa": 727,
+                "di_luar_opsi": false,
+                "dicatat": 727,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 13,
+                "soal": "601 - 557",
+                "benar": 44,
+                "opsi": [
+                  44,
+                  144,
+                  156,
+                  944
+                ],
+                "dihitung_siswa": 154,
+                "di_luar_opsi": true,
+                "dicatat": "di luar opsi",
+                "cocok_pola": []
+              },
+              {
+                "no": 14,
+                "soal": "520 - 138",
+                "benar": 382,
+                "opsi": [
+                  382,
+                  390,
+                  418,
+                  492
+                ],
+                "dihitung_siswa": 492,
+                "di_luar_opsi": false,
+                "dicatat": 492,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 15,
+                "soal": "706 - 648",
+                "benar": 58,
+                "opsi": [
+                  58,
+                  158,
+                  168,
+                  958
+                ],
+                "dihitung_siswa": 168,
+                "di_luar_opsi": false,
+                "dicatat": 168,
+                "cocok_pola": [
+                  "S2"
+                ]
+              }
+            ]
+          },
+          "menebak": {
+            "status": "supported",
+            "supported": [
+              "S2",
+              "S3"
+            ],
+            "preliminary": [],
+            "scores": {
+              "S1": 0.0,
+              "S2": 0.996,
+              "S3": 0.803,
+              "S4": 0.002,
+              "S5": 0.006,
+              "S6": 0.0
+            },
+            "thresholds": {
+              "S1": 0.78,
+              "S2": 0.93,
+              "S3": 0.7,
+              "S4": 0.75,
+              "S5": 0.65,
+              "S6": 0.75
+            },
+            "counts": {
+              "wrong": 12,
+              "correct": 3
+            },
+            "exact": {
+              "S2": 8,
+              "S3": 4,
+              "S5": 1
+            },
+            "unique": {
+              "S2": 7,
+              "S3": 3,
+              "S5": 1
+            },
+            "questions": [
+              {
+                "no": 1,
+                "soal": "801 - 533",
+                "benar": 268,
+                "opsi": [
+                  168,
+                  268,
+                  332,
+                  378
+                ],
+                "dihitung_siswa": 377,
+                "di_luar_opsi": true,
+                "dicatat": 378,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 2,
+                "soal": "680 - 353",
+                "benar": 327,
+                "opsi": [
+                  227,
+                  327,
+                  330,
+                  337
+                ],
+                "dihitung_siswa": 37,
+                "di_luar_opsi": true,
+                "dicatat": 330,
+                "cocok_pola": [
+                  "S3"
+                ]
+              },
+              {
+                "no": 3,
+                "soal": "550 - 271",
+                "benar": 279,
+                "opsi": [
+                  279,
+                  281,
+                  321,
+                  389
+                ],
+                "dihitung_siswa": 389,
+                "di_luar_opsi": false,
+                "dicatat": 389,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 4,
+                "soal": "503 - 235",
+                "benar": 268,
+                "opsi": [
+                  268,
+                  332,
+                  368,
+                  378
+                ],
+                "dihitung_siswa": 378,
+                "di_luar_opsi": false,
+                "dicatat": 378,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 5,
+                "soal": "600 - 456",
+                "benar": 144,
+                "opsi": [
+                  144,
+                  200,
+                  244,
+                  254
+                ],
+                "dihitung_siswa": 254,
+                "di_luar_opsi": false,
+                "dicatat": 254,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 6,
+                "soal": "700 - 250",
+                "benar": 450,
+                "opsi": [
+                  450,
+                  451,
+                  500,
+                  550
+                ],
+                "dihitung_siswa": 50,
+                "di_luar_opsi": true,
+                "dicatat": 500,
+                "cocok_pola": [
+                  "S3"
+                ]
+              },
+              {
+                "no": 7,
+                "soal": "512 - 264",
+                "benar": 248,
+                "opsi": [
+                  248,
+                  308,
+                  352,
+                  368
+                ],
+                "dihitung_siswa": 258,
+                "di_luar_opsi": true,
+                "dicatat": 308,
+                "cocok_pola": [
+                  "S3"
+                ]
+              },
+              {
+                "no": 8,
+                "soal": "701 - 126",
+                "benar": 575,
+                "opsi": [
+                  475,
+                  575,
+                  625,
+                  675
+                ],
+                "dihitung_siswa": 685,
+                "di_luar_opsi": true,
+                "dicatat": 675,
+                "cocok_pola": [
+                  "S5"
+                ]
+              },
+              {
+                "no": 9,
+                "soal": "913 - 619",
+                "benar": 294,
+                "opsi": [
+                  294,
+                  304,
+                  306,
+                  314
+                ],
+                "dihitung_siswa": 304,
+                "di_luar_opsi": false,
+                "dicatat": 304,
+                "cocok_pola": [
+                  "S2",
+                  "S3"
+                ]
+              },
+              {
+                "no": 10,
+                "soal": "602 - 278",
+                "benar": 324,
+                "opsi": [
+                  224,
+                  324,
+                  424,
+                  434
+                ],
+                "dihitung_siswa": 9732,
+                "di_luar_opsi": true,
+                "dicatat": 324,
+                "cocok_pola": []
+              },
+              {
+                "no": 11,
+                "soal": "902 - 418",
+                "benar": 484,
+                "opsi": [
+                  384,
+                  484,
+                  584,
+                  594
+                ],
+                "dihitung_siswa": 484,
+                "di_luar_opsi": false,
+                "dicatat": 484,
+                "cocok_pola": []
+              },
+              {
+                "no": 12,
+                "soal": "816 - 199",
+                "benar": 617,
+                "opsi": [
+                  617,
+                  707,
+                  727,
+                  783
+                ],
+                "dihitung_siswa": 727,
+                "di_luar_opsi": false,
+                "dicatat": 727,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 13,
+                "soal": "601 - 557",
+                "benar": 44,
+                "opsi": [
+                  44,
+                  144,
+                  156,
+                  944
+                ],
+                "dihitung_siswa": 154,
+                "di_luar_opsi": true,
+                "dicatat": 44,
+                "cocok_pola": []
+              },
+              {
+                "no": 14,
+                "soal": "520 - 138",
+                "benar": 382,
+                "opsi": [
+                  382,
+                  390,
+                  418,
+                  492
+                ],
+                "dihitung_siswa": 492,
+                "di_luar_opsi": false,
+                "dicatat": 492,
+                "cocok_pola": [
+                  "S2"
+                ]
+              },
+              {
+                "no": 15,
+                "soal": "706 - 648",
+                "benar": 58,
+                "opsi": [
+                  58,
+                  158,
+                  168,
+                  958
+                ],
+                "dihitung_siswa": 168,
+                "di_luar_opsi": false,
+                "dicatat": 168,
+                "cocok_pola": [
+                  "S2"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}

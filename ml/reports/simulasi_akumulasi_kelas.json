@@ -1,0 +1,151 @@
+{
+  "seed": 42,
+  "class_size": 30,
+  "shared": 8,
+  "classes_per_group": 200,
+  "alert": 0.25,
+  "student_level": {
+    "supported": 6581,
+    "supported_ok": 6426,
+    "warning": 3351,
+    "warning_ok": 1057,
+    "true": 8101,
+    "true_supported": 6426,
+    "true_warned": 1057
+  },
+  "class_level": {
+    "acak": {
+      "didukung": {
+        "rata_rata_selisih_per_pola": 1.2107407407407407,
+        "pola_terbanyak_tepat": 0.7891666666666667,
+        "peringatan_kelas_presisi": 0.9645909645909646,
+        "peringatan_kelas_recall": 0.5337837837837838,
+        "tp": 790,
+        "fp": 29,
+        "fn": 690,
+        "tn": 3891,
+        "classes": 1200
+      },
+      "plus_waspada": {
+        "rata_rata_selisih_per_pola": 1.7840740740740741,
+        "pola_terbanyak_tepat": 0.7216666666666667,
+        "peringatan_kelas_presisi": 0.5365949119373777,
+        "peringatan_kelas_recall": 0.9263513513513514,
+        "tp": 1371,
+        "fp": 1184,
+        "fn": 109,
+        "tn": 2736,
+        "classes": 1200
+      },
+      "skor": {
+        "rata_rata_selisih_per_pola": 1.268698640948532,
+        "pola_terbanyak_tepat": 0.7841666666666667,
+        "peringatan_kelas_presisi": 0.7658884565499352,
+        "peringatan_kelas_recall": 0.797972972972973,
+        "tp": 1181,
+        "fp": 361,
+        "fn": 299,
+        "tn": 3559,
+        "classes": 1200
+      }
+    },
+    "satu_umum": {
+      "didukung": {
+        "rata_rata_selisih_per_pola": 1.2961111111111112,
+        "pola_terbanyak_tepat": 0.7841666666666667,
+        "peringatan_kelas_presisi": 0.9879663056558363,
+        "peringatan_kelas_recall": 0.37956541840036984,
+        "tp": 821,
+        "fp": 10,
+        "fn": 1342,
+        "tn": 3227,
+        "classes": 1200
+      },
+      "plus_waspada": {
+        "rata_rata_selisih_per_pola": 1.6781481481481482,
+        "pola_terbanyak_tepat": 0.7291666666666666,
+        "peringatan_kelas_presisi": 0.6967575534266764,
+        "peringatan_kelas_recall": 0.8742487286176607,
+        "tp": 1891,
+        "fp": 823,
+        "fn": 272,
+        "tn": 2414,
+        "classes": 1200
+      },
+      "skor": {
+        "rata_rata_selisih_per_pola": 1.2662342984043893,
+        "pola_terbanyak_tepat": 0.7783333333333333,
+        "peringatan_kelas_presisi": 0.8562570462232244,
+        "peringatan_kelas_recall": 0.7022653721682848,
+        "tp": 1519,
+        "fp": 255,
+        "fn": 644,
+        "tn": 2982,
+        "classes": 1200
+      }
+    }
+  },
+  "example": {
+    "operation": "subtraction",
+    "category": "hundreds",
+    "shared_pattern": "S5",
+    "rows": [
+      {
+        "pola": "S1",
+        "sebenarnya": 4,
+        "didukung": 4,
+        "waspada": 1,
+        "didukung_tepat": 4,
+        "waspada_tepat": 0,
+        "skor": 4.3
+      },
+      {
+        "pola": "S2",
+        "sebenarnya": 8,
+        "didukung": 6,
+        "waspada": 2,
+        "didukung_tepat": 6,
+        "waspada_tepat": 2,
+        "skor": 7.3
+      },
+      {
+        "pola": "S3",
+        "sebenarnya": 6,
+        "didukung": 5,
+        "waspada": 1,
+        "didukung_tepat": 5,
+        "waspada_tepat": 1,
+        "skor": 5.9
+      },
+      {
+        "pola": "S4",
+        "sebenarnya": 6,
+        "didukung": 4,
+        "waspada": 0,
+        "didukung_tepat": 4,
+        "waspada_tepat": 0,
+        "skor": 5.3
+      },
+      {
+        "pola": "S5",
+        "sebenarnya": 8,
+        "didukung": 5,
+        "waspada": 1,
+        "didukung_tepat": 5,
+        "waspada_tepat": 1,
+        "skor": 6.2
+      },
+      {
+        "pola": "S6",
+        "sebenarnya": 4,
+        "didukung": 3,
+        "waspada": 0,
+        "didukung_tepat": 3,
+        "waspada_tepat": 0,
+        "skor": 4.1
+      }
+    ],
+    "students_without_any_supported": 4,
+    "students_without_any_signal": 3
+  }
+}

@@ -108,10 +108,10 @@ function IsiDetail({ detail }: { detail: Detail }) {
           </h2>
           <span className="text-[13px] text-slate-600">Perlu pemeriksaan lanjutan · urutan dari layanan diagnosis</span>
         </div>
-        <PenilaianPola hasil={hasil} tanda={sesi.operasi === "penjumlahan" ? "+" : "−"} />
+        <PenilaianPola hasil={hasil} tanda={sesi.operasi === "penjumlahan" ? "+" : "−"} kategori={sesi.numberCategory ? namaKategori(sesi.numberCategory) : undefined} />
       </section>
 
-      <GrafikBukti hasil={hasil} tanda={sesi.operasi === "penjumlahan" ? "+" : "−"} />
+      <GrafikBukti hasil={hasil} tanda={sesi.operasi === "penjumlahan" ? "+" : "−"} kategori={sesi.numberCategory ? namaKategori(sesi.numberCategory) : undefined} />
 
       <section aria-labelledby="rincian-judul" className="flex flex-col gap-3.5">
         <h2 id="rincian-judul" className="m-0 text-lg font-extrabold">

@@ -1,0 +1,3319 @@
+{
+  "seed": 42,
+  "model_path": "C:\\Users\\zakky\\Documents\\Kuliah\\Semester 7\\Kirana hackathon\\Kirana\\ml\\artifacts\\kirana_model.joblib",
+  "rankings": [
+    "exact",
+    "score",
+    "margin",
+    "ratio"
+  ],
+  "provenance": {
+    "source": "refit_legacy_policy",
+    "seed": 42,
+    "test": {
+      "addition": {
+        "sessions": 1320,
+        "macro_f1": 0.9177480136985916,
+        "true_patterns_found": 1145,
+        "true_patterns": 1320,
+        "false_pattern_calls": 30,
+        "mixed_both_found": 135,
+        "mixed_sessions": 300,
+        "no_target_with_calls": 29,
+        "no_target_sessions": 300,
+        "abstained": 281,
+        "by_pattern": {
+          "A1": {
+            "precision": 0.9823943661971831,
+            "recall": 0.8454545454545455,
+            "f1": 0.9087947882736156,
+            "support": 330
+          },
+          "A2": {
+            "precision": 0.9766666666666667,
+            "recall": 0.8825301204819277,
+            "f1": 0.9272151898734177,
+            "support": 332
+          },
+          "A3": {
+            "precision": 0.9591836734693877,
+            "recall": 0.8597560975609756,
+            "f1": 0.9067524115755627,
+            "support": 328
+          },
+          "A4": {
+            "precision": 0.9797979797979798,
+            "recall": 0.8818181818181818,
+            "f1": 0.9282296650717703,
+            "support": 330
+          }
+        }
+      },
+      "subtraction": {
+        "sessions": 1679,
+        "macro_f1": 0.8898935607068904,
+        "true_patterns_found": 1360,
+        "true_patterns": 1678,
+        "false_pattern_calls": 18,
+        "mixed_both_found": 40,
+        "mixed_sessions": 299,
+        "no_target_with_calls": 17,
+        "no_target_sessions": 300,
+        "abstained": 342,
+        "by_pattern": {
+          "S1": {
+            "precision": 1.0,
+            "recall": 0.8351254480286738,
+            "f1": 0.91015625,
+            "support": 279
+          },
+          "S2": {
+            "precision": 0.99581589958159,
+            "recall": 0.8439716312056738,
+            "f1": 0.9136276391554703,
+            "support": 282
+          },
+          "S3": {
+            "precision": 0.9829059829059829,
+            "recall": 0.8303249097472925,
+            "f1": 0.9001956947162426,
+            "support": 277
+          },
+          "S4": {
+            "precision": 0.9867256637168141,
+            "recall": 0.8109090909090909,
+            "f1": 0.8902195608782435,
+            "support": 275
+          },
+          "S5": {
+            "precision": 0.9730941704035875,
+            "recall": 0.7587412587412588,
+            "f1": 0.8526522593320236,
+            "support": 286
+          },
+          "S6": {
+            "precision": 0.9820627802690582,
+            "recall": 0.7849462365591398,
+            "f1": 0.8725099601593626,
+            "support": 279
+          }
+        }
+      }
+    }
+  },
+  "splits": {
+    "validation": {
+      "addition": {
+        "tens": {
+          "single_supported": {
+            "exact": {
+              "sessions": 536,
+              "top1_is_dominant": 536,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 536,
+              "top1_is_dominant": 536,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 536,
+              "top1_is_dominant": 536,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 536,
+              "top1_is_dominant": 536,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 212,
+              "top1_is_dominant": 166,
+              "accuracy": 0.783,
+              "top_tied": 8,
+              "chance_accuracy": 0.7736
+            },
+            "score": {
+              "sessions": 212,
+              "top1_is_dominant": 166,
+              "accuracy": 0.783,
+              "top_tied": 0,
+              "chance_accuracy": 0.7736
+            },
+            "margin": {
+              "sessions": 212,
+              "top1_is_dominant": 168,
+              "accuracy": 0.7925,
+              "top_tied": 0,
+              "chance_accuracy": 0.7736
+            },
+            "ratio": {
+              "sessions": 212,
+              "top1_is_dominant": 168,
+              "accuracy": 0.7925,
+              "top_tied": 0,
+              "chance_accuracy": 0.7736
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 30,
+              "top1_is_dominant": 17,
+              "accuracy": 0.5667,
+              "top_tied": 8,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 30,
+              "top1_is_dominant": 17,
+              "accuracy": 0.5667,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 30,
+              "top1_is_dominant": 19,
+              "accuracy": 0.6333,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 30,
+              "top1_is_dominant": 19,
+              "accuracy": 0.6333,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 8,
+              "top1_is_dominant": 3,
+              "accuracy": 0.375,
+              "top_tied": 8,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 8,
+              "top1_is_dominant": 4,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 8,
+              "top1_is_dominant": 4,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 8,
+              "top1_is_dominant": 4,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 12,
+                "top1_is_dominant": 6,
+                "accuracy": 0.5,
+                "top_tied": 2,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 12,
+                "top1_is_dominant": 4,
+                "accuracy": 0.3333,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 12,
+                "top1_is_dominant": 8,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 12,
+                "top1_is_dominant": 8,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 13,
+                "top1_is_dominant": 7,
+                "accuracy": 0.5385,
+                "top_tied": 5,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 13,
+                "top1_is_dominant": 8,
+                "accuracy": 0.6154,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 13,
+                "top1_is_dominant": 7,
+                "accuracy": 0.5385,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 13,
+                "top1_is_dominant": 7,
+                "accuracy": 0.5385,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 5,
+                "top1_is_dominant": 4,
+                "accuracy": 0.8,
+                "top_tied": 1,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 5,
+                "top1_is_dominant": 5,
+                "accuracy": 1.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 5,
+                "top1_is_dominant": 4,
+                "accuracy": 0.8,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 5,
+                "top1_is_dominant": 4,
+                "accuracy": 0.8,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 30,
+            "dominant_supported": 30
+          },
+          "ml_filter": {
+            "gate_passed": 1296,
+            "ml_rejected": 501,
+            "ml_rejected_correctly": 316,
+            "ml_rejected_true_pattern": 185,
+            "supported": 795,
+            "supported_correct": 778,
+            "gate_only_false_calls": 333,
+            "gate_and_ml_false_calls": 17
+          }
+        },
+        "hundreds": {
+          "single_supported": {
+            "exact": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 295,
+              "top1_is_dominant": 239,
+              "accuracy": 0.8102,
+              "top_tied": 23,
+              "chance_accuracy": 0.7542
+            },
+            "score": {
+              "sessions": 295,
+              "top1_is_dominant": 245,
+              "accuracy": 0.8305,
+              "top_tied": 0,
+              "chance_accuracy": 0.7542
+            },
+            "margin": {
+              "sessions": 295,
+              "top1_is_dominant": 244,
+              "accuracy": 0.8271,
+              "top_tied": 0,
+              "chance_accuracy": 0.7542
+            },
+            "ratio": {
+              "sessions": 295,
+              "top1_is_dominant": 242,
+              "accuracy": 0.8203,
+              "top_tied": 0,
+              "chance_accuracy": 0.7542
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 115,
+              "top1_is_dominant": 74,
+              "accuracy": 0.6435,
+              "top_tied": 23,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 115,
+              "top1_is_dominant": 80,
+              "accuracy": 0.6957,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 115,
+              "top1_is_dominant": 79,
+              "accuracy": 0.687,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 115,
+              "top1_is_dominant": 77,
+              "accuracy": 0.6696,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 23,
+              "top1_is_dominant": 13,
+              "accuracy": 0.5652,
+              "top_tied": 23,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 23,
+              "top1_is_dominant": 14,
+              "accuracy": 0.6087,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 23,
+              "top1_is_dominant": 17,
+              "accuracy": 0.7391,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 23,
+              "top1_is_dominant": 16,
+              "accuracy": 0.6957,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 36,
+                "top1_is_dominant": 23,
+                "accuracy": 0.6389,
+                "top_tied": 7,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 36,
+                "top1_is_dominant": 22,
+                "accuracy": 0.6111,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 36,
+                "top1_is_dominant": 25,
+                "accuracy": 0.6944,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 36,
+                "top1_is_dominant": 25,
+                "accuracy": 0.6944,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 63,
+                "top1_is_dominant": 39,
+                "accuracy": 0.619,
+                "top_tied": 14,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 63,
+                "top1_is_dominant": 45,
+                "accuracy": 0.7143,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 63,
+                "top1_is_dominant": 42,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 63,
+                "top1_is_dominant": 41,
+                "accuracy": 0.6508,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 16,
+                "top1_is_dominant": 12,
+                "accuracy": 0.75,
+                "top_tied": 2,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 16,
+                "top1_is_dominant": 13,
+                "accuracy": 0.8125,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 16,
+                "top1_is_dominant": 12,
+                "accuracy": 0.75,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 16,
+                "top1_is_dominant": 11,
+                "accuracy": 0.6875,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 115,
+            "dominant_supported": 115
+          },
+          "ml_filter": {
+            "gate_passed": 1588,
+            "ml_rejected": 438,
+            "ml_rejected_correctly": 306,
+            "ml_rejected_true_pattern": 132,
+            "supported": 1150,
+            "supported_correct": 1127,
+            "gate_only_false_calls": 329,
+            "gate_and_ml_false_calls": 23
+          }
+        },
+        "thousands": {
+          "single_supported": {
+            "exact": {
+              "sessions": 716,
+              "top1_is_dominant": 716,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 716,
+              "top1_is_dominant": 716,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 716,
+              "top1_is_dominant": 716,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 716,
+              "top1_is_dominant": 716,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 281,
+              "top1_is_dominant": 227,
+              "accuracy": 0.8078,
+              "top_tied": 20,
+              "chance_accuracy": 0.7349
+            },
+            "score": {
+              "sessions": 281,
+              "top1_is_dominant": 223,
+              "accuracy": 0.7936,
+              "top_tied": 0,
+              "chance_accuracy": 0.7349
+            },
+            "margin": {
+              "sessions": 281,
+              "top1_is_dominant": 215,
+              "accuracy": 0.7651,
+              "top_tied": 0,
+              "chance_accuracy": 0.7349
+            },
+            "ratio": {
+              "sessions": 281,
+              "top1_is_dominant": 214,
+              "accuracy": 0.7616,
+              "top_tied": 0,
+              "chance_accuracy": 0.7349
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 85,
+              "top1_is_dominant": 63,
+              "accuracy": 0.7412,
+              "top_tied": 20,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 85,
+              "top1_is_dominant": 59,
+              "accuracy": 0.6941,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 85,
+              "top1_is_dominant": 51,
+              "accuracy": 0.6,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 85,
+              "top1_is_dominant": 50,
+              "accuracy": 0.5882,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 20,
+              "top1_is_dominant": 15,
+              "accuracy": 0.75,
+              "top_tied": 20,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 20,
+              "top1_is_dominant": 12,
+              "accuracy": 0.6,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 20,
+              "top1_is_dominant": 11,
+              "accuracy": 0.55,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 20,
+              "top1_is_dominant": 11,
+              "accuracy": 0.55,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 32,
+                "top1_is_dominant": 19,
+                "accuracy": 0.5938,
+                "top_tied": 8,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 32,
+                "top1_is_dominant": 17,
+                "accuracy": 0.5312,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 32,
+                "top1_is_dominant": 17,
+                "accuracy": 0.5312,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 32,
+                "top1_is_dominant": 17,
+                "accuracy": 0.5312,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 37,
+                "top1_is_dominant": 29,
+                "accuracy": 0.7838,
+                "top_tied": 10,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 37,
+                "top1_is_dominant": 28,
+                "accuracy": 0.7568,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 37,
+                "top1_is_dominant": 21,
+                "accuracy": 0.5676,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 37,
+                "top1_is_dominant": 21,
+                "accuracy": 0.5676,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 16,
+                "top1_is_dominant": 15,
+                "accuracy": 0.9375,
+                "top_tied": 2,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 16,
+                "top1_is_dominant": 14,
+                "accuracy": 0.875,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 16,
+                "top1_is_dominant": 13,
+                "accuracy": 0.8125,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 16,
+                "top1_is_dominant": 12,
+                "accuracy": 0.75,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 85,
+            "dominant_supported": 85
+          },
+          "ml_filter": {
+            "gate_passed": 1587,
+            "ml_rejected": 483,
+            "ml_rejected_correctly": 292,
+            "ml_rejected_true_pattern": 191,
+            "supported": 1104,
+            "supported_correct": 1081,
+            "gate_only_false_calls": 315,
+            "gate_and_ml_false_calls": 23
+          }
+        }
+      },
+      "subtraction": {
+        "tens": {
+          "single_supported": {
+            "exact": {
+              "sessions": 442,
+              "top1_is_dominant": 441,
+              "accuracy": 0.9977,
+              "top_tied": 0,
+              "chance_accuracy": 0.9977
+            },
+            "score": {
+              "sessions": 442,
+              "top1_is_dominant": 441,
+              "accuracy": 0.9977,
+              "top_tied": 0,
+              "chance_accuracy": 0.9977
+            },
+            "margin": {
+              "sessions": 442,
+              "top1_is_dominant": 441,
+              "accuracy": 0.9977,
+              "top_tied": 0,
+              "chance_accuracy": 0.9977
+            },
+            "ratio": {
+              "sessions": 442,
+              "top1_is_dominant": 441,
+              "accuracy": 0.9977,
+              "top_tied": 0,
+              "chance_accuracy": 0.9977
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 124,
+              "top1_is_dominant": 93,
+              "accuracy": 0.75,
+              "top_tied": 1,
+              "chance_accuracy": 0.7581
+            },
+            "score": {
+              "sessions": 124,
+              "top1_is_dominant": 95,
+              "accuracy": 0.7661,
+              "top_tied": 0,
+              "chance_accuracy": 0.7581
+            },
+            "margin": {
+              "sessions": 124,
+              "top1_is_dominant": 93,
+              "accuracy": 0.75,
+              "top_tied": 0,
+              "chance_accuracy": 0.7581
+            },
+            "ratio": {
+              "sessions": 124,
+              "top1_is_dominant": 93,
+              "accuracy": 0.75,
+              "top_tied": 0,
+              "chance_accuracy": 0.7581
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 4,
+              "top1_is_dominant": 1,
+              "accuracy": 0.25,
+              "top_tied": 1,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 4,
+              "top1_is_dominant": 3,
+              "accuracy": 0.75,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 4,
+              "top1_is_dominant": 1,
+              "accuracy": 0.25,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 4,
+              "top1_is_dominant": 1,
+              "accuracy": 0.25,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 1,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 1,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 1,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 1,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 1,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 2,
+                "top1_is_dominant": 1,
+                "accuracy": 0.5,
+                "top_tied": 1,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 2,
+                "top1_is_dominant": 1,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 2,
+                "top1_is_dominant": 1,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 2,
+                "top1_is_dominant": 1,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 1,
+                "top1_is_dominant": 0,
+                "accuracy": 0.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 1,
+                "top1_is_dominant": 1,
+                "accuracy": 1.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 1,
+                "top1_is_dominant": 0,
+                "accuracy": 0.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 1,
+                "top1_is_dominant": 0,
+                "accuracy": 0.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 1,
+                "top1_is_dominant": 0,
+                "accuracy": 0.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 1,
+                "top1_is_dominant": 1,
+                "accuracy": 1.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 1,
+                "top1_is_dominant": 0,
+                "accuracy": 0.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 1,
+                "top1_is_dominant": 0,
+                "accuracy": 0.0,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 4,
+            "dominant_supported": 4
+          },
+          "ml_filter": {
+            "gate_passed": 924,
+            "ml_rejected": 352,
+            "ml_rejected_correctly": 273,
+            "ml_rejected_true_pattern": 79,
+            "supported": 572,
+            "supported_correct": 569,
+            "gate_only_false_calls": 276,
+            "gate_and_ml_false_calls": 3
+          }
+        },
+        "hundreds": {
+          "single_supported": {
+            "exact": {
+              "sessions": 1059,
+              "top1_is_dominant": 1057,
+              "accuracy": 0.9981,
+              "top_tied": 0,
+              "chance_accuracy": 0.9976
+            },
+            "score": {
+              "sessions": 1059,
+              "top1_is_dominant": 1058,
+              "accuracy": 0.9991,
+              "top_tied": 0,
+              "chance_accuracy": 0.9976
+            },
+            "margin": {
+              "sessions": 1059,
+              "top1_is_dominant": 1057,
+              "accuracy": 0.9981,
+              "top_tied": 0,
+              "chance_accuracy": 0.9976
+            },
+            "ratio": {
+              "sessions": 1059,
+              "top1_is_dominant": 1057,
+              "accuracy": 0.9981,
+              "top_tied": 0,
+              "chance_accuracy": 0.9976
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 263,
+              "top1_is_dominant": 203,
+              "accuracy": 0.7719,
+              "top_tied": 7,
+              "chance_accuracy": 0.77
+            },
+            "score": {
+              "sessions": 263,
+              "top1_is_dominant": 203,
+              "accuracy": 0.7719,
+              "top_tied": 0,
+              "chance_accuracy": 0.77
+            },
+            "margin": {
+              "sessions": 263,
+              "top1_is_dominant": 201,
+              "accuracy": 0.7643,
+              "top_tied": 0,
+              "chance_accuracy": 0.77
+            },
+            "ratio": {
+              "sessions": 263,
+              "top1_is_dominant": 200,
+              "accuracy": 0.7605,
+              "top_tied": 0,
+              "chance_accuracy": 0.77
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 37,
+              "top1_is_dominant": 19,
+              "accuracy": 0.5135,
+              "top_tied": 7,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 37,
+              "top1_is_dominant": 19,
+              "accuracy": 0.5135,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 37,
+              "top1_is_dominant": 17,
+              "accuracy": 0.4595,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 37,
+              "top1_is_dominant": 16,
+              "accuracy": 0.4324,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 7,
+              "top1_is_dominant": 3,
+              "accuracy": 0.4286,
+              "top_tied": 7,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 7,
+              "top1_is_dominant": 3,
+              "accuracy": 0.4286,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 7,
+              "top1_is_dominant": 3,
+              "accuracy": 0.4286,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 7,
+              "top1_is_dominant": 3,
+              "accuracy": 0.4286,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 14,
+                "top1_is_dominant": 7,
+                "accuracy": 0.5,
+                "top_tied": 3,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 14,
+                "top1_is_dominant": 6,
+                "accuracy": 0.4286,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 14,
+                "top1_is_dominant": 6,
+                "accuracy": 0.4286,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 14,
+                "top1_is_dominant": 6,
+                "accuracy": 0.4286,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 14,
+                "top1_is_dominant": 6,
+                "accuracy": 0.4286,
+                "top_tied": 4,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 14,
+                "top1_is_dominant": 9,
+                "accuracy": 0.6429,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 14,
+                "top1_is_dominant": 6,
+                "accuracy": 0.4286,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 14,
+                "top1_is_dominant": 6,
+                "accuracy": 0.4286,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 9,
+                "top1_is_dominant": 6,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 9,
+                "top1_is_dominant": 4,
+                "accuracy": 0.4444,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 9,
+                "top1_is_dominant": 5,
+                "accuracy": 0.5556,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 9,
+                "top1_is_dominant": 4,
+                "accuracy": 0.4444,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 37,
+            "dominant_supported": 37
+          },
+          "ml_filter": {
+            "gate_passed": 1840,
+            "ml_rejected": 459,
+            "ml_rejected_correctly": 328,
+            "ml_rejected_true_pattern": 131,
+            "supported": 1381,
+            "supported_correct": 1358,
+            "gate_only_false_calls": 351,
+            "gate_and_ml_false_calls": 23
+          }
+        },
+        "thousands": {
+          "single_supported": {
+            "exact": {
+              "sessions": 1065,
+              "top1_is_dominant": 1065,
+              "accuracy": 1.0,
+              "top_tied": 1,
+              "chance_accuracy": 0.9995
+            },
+            "score": {
+              "sessions": 1065,
+              "top1_is_dominant": 1065,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            },
+            "margin": {
+              "sessions": 1065,
+              "top1_is_dominant": 1065,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            },
+            "ratio": {
+              "sessions": 1065,
+              "top1_is_dominant": 1065,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 280,
+              "top1_is_dominant": 224,
+              "accuracy": 0.8,
+              "top_tied": 14,
+              "chance_accuracy": 0.7786
+            },
+            "score": {
+              "sessions": 280,
+              "top1_is_dominant": 227,
+              "accuracy": 0.8107,
+              "top_tied": 0,
+              "chance_accuracy": 0.7786
+            },
+            "margin": {
+              "sessions": 280,
+              "top1_is_dominant": 220,
+              "accuracy": 0.7857,
+              "top_tied": 0,
+              "chance_accuracy": 0.7786
+            },
+            "ratio": {
+              "sessions": 280,
+              "top1_is_dominant": 218,
+              "accuracy": 0.7786,
+              "top_tied": 0,
+              "chance_accuracy": 0.7786
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 54,
+              "top1_is_dominant": 33,
+              "accuracy": 0.6111,
+              "top_tied": 14,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 54,
+              "top1_is_dominant": 36,
+              "accuracy": 0.6667,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 54,
+              "top1_is_dominant": 29,
+              "accuracy": 0.537,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 54,
+              "top1_is_dominant": 27,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 14,
+              "top1_is_dominant": 8,
+              "accuracy": 0.5714,
+              "top_tied": 14,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 14,
+              "top1_is_dominant": 8,
+              "accuracy": 0.5714,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 14,
+              "top1_is_dominant": 7,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 14,
+              "top1_is_dominant": 6,
+              "accuracy": 0.4286,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 24,
+                "top1_is_dominant": 15,
+                "accuracy": 0.625,
+                "top_tied": 6,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 24,
+                "top1_is_dominant": 15,
+                "accuracy": 0.625,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 24,
+                "top1_is_dominant": 14,
+                "accuracy": 0.5833,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 24,
+                "top1_is_dominant": 13,
+                "accuracy": 0.5417,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 21,
+                "top1_is_dominant": 11,
+                "accuracy": 0.5238,
+                "top_tied": 5,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 21,
+                "top1_is_dominant": 13,
+                "accuracy": 0.619,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 21,
+                "top1_is_dominant": 9,
+                "accuracy": 0.4286,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 21,
+                "top1_is_dominant": 10,
+                "accuracy": 0.4762,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 9,
+                "top1_is_dominant": 7,
+                "accuracy": 0.7778,
+                "top_tied": 3,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 9,
+                "top1_is_dominant": 8,
+                "accuracy": 0.8889,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 9,
+                "top1_is_dominant": 6,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 9,
+                "top1_is_dominant": 4,
+                "accuracy": 0.4444,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 54,
+            "dominant_supported": 54
+          },
+          "ml_filter": {
+            "gate_passed": 1809,
+            "ml_rejected": 393,
+            "ml_rejected_correctly": 292,
+            "ml_rejected_true_pattern": 101,
+            "supported": 1416,
+            "supported_correct": 1399,
+            "gate_only_false_calls": 309,
+            "gate_and_ml_false_calls": 17
+          }
+        }
+      },
+      "overall": {
+        "single_supported": {
+          "exact": {
+            "sessions": 4535,
+            "top1_is_dominant": 4532,
+            "accuracy": 0.9993,
+            "top_tied": 1,
+            "chance_accuracy": 0.9991
+          },
+          "score": {
+            "sessions": 4535,
+            "top1_is_dominant": 4533,
+            "accuracy": 0.9996,
+            "top_tied": 0,
+            "chance_accuracy": 0.9991
+          },
+          "margin": {
+            "sessions": 4535,
+            "top1_is_dominant": 4532,
+            "accuracy": 0.9993,
+            "top_tied": 0,
+            "chance_accuracy": 0.9991
+          },
+          "ratio": {
+            "sessions": 4535,
+            "top1_is_dominant": 4532,
+            "accuracy": 0.9993,
+            "top_tied": 0,
+            "chance_accuracy": 0.9991
+          }
+        },
+        "mixed_supported": {
+          "exact": {
+            "sessions": 1455,
+            "top1_is_dominant": 1152,
+            "accuracy": 0.7918,
+            "top_tied": 73,
+            "chance_accuracy": 0.7612
+          },
+          "score": {
+            "sessions": 1455,
+            "top1_is_dominant": 1159,
+            "accuracy": 0.7966,
+            "top_tied": 0,
+            "chance_accuracy": 0.7612
+          },
+          "margin": {
+            "sessions": 1455,
+            "top1_is_dominant": 1141,
+            "accuracy": 0.7842,
+            "top_tied": 0,
+            "chance_accuracy": 0.7612
+          },
+          "ratio": {
+            "sessions": 1455,
+            "top1_is_dominant": 1135,
+            "accuracy": 0.7801,
+            "top_tied": 0,
+            "chance_accuracy": 0.7612
+          }
+        },
+        "mixed_multi": {
+          "exact": {
+            "sessions": 325,
+            "top1_is_dominant": 207,
+            "accuracy": 0.6369,
+            "top_tied": 73,
+            "chance_accuracy": 0.5
+          },
+          "score": {
+            "sessions": 325,
+            "top1_is_dominant": 214,
+            "accuracy": 0.6585,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "margin": {
+            "sessions": 325,
+            "top1_is_dominant": 196,
+            "accuracy": 0.6031,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "ratio": {
+            "sessions": 325,
+            "top1_is_dominant": 190,
+            "accuracy": 0.5846,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          }
+        },
+        "mixed_multi_exact_tied": {
+          "exact": {
+            "sessions": 73,
+            "top1_is_dominant": 42,
+            "accuracy": 0.5753,
+            "top_tied": 73,
+            "chance_accuracy": 0.5
+          },
+          "score": {
+            "sessions": 73,
+            "top1_is_dominant": 41,
+            "accuracy": 0.5616,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "margin": {
+            "sessions": 73,
+            "top1_is_dominant": 42,
+            "accuracy": 0.5753,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "ratio": {
+            "sessions": 73,
+            "top1_is_dominant": 40,
+            "accuracy": 0.5479,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          }
+        },
+        "mixed_multi_by_dominant_weight": {
+          "<0.60": {
+            "exact": {
+              "sessions": 120,
+              "top1_is_dominant": 71,
+              "accuracy": 0.5917,
+              "top_tied": 27,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 120,
+              "top1_is_dominant": 65,
+              "accuracy": 0.5417,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 120,
+              "top1_is_dominant": 71,
+              "accuracy": 0.5917,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 120,
+              "top1_is_dominant": 70,
+              "accuracy": 0.5833,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "0.60-0.69": {
+            "exact": {
+              "sessions": 149,
+              "top1_is_dominant": 92,
+              "accuracy": 0.6174,
+              "top_tied": 38,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 149,
+              "top1_is_dominant": 104,
+              "accuracy": 0.698,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 149,
+              "top1_is_dominant": 85,
+              "accuracy": 0.5705,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 149,
+              "top1_is_dominant": 85,
+              "accuracy": 0.5705,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          ">=0.70": {
+            "exact": {
+              "sessions": 56,
+              "top1_is_dominant": 44,
+              "accuracy": 0.7857,
+              "top_tied": 8,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 56,
+              "top1_is_dominant": 45,
+              "accuracy": 0.8036,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 56,
+              "top1_is_dominant": 40,
+              "accuracy": 0.7143,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 56,
+              "top1_is_dominant": 35,
+              "accuracy": 0.625,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          }
+        },
+        "ml_filter": {
+          "gate_passed": 9044,
+          "ml_rejected": 2626,
+          "ml_rejected_correctly": 1807,
+          "ml_rejected_true_pattern": 819,
+          "supported": 6418,
+          "supported_correct": 6312,
+          "gate_only_false_calls": 1913,
+          "gate_and_ml_false_calls": 106
+        }
+      }
+    },
+    "test": {
+      "addition": {
+        "tens": {
+          "single_supported": {
+            "exact": {
+              "sessions": 534,
+              "top1_is_dominant": 534,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 534,
+              "top1_is_dominant": 534,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 534,
+              "top1_is_dominant": 534,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 534,
+              "top1_is_dominant": 534,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 210,
+              "top1_is_dominant": 163,
+              "accuracy": 0.7762,
+              "top_tied": 12,
+              "chance_accuracy": 0.7524
+            },
+            "score": {
+              "sessions": 210,
+              "top1_is_dominant": 159,
+              "accuracy": 0.7571,
+              "top_tied": 0,
+              "chance_accuracy": 0.7524
+            },
+            "margin": {
+              "sessions": 210,
+              "top1_is_dominant": 161,
+              "accuracy": 0.7667,
+              "top_tied": 0,
+              "chance_accuracy": 0.7524
+            },
+            "ratio": {
+              "sessions": 210,
+              "top1_is_dominant": 161,
+              "accuracy": 0.7667,
+              "top_tied": 0,
+              "chance_accuracy": 0.7524
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 32,
+              "top1_is_dominant": 21,
+              "accuracy": 0.6562,
+              "top_tied": 12,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 32,
+              "top1_is_dominant": 17,
+              "accuracy": 0.5312,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 32,
+              "top1_is_dominant": 19,
+              "accuracy": 0.5938,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 32,
+              "top1_is_dominant": 19,
+              "accuracy": 0.5938,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 12,
+              "top1_is_dominant": 10,
+              "accuracy": 0.8333,
+              "top_tied": 12,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 12,
+              "top1_is_dominant": 6,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 12,
+              "top1_is_dominant": 10,
+              "accuracy": 0.8333,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 12,
+              "top1_is_dominant": 10,
+              "accuracy": 0.8333,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 11,
+                "top1_is_dominant": 9,
+                "accuracy": 0.8182,
+                "top_tied": 5,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 11,
+                "top1_is_dominant": 5,
+                "accuracy": 0.4545,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 11,
+                "top1_is_dominant": 7,
+                "accuracy": 0.6364,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 11,
+                "top1_is_dominant": 7,
+                "accuracy": 0.6364,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 15,
+                "top1_is_dominant": 8,
+                "accuracy": 0.5333,
+                "top_tied": 3,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 15,
+                "top1_is_dominant": 8,
+                "accuracy": 0.5333,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 15,
+                "top1_is_dominant": 8,
+                "accuracy": 0.5333,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 15,
+                "top1_is_dominant": 8,
+                "accuracy": 0.5333,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 4,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 32,
+            "dominant_supported": 32
+          },
+          "ml_filter": {
+            "gate_passed": 1295,
+            "ml_rejected": 512,
+            "ml_rejected_correctly": 319,
+            "ml_rejected_true_pattern": 193,
+            "supported": 783,
+            "supported_correct": 776,
+            "gate_only_false_calls": 326,
+            "gate_and_ml_false_calls": 7
+          }
+        },
+        "hundreds": {
+          "single_supported": {
+            "exact": {
+              "sessions": 718,
+              "top1_is_dominant": 718,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 718,
+              "top1_is_dominant": 718,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 718,
+              "top1_is_dominant": 718,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 718,
+              "top1_is_dominant": 718,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 297,
+              "top1_is_dominant": 230,
+              "accuracy": 0.7744,
+              "top_tied": 25,
+              "chance_accuracy": 0.702
+            },
+            "score": {
+              "sessions": 297,
+              "top1_is_dominant": 238,
+              "accuracy": 0.8013,
+              "top_tied": 0,
+              "chance_accuracy": 0.702
+            },
+            "margin": {
+              "sessions": 297,
+              "top1_is_dominant": 229,
+              "accuracy": 0.771,
+              "top_tied": 0,
+              "chance_accuracy": 0.702
+            },
+            "ratio": {
+              "sessions": 297,
+              "top1_is_dominant": 224,
+              "accuracy": 0.7542,
+              "top_tied": 0,
+              "chance_accuracy": 0.702
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 127,
+              "top1_is_dominant": 85,
+              "accuracy": 0.6693,
+              "top_tied": 25,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 127,
+              "top1_is_dominant": 93,
+              "accuracy": 0.7323,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 127,
+              "top1_is_dominant": 84,
+              "accuracy": 0.6614,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 127,
+              "top1_is_dominant": 79,
+              "accuracy": 0.622,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 25,
+              "top1_is_dominant": 9,
+              "accuracy": 0.36,
+              "top_tied": 25,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 25,
+              "top1_is_dominant": 14,
+              "accuracy": 0.56,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 25,
+              "top1_is_dominant": 13,
+              "accuracy": 0.52,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 25,
+              "top1_is_dominant": 15,
+              "accuracy": 0.6,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 38,
+                "top1_is_dominant": 24,
+                "accuracy": 0.6316,
+                "top_tied": 8,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 38,
+                "top1_is_dominant": 28,
+                "accuracy": 0.7368,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 38,
+                "top1_is_dominant": 24,
+                "accuracy": 0.6316,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 38,
+                "top1_is_dominant": 22,
+                "accuracy": 0.5789,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 67,
+                "top1_is_dominant": 40,
+                "accuracy": 0.597,
+                "top_tied": 15,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 67,
+                "top1_is_dominant": 44,
+                "accuracy": 0.6567,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 67,
+                "top1_is_dominant": 41,
+                "accuracy": 0.6119,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 67,
+                "top1_is_dominant": 40,
+                "accuracy": 0.597,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 22,
+                "top1_is_dominant": 21,
+                "accuracy": 0.9545,
+                "top_tied": 2,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 22,
+                "top1_is_dominant": 21,
+                "accuracy": 0.9545,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 22,
+                "top1_is_dominant": 19,
+                "accuracy": 0.8636,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 22,
+                "top1_is_dominant": 17,
+                "accuracy": 0.7727,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 127,
+            "dominant_supported": 127
+          },
+          "ml_filter": {
+            "gate_passed": 1599,
+            "ml_rejected": 422,
+            "ml_rejected_correctly": 305,
+            "ml_rejected_true_pattern": 117,
+            "supported": 1177,
+            "supported_correct": 1142,
+            "gate_only_false_calls": 340,
+            "gate_and_ml_false_calls": 35
+          }
+        },
+        "thousands": {
+          "single_supported": {
+            "exact": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 717,
+              "top1_is_dominant": 717,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 288,
+              "top1_is_dominant": 230,
+              "accuracy": 0.7986,
+              "top_tied": 17,
+              "chance_accuracy": 0.7309
+            },
+            "score": {
+              "sessions": 288,
+              "top1_is_dominant": 231,
+              "accuracy": 0.8021,
+              "top_tied": 0,
+              "chance_accuracy": 0.7309
+            },
+            "margin": {
+              "sessions": 288,
+              "top1_is_dominant": 217,
+              "accuracy": 0.7535,
+              "top_tied": 0,
+              "chance_accuracy": 0.7309
+            },
+            "ratio": {
+              "sessions": 288,
+              "top1_is_dominant": 215,
+              "accuracy": 0.7465,
+              "top_tied": 0,
+              "chance_accuracy": 0.7309
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 105,
+              "top1_is_dominant": 72,
+              "accuracy": 0.6857,
+              "top_tied": 17,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 105,
+              "top1_is_dominant": 73,
+              "accuracy": 0.6952,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 105,
+              "top1_is_dominant": 59,
+              "accuracy": 0.5619,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 105,
+              "top1_is_dominant": 57,
+              "accuracy": 0.5429,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 17,
+              "top1_is_dominant": 9,
+              "accuracy": 0.5294,
+              "top_tied": 17,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 17,
+              "top1_is_dominant": 11,
+              "accuracy": 0.6471,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 17,
+              "top1_is_dominant": 10,
+              "accuracy": 0.5882,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 17,
+              "top1_is_dominant": 10,
+              "accuracy": 0.5882,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 32,
+                "top1_is_dominant": 22,
+                "accuracy": 0.6875,
+                "top_tied": 7,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 32,
+                "top1_is_dominant": 23,
+                "accuracy": 0.7188,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 32,
+                "top1_is_dominant": 17,
+                "accuracy": 0.5312,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 32,
+                "top1_is_dominant": 17,
+                "accuracy": 0.5312,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 51,
+                "top1_is_dominant": 30,
+                "accuracy": 0.5882,
+                "top_tied": 6,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 51,
+                "top1_is_dominant": 32,
+                "accuracy": 0.6275,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 51,
+                "top1_is_dominant": 26,
+                "accuracy": 0.5098,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 51,
+                "top1_is_dominant": 26,
+                "accuracy": 0.5098,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 22,
+                "top1_is_dominant": 20,
+                "accuracy": 0.9091,
+                "top_tied": 4,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 22,
+                "top1_is_dominant": 18,
+                "accuracy": 0.8182,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 22,
+                "top1_is_dominant": 16,
+                "accuracy": 0.7273,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 22,
+                "top1_is_dominant": 14,
+                "accuracy": 0.6364,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 105,
+            "dominant_supported": 105
+          },
+          "ml_filter": {
+            "gate_passed": 1579,
+            "ml_rejected": 439,
+            "ml_rejected_correctly": 307,
+            "ml_rejected_true_pattern": 132,
+            "supported": 1140,
+            "supported_correct": 1110,
+            "gate_only_false_calls": 337,
+            "gate_and_ml_false_calls": 30
+          }
+        }
+      },
+      "subtraction": {
+        "tens": {
+          "single_supported": {
+            "exact": {
+              "sessions": 526,
+              "top1_is_dominant": 526,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "score": {
+              "sessions": 526,
+              "top1_is_dominant": 526,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "margin": {
+              "sessions": 526,
+              "top1_is_dominant": 526,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            },
+            "ratio": {
+              "sessions": 526,
+              "top1_is_dominant": 526,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 1.0
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 145,
+              "top1_is_dominant": 116,
+              "accuracy": 0.8,
+              "top_tied": 0,
+              "chance_accuracy": 0.7931
+            },
+            "score": {
+              "sessions": 145,
+              "top1_is_dominant": 115,
+              "accuracy": 0.7931,
+              "top_tied": 0,
+              "chance_accuracy": 0.7931
+            },
+            "margin": {
+              "sessions": 145,
+              "top1_is_dominant": 116,
+              "accuracy": 0.8,
+              "top_tied": 0,
+              "chance_accuracy": 0.7931
+            },
+            "ratio": {
+              "sessions": 145,
+              "top1_is_dominant": 115,
+              "accuracy": 0.7931,
+              "top_tied": 0,
+              "chance_accuracy": 0.7931
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 6,
+              "top1_is_dominant": 4,
+              "accuracy": 0.6667,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 6,
+              "top1_is_dominant": 3,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 6,
+              "top1_is_dominant": 4,
+              "accuracy": 0.6667,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 6,
+              "top1_is_dominant": 3,
+              "accuracy": 0.5,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 0,
+              "top1_is_dominant": 0,
+              "accuracy": null,
+              "top_tied": 0,
+              "chance_accuracy": null
+            },
+            "score": {
+              "sessions": 0,
+              "top1_is_dominant": 0,
+              "accuracy": null,
+              "top_tied": 0,
+              "chance_accuracy": null
+            },
+            "margin": {
+              "sessions": 0,
+              "top1_is_dominant": 0,
+              "accuracy": null,
+              "top_tied": 0,
+              "chance_accuracy": null
+            },
+            "ratio": {
+              "sessions": 0,
+              "top1_is_dominant": 0,
+              "accuracy": null,
+              "top_tied": 0,
+              "chance_accuracy": null
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              },
+              "score": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              },
+              "margin": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              },
+              "ratio": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 6,
+                "top1_is_dominant": 3,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 6,
+                "top1_is_dominant": 3,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              },
+              "score": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              },
+              "margin": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              },
+              "ratio": {
+                "sessions": 0,
+                "top1_is_dominant": 0,
+                "accuracy": null,
+                "top_tied": 0,
+                "chance_accuracy": null
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 6,
+            "dominant_supported": 6
+          },
+          "ml_filter": {
+            "gate_passed": 1047,
+            "ml_rejected": 358,
+            "ml_rejected_correctly": 254,
+            "ml_rejected_true_pattern": 104,
+            "supported": 689,
+            "supported_correct": 677,
+            "gate_only_false_calls": 266,
+            "gate_and_ml_false_calls": 12
+          }
+        },
+        "hundreds": {
+          "single_supported": {
+            "exact": {
+              "sessions": 1042,
+              "top1_is_dominant": 1042,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.999
+            },
+            "score": {
+              "sessions": 1042,
+              "top1_is_dominant": 1042,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.999
+            },
+            "margin": {
+              "sessions": 1042,
+              "top1_is_dominant": 1041,
+              "accuracy": 0.999,
+              "top_tied": 0,
+              "chance_accuracy": 0.999
+            },
+            "ratio": {
+              "sessions": 1042,
+              "top1_is_dominant": 1041,
+              "accuracy": 0.999,
+              "top_tied": 0,
+              "chance_accuracy": 0.999
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 272,
+              "top1_is_dominant": 211,
+              "accuracy": 0.7757,
+              "top_tied": 3,
+              "chance_accuracy": 0.7629
+            },
+            "score": {
+              "sessions": 272,
+              "top1_is_dominant": 207,
+              "accuracy": 0.761,
+              "top_tied": 0,
+              "chance_accuracy": 0.7629
+            },
+            "margin": {
+              "sessions": 272,
+              "top1_is_dominant": 204,
+              "accuracy": 0.75,
+              "top_tied": 0,
+              "chance_accuracy": 0.7629
+            },
+            "ratio": {
+              "sessions": 272,
+              "top1_is_dominant": 204,
+              "accuracy": 0.75,
+              "top_tied": 0,
+              "chance_accuracy": 0.7629
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 35,
+              "top1_is_dominant": 21,
+              "accuracy": 0.6,
+              "top_tied": 3,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 35,
+              "top1_is_dominant": 17,
+              "accuracy": 0.4857,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 35,
+              "top1_is_dominant": 14,
+              "accuracy": 0.4,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 35,
+              "top1_is_dominant": 14,
+              "accuracy": 0.4,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 3,
+              "top1_is_dominant": 2,
+              "accuracy": 0.6667,
+              "top_tied": 3,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 3,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 3,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 3,
+              "top1_is_dominant": 0,
+              "accuracy": 0.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 10,
+                "top1_is_dominant": 4,
+                "accuracy": 0.4,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 10,
+                "top1_is_dominant": 4,
+                "accuracy": 0.4,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 10,
+                "top1_is_dominant": 3,
+                "accuracy": 0.3,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 10,
+                "top1_is_dominant": 3,
+                "accuracy": 0.3,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 19,
+                "top1_is_dominant": 12,
+                "accuracy": 0.6316,
+                "top_tied": 2,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 19,
+                "top1_is_dominant": 9,
+                "accuracy": 0.4737,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 19,
+                "top1_is_dominant": 7,
+                "accuracy": 0.3684,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 19,
+                "top1_is_dominant": 7,
+                "accuracy": 0.3684,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 6,
+                "top1_is_dominant": 5,
+                "accuracy": 0.8333,
+                "top_tied": 1,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 35,
+            "dominant_supported": 35
+          },
+          "ml_filter": {
+            "gate_passed": 1845,
+            "ml_rejected": 457,
+            "ml_rejected_correctly": 321,
+            "ml_rejected_true_pattern": 136,
+            "supported": 1388,
+            "supported_correct": 1349,
+            "gate_only_false_calls": 360,
+            "gate_and_ml_false_calls": 39
+          }
+        },
+        "thousands": {
+          "single_supported": {
+            "exact": {
+              "sessions": 1047,
+              "top1_is_dominant": 1047,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            },
+            "score": {
+              "sessions": 1047,
+              "top1_is_dominant": 1046,
+              "accuracy": 0.999,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            },
+            "margin": {
+              "sessions": 1047,
+              "top1_is_dominant": 1047,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            },
+            "ratio": {
+              "sessions": 1047,
+              "top1_is_dominant": 1047,
+              "accuracy": 1.0,
+              "top_tied": 0,
+              "chance_accuracy": 0.9995
+            }
+          },
+          "mixed_supported": {
+            "exact": {
+              "sessions": 272,
+              "top1_is_dominant": 214,
+              "accuracy": 0.7868,
+              "top_tied": 10,
+              "chance_accuracy": 0.7592
+            },
+            "score": {
+              "sessions": 272,
+              "top1_is_dominant": 207,
+              "accuracy": 0.761,
+              "top_tied": 0,
+              "chance_accuracy": 0.7592
+            },
+            "margin": {
+              "sessions": 272,
+              "top1_is_dominant": 206,
+              "accuracy": 0.7574,
+              "top_tied": 0,
+              "chance_accuracy": 0.7592
+            },
+            "ratio": {
+              "sessions": 272,
+              "top1_is_dominant": 204,
+              "accuracy": 0.75,
+              "top_tied": 0,
+              "chance_accuracy": 0.7592
+            }
+          },
+          "mixed_multi": {
+            "exact": {
+              "sessions": 53,
+              "top1_is_dominant": 34,
+              "accuracy": 0.6415,
+              "top_tied": 10,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 53,
+              "top1_is_dominant": 27,
+              "accuracy": 0.5094,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 53,
+              "top1_is_dominant": 26,
+              "accuracy": 0.4906,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 53,
+              "top1_is_dominant": 24,
+              "accuracy": 0.4528,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_exact_tied": {
+            "exact": {
+              "sessions": 10,
+              "top1_is_dominant": 5,
+              "accuracy": 0.5,
+              "top_tied": 10,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 10,
+              "top1_is_dominant": 4,
+              "accuracy": 0.4,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 10,
+              "top1_is_dominant": 3,
+              "accuracy": 0.3,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 10,
+              "top1_is_dominant": 3,
+              "accuracy": 0.3,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "mixed_multi_by_dominant_weight": {
+            "<0.60": {
+              "exact": {
+                "sessions": 15,
+                "top1_is_dominant": 9,
+                "accuracy": 0.6,
+                "top_tied": 6,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 15,
+                "top1_is_dominant": 7,
+                "accuracy": 0.4667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 15,
+                "top1_is_dominant": 9,
+                "accuracy": 0.6,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 15,
+                "top1_is_dominant": 8,
+                "accuracy": 0.5333,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            "0.60-0.69": {
+              "exact": {
+                "sessions": 32,
+                "top1_is_dominant": 22,
+                "accuracy": 0.6875,
+                "top_tied": 4,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 32,
+                "top1_is_dominant": 16,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 32,
+                "top1_is_dominant": 13,
+                "accuracy": 0.4062,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 32,
+                "top1_is_dominant": 13,
+                "accuracy": 0.4062,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            },
+            ">=0.70": {
+              "exact": {
+                "sessions": 6,
+                "top1_is_dominant": 3,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "score": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "margin": {
+                "sessions": 6,
+                "top1_is_dominant": 4,
+                "accuracy": 0.6667,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              },
+              "ratio": {
+                "sessions": 6,
+                "top1_is_dominant": 3,
+                "accuracy": 0.5,
+                "top_tied": 0,
+                "chance_accuracy": 0.5
+              }
+            }
+          },
+          "mixed_multi_dominant_in_supported": {
+            "mixed_multi": 53,
+            "dominant_supported": 53
+          },
+          "ml_filter": {
+            "gate_passed": 1855,
+            "ml_rejected": 451,
+            "ml_rejected_correctly": 306,
+            "ml_rejected_true_pattern": 145,
+            "supported": 1404,
+            "supported_correct": 1372,
+            "gate_only_false_calls": 338,
+            "gate_and_ml_false_calls": 32
+          }
+        }
+      },
+      "overall": {
+        "single_supported": {
+          "exact": {
+            "sessions": 4584,
+            "top1_is_dominant": 4584,
+            "accuracy": 1.0,
+            "top_tied": 0,
+            "chance_accuracy": 0.9997
+          },
+          "score": {
+            "sessions": 4584,
+            "top1_is_dominant": 4583,
+            "accuracy": 0.9998,
+            "top_tied": 0,
+            "chance_accuracy": 0.9997
+          },
+          "margin": {
+            "sessions": 4584,
+            "top1_is_dominant": 4583,
+            "accuracy": 0.9998,
+            "top_tied": 0,
+            "chance_accuracy": 0.9997
+          },
+          "ratio": {
+            "sessions": 4584,
+            "top1_is_dominant": 4583,
+            "accuracy": 0.9998,
+            "top_tied": 0,
+            "chance_accuracy": 0.9997
+          }
+        },
+        "mixed_supported": {
+          "exact": {
+            "sessions": 1484,
+            "top1_is_dominant": 1164,
+            "accuracy": 0.7844,
+            "top_tied": 67,
+            "chance_accuracy": 0.7453
+          },
+          "score": {
+            "sessions": 1484,
+            "top1_is_dominant": 1157,
+            "accuracy": 0.7796,
+            "top_tied": 0,
+            "chance_accuracy": 0.7453
+          },
+          "margin": {
+            "sessions": 1484,
+            "top1_is_dominant": 1133,
+            "accuracy": 0.7635,
+            "top_tied": 0,
+            "chance_accuracy": 0.7453
+          },
+          "ratio": {
+            "sessions": 1484,
+            "top1_is_dominant": 1123,
+            "accuracy": 0.7567,
+            "top_tied": 0,
+            "chance_accuracy": 0.7453
+          }
+        },
+        "mixed_multi": {
+          "exact": {
+            "sessions": 358,
+            "top1_is_dominant": 237,
+            "accuracy": 0.662,
+            "top_tied": 67,
+            "chance_accuracy": 0.5
+          },
+          "score": {
+            "sessions": 358,
+            "top1_is_dominant": 230,
+            "accuracy": 0.6425,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "margin": {
+            "sessions": 358,
+            "top1_is_dominant": 206,
+            "accuracy": 0.5754,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "ratio": {
+            "sessions": 358,
+            "top1_is_dominant": 196,
+            "accuracy": 0.5475,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          }
+        },
+        "mixed_multi_exact_tied": {
+          "exact": {
+            "sessions": 67,
+            "top1_is_dominant": 35,
+            "accuracy": 0.5224,
+            "top_tied": 67,
+            "chance_accuracy": 0.5
+          },
+          "score": {
+            "sessions": 67,
+            "top1_is_dominant": 35,
+            "accuracy": 0.5224,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "margin": {
+            "sessions": 67,
+            "top1_is_dominant": 36,
+            "accuracy": 0.5373,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          },
+          "ratio": {
+            "sessions": 67,
+            "top1_is_dominant": 38,
+            "accuracy": 0.5672,
+            "top_tied": 0,
+            "chance_accuracy": 0.5
+          }
+        },
+        "mixed_multi_by_dominant_weight": {
+          "<0.60": {
+            "exact": {
+              "sessions": 106,
+              "top1_is_dominant": 68,
+              "accuracy": 0.6415,
+              "top_tied": 26,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 106,
+              "top1_is_dominant": 67,
+              "accuracy": 0.6321,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 106,
+              "top1_is_dominant": 60,
+              "accuracy": 0.566,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 106,
+              "top1_is_dominant": 57,
+              "accuracy": 0.5377,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          "0.60-0.69": {
+            "exact": {
+              "sessions": 190,
+              "top1_is_dominant": 116,
+              "accuracy": 0.6105,
+              "top_tied": 30,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 190,
+              "top1_is_dominant": 112,
+              "accuracy": 0.5895,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 190,
+              "top1_is_dominant": 99,
+              "accuracy": 0.5211,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 190,
+              "top1_is_dominant": 97,
+              "accuracy": 0.5105,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          },
+          ">=0.70": {
+            "exact": {
+              "sessions": 62,
+              "top1_is_dominant": 53,
+              "accuracy": 0.8548,
+              "top_tied": 11,
+              "chance_accuracy": 0.5
+            },
+            "score": {
+              "sessions": 62,
+              "top1_is_dominant": 51,
+              "accuracy": 0.8226,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "margin": {
+              "sessions": 62,
+              "top1_is_dominant": 47,
+              "accuracy": 0.7581,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            },
+            "ratio": {
+              "sessions": 62,
+              "top1_is_dominant": 42,
+              "accuracy": 0.6774,
+              "top_tied": 0,
+              "chance_accuracy": 0.5
+            }
+          }
+        },
+        "ml_filter": {
+          "gate_passed": 9220,
+          "ml_rejected": 2639,
+          "ml_rejected_correctly": 1812,
+          "ml_rejected_true_pattern": 827,
+          "supported": 6581,
+          "supported_correct": 6426,
+          "gate_only_false_calls": 1967,
+          "gate_and_ml_false_calls": 155
+        }
+      }
+    }
+  },
+  "recommendation": {
+    "validation_accuracy": {
+      "exact": 0.6369,
+      "score": 0.6585,
+      "margin": 0.6031,
+      "ratio": 0.5846
+    },
+    "best": "score",
+    "test_accuracy": {
+      "exact": 0.662,
+      "score": 0.6425,
+      "margin": 0.5754,
+      "ratio": 0.5475
+    },
+    "confirmed": false,
+    "decision": "Urutan 'score' unggul di validation tetapi kalah dari hitungan di test; keunggulan tidak terkonfirmasi. Jangan klaim 'pola dominan', pertimbangkan P3.1."
+  }
+}

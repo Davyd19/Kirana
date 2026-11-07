@@ -1,0 +1,1691 @@
+{
+  "seed": 42,
+  "results": {
+    "0.00/A_sekarang": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6426,
+        "false_calls": 155,
+        "preliminary_false": 2294,
+        "outside": 21471,
+        "skipped": 860,
+        "wrong": 54432,
+        "fake_matches": 11522,
+        "fake_sessions": 1467,
+        "macro_f1": 0.8540418716569026,
+        "precision": 0.9764473484272906,
+        "recall": 0.7932354030366622
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8743493130082939,
+          "true_patterns": 992,
+          "true_found": 776,
+          "false_calls": 7,
+          "preliminary_false": 319,
+          "outside": 1600,
+          "skipped": 120,
+          "wrong": 9404,
+          "fake_matches": 1279,
+          "fake_sessions": 168
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.9143229357470932,
+          "true_patterns": 1320,
+          "true_found": 1142,
+          "false_calls": 35,
+          "preliminary_false": 305,
+          "outside": 3556,
+          "skipped": 124,
+          "wrong": 9387,
+          "fake_matches": 1301,
+          "fake_sessions": 163
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.9020468917302413,
+          "true_patterns": 1320,
+          "true_found": 1110,
+          "false_calls": 30,
+          "preliminary_false": 307,
+          "outside": 3827,
+          "skipped": 133,
+          "wrong": 9454,
+          "fake_matches": 1286,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6646872352147821,
+          "true_patterns": 1113,
+          "true_found": 677,
+          "false_calls": 12,
+          "preliminary_false": 719,
+          "outside": 1982,
+          "skipped": 161,
+          "wrong": 8194,
+          "fake_matches": 3117,
+          "fake_sessions": 590
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8789940479004351,
+          "true_patterns": 1678,
+          "true_found": 1349,
+          "false_calls": 39,
+          "preliminary_false": 337,
+          "outside": 4536,
+          "skipped": 162,
+          "wrong": 9050,
+          "fake_matches": 2731,
+          "fake_sessions": 222
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8898508063405696,
+          "true_patterns": 1678,
+          "true_found": 1372,
+          "false_calls": 32,
+          "preliminary_false": 307,
+          "outside": 5970,
+          "skipped": 160,
+          "wrong": 8943,
+          "fake_matches": 1808,
+          "fake_sessions": 168
+        }
+      }
+    },
+    "0.00/B_tanpa_lewati_tebak": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6427,
+        "false_calls": 159,
+        "preliminary_false": 2367,
+        "outside": 21473,
+        "skipped": 0,
+        "wrong": 55068,
+        "fake_matches": 12011,
+        "fake_sessions": 1529,
+        "macro_f1": 0.853901471987622,
+        "precision": 0.9758578803522624,
+        "recall": 0.793358844587088
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8762547891072158,
+          "true_patterns": 992,
+          "true_found": 779,
+          "false_calls": 7,
+          "preliminary_false": 328,
+          "outside": 1601,
+          "skipped": 0,
+          "wrong": 9499,
+          "fake_matches": 1347,
+          "fake_sessions": 175
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.9129000412458178,
+          "true_patterns": 1320,
+          "true_found": 1142,
+          "false_calls": 39,
+          "preliminary_false": 311,
+          "outside": 3556,
+          "skipped": 0,
+          "wrong": 9477,
+          "fake_matches": 1373,
+          "fake_sessions": 171
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.9011705096408764,
+          "true_patterns": 1320,
+          "true_found": 1109,
+          "false_calls": 31,
+          "preliminary_false": 315,
+          "outside": 3827,
+          "skipped": 0,
+          "wrong": 9552,
+          "fake_matches": 1355,
+          "fake_sessions": 163
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6639021334326966,
+          "true_patterns": 1113,
+          "true_found": 678,
+          "false_calls": 15,
+          "preliminary_false": 730,
+          "outside": 1982,
+          "skipped": 0,
+          "wrong": 8306,
+          "fake_matches": 3199,
+          "fake_sessions": 599
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8795843623202385,
+          "true_patterns": 1678,
+          "true_found": 1350,
+          "false_calls": 38,
+          "preliminary_false": 363,
+          "outside": 4536,
+          "skipped": 0,
+          "wrong": 9173,
+          "fake_matches": 2831,
+          "fake_sessions": 245
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.889596996178887,
+          "true_patterns": 1678,
+          "true_found": 1369,
+          "false_calls": 29,
+          "preliminary_false": 320,
+          "outside": 5971,
+          "skipped": 0,
+          "wrong": 9061,
+          "fake_matches": 1906,
+          "fake_sessions": 176
+        }
+      }
+    },
+    "0.00/C_tanpa_lewati_luar": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6437,
+        "false_calls": 159,
+        "preliminary_false": 2290,
+        "outside": 22331,
+        "skipped": 0,
+        "wrong": 54432,
+        "fake_matches": 11522,
+        "fake_sessions": 1467,
+        "macro_f1": 0.8547232916004704,
+        "precision": 0.9758944815039418,
+        "recall": 0.7945932600913468
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8770315105334779,
+          "true_patterns": 992,
+          "true_found": 781,
+          "false_calls": 8,
+          "preliminary_false": 318,
+          "outside": 1720,
+          "skipped": 0,
+          "wrong": 9404,
+          "fake_matches": 1279,
+          "fake_sessions": 168
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.9143229357470932,
+          "true_patterns": 1320,
+          "true_found": 1142,
+          "false_calls": 35,
+          "preliminary_false": 305,
+          "outside": 3680,
+          "skipped": 0,
+          "wrong": 9387,
+          "fake_matches": 1301,
+          "fake_sessions": 163
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.9033861473516,
+          "true_patterns": 1320,
+          "true_found": 1113,
+          "false_calls": 30,
+          "preliminary_false": 307,
+          "outside": 3960,
+          "skipped": 0,
+          "wrong": 9454,
+          "fake_matches": 1286,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6642564827611289,
+          "true_patterns": 1113,
+          "true_found": 677,
+          "false_calls": 13,
+          "preliminary_false": 718,
+          "outside": 2143,
+          "skipped": 0,
+          "wrong": 8194,
+          "fake_matches": 3117,
+          "fake_sessions": 590
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8797195400321275,
+          "true_patterns": 1678,
+          "true_found": 1351,
+          "false_calls": 39,
+          "preliminary_false": 337,
+          "outside": 4698,
+          "skipped": 0,
+          "wrong": 9050,
+          "fake_matches": 2731,
+          "fake_sessions": 222
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8896231331773953,
+          "true_patterns": 1678,
+          "true_found": 1373,
+          "false_calls": 34,
+          "preliminary_false": 305,
+          "outside": 6130,
+          "skipped": 0,
+          "wrong": 8943,
+          "fake_matches": 1808,
+          "fake_sessions": 168
+        }
+      }
+    },
+    "0.00/D_tanpa_keduanya": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 5752,
+        "false_calls": 165,
+        "preliminary_false": 6198,
+        "outside": 0,
+        "skipped": 0,
+        "wrong": 71299,
+        "fake_matches": 25810,
+        "fake_sessions": 4257,
+        "macro_f1": 0.8033057827262743,
+        "precision": 0.9721142470846713,
+        "recall": 0.7100357980496235
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8739530929428628,
+          "true_patterns": 992,
+          "true_found": 780,
+          "false_calls": 13,
+          "preliminary_false": 545,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 10696,
+          "fake_matches": 2205,
+          "fake_sessions": 345
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8711069614384936,
+          "true_patterns": 1320,
+          "true_found": 1043,
+          "false_calls": 31,
+          "preliminary_false": 885,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12116,
+          "fake_matches": 3513,
+          "fake_sessions": 615
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.847991995877505,
+          "true_patterns": 1320,
+          "true_found": 991,
+          "false_calls": 21,
+          "preliminary_false": 965,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12411,
+          "fake_matches": 3698,
+          "fake_sessions": 663
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6563415135690429,
+          "true_patterns": 1113,
+          "true_found": 664,
+          "false_calls": 13,
+          "preliminary_false": 1014,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 9809,
+          "fake_matches": 4286,
+          "fake_sessions": 768
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8118307138058795,
+          "true_patterns": 1678,
+          "true_found": 1196,
+          "false_calls": 54,
+          "preliminary_false": 1345,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12678,
+          "fake_matches": 6029,
+          "fake_sessions": 904
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.7586104187238619,
+          "true_patterns": 1678,
+          "true_found": 1078,
+          "false_calls": 33,
+          "preliminary_false": 1444,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 13589,
+          "fake_matches": 6079,
+          "fake_sessions": 962
+        }
+      }
+    },
+    "0.10/A_sekarang": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6160,
+        "false_calls": 154,
+        "preliminary_false": 2261,
+        "outside": 19290,
+        "skipped": 13080,
+        "wrong": 49891,
+        "fake_matches": 11117,
+        "fake_sessions": 1435,
+        "macro_f1": 0.8324953326058014,
+        "precision": 0.975609756097561,
+        "recall": 0.7603999506233798
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.830874184444918,
+          "true_patterns": 992,
+          "true_found": 710,
+          "false_calls": 7,
+          "preliminary_false": 318,
+          "outside": 1444,
+          "skipped": 1866,
+          "wrong": 8626,
+          "fake_matches": 1274,
+          "fake_sessions": 167
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.9053485898983658,
+          "true_patterns": 1320,
+          "true_found": 1122,
+          "false_calls": 36,
+          "preliminary_false": 303,
+          "outside": 3210,
+          "skipped": 1881,
+          "wrong": 8593,
+          "fake_matches": 1300,
+          "fake_sessions": 162
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8775632865377267,
+          "true_patterns": 1320,
+          "true_found": 1057,
+          "false_calls": 30,
+          "preliminary_false": 307,
+          "outside": 3457,
+          "skipped": 1854,
+          "wrong": 8662,
+          "fake_matches": 1282,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6508426031247608,
+          "true_patterns": 1113,
+          "true_found": 653,
+          "false_calls": 13,
+          "preliminary_false": 696,
+          "outside": 1777,
+          "skipped": 2434,
+          "wrong": 7528,
+          "fake_matches": 2918,
+          "fake_sessions": 570
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8618588220505371,
+          "true_patterns": 1678,
+          "true_found": 1305,
+          "false_calls": 38,
+          "preliminary_false": 329,
+          "outside": 4081,
+          "skipped": 2509,
+          "wrong": 8272,
+          "fake_matches": 2576,
+          "fake_sessions": 213
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8684845095785004,
+          "true_patterns": 1678,
+          "true_found": 1313,
+          "false_calls": 30,
+          "preliminary_false": 308,
+          "outside": 5321,
+          "skipped": 2536,
+          "wrong": 8210,
+          "fake_matches": 1767,
+          "fake_sessions": 167
+        }
+      }
+    },
+    "0.10/B_tanpa_lewati_tebak": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6173,
+        "false_calls": 182,
+        "preliminary_false": 3660,
+        "outside": 19331,
+        "skipped": 0,
+        "wrong": 59650,
+        "fake_matches": 18695,
+        "fake_sessions": 2588,
+        "macro_f1": 0.8333120290567844,
+        "precision": 0.9713611329661683,
+        "recall": 0.7620046907789162
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8572633478482601,
+          "true_patterns": 992,
+          "true_found": 751,
+          "false_calls": 9,
+          "preliminary_false": 493,
+          "outside": 1444,
+          "skipped": 0,
+          "wrong": 9997,
+          "fake_matches": 2249,
+          "fake_sessions": 320
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.905870205950601,
+          "true_patterns": 1320,
+          "true_found": 1127,
+          "false_calls": 40,
+          "preliminary_false": 457,
+          "outside": 3210,
+          "skipped": 0,
+          "wrong": 10018,
+          "fake_matches": 2306,
+          "fake_sessions": 293
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8792822497425707,
+          "true_patterns": 1320,
+          "true_found": 1064,
+          "false_calls": 34,
+          "preliminary_false": 469,
+          "outside": 3457,
+          "skipped": 0,
+          "wrong": 10043,
+          "fake_matches": 2256,
+          "fake_sessions": 293
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6423098468417194,
+          "true_patterns": 1113,
+          "true_found": 643,
+          "false_calls": 19,
+          "preliminary_false": 1004,
+          "outside": 1777,
+          "skipped": 0,
+          "wrong": 9338,
+          "fake_matches": 4316,
+          "fake_sessions": 785
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.85126679644601,
+          "true_patterns": 1678,
+          "true_found": 1283,
+          "false_calls": 46,
+          "preliminary_false": 686,
+          "outside": 4122,
+          "skipped": 0,
+          "wrong": 10150,
+          "fake_matches": 4216,
+          "fake_sessions": 511
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8638797275115451,
+          "true_patterns": 1678,
+          "true_found": 1305,
+          "false_calls": 34,
+          "preliminary_false": 551,
+          "outside": 5321,
+          "skipped": 0,
+          "wrong": 10104,
+          "fake_matches": 3352,
+          "fake_sessions": 386
+        }
+      }
+    },
+    "0.10/C_tanpa_lewati_luar": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6295,
+        "false_calls": 179,
+        "preliminary_false": 2236,
+        "outside": 32370,
+        "skipped": 0,
+        "wrong": 49891,
+        "fake_matches": 11117,
+        "fake_sessions": 1435,
+        "macro_f1": 0.8421936615298375,
+        "precision": 0.9723509422304603,
+        "recall": 0.7770645599308728
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8533339810436313,
+          "true_patterns": 992,
+          "true_found": 745,
+          "false_calls": 9,
+          "preliminary_false": 316,
+          "outside": 3310,
+          "skipped": 0,
+          "wrong": 8626,
+          "fake_matches": 1274,
+          "fake_sessions": 167
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.9117892899888458,
+          "true_patterns": 1320,
+          "true_found": 1146,
+          "false_calls": 47,
+          "preliminary_false": 292,
+          "outside": 5091,
+          "skipped": 0,
+          "wrong": 8593,
+          "fake_matches": 1300,
+          "fake_sessions": 162
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8957205349522308,
+          "true_patterns": 1320,
+          "true_found": 1100,
+          "false_calls": 35,
+          "preliminary_false": 302,
+          "outside": 5311,
+          "skipped": 0,
+          "wrong": 8662,
+          "fake_matches": 1282,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6535789404764828,
+          "true_patterns": 1113,
+          "true_found": 658,
+          "false_calls": 13,
+          "preliminary_false": 696,
+          "outside": 4211,
+          "skipped": 0,
+          "wrong": 7528,
+          "fake_matches": 2918,
+          "fake_sessions": 570
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8648025076698752,
+          "true_patterns": 1678,
+          "true_found": 1315,
+          "false_calls": 41,
+          "preliminary_false": 326,
+          "outside": 6590,
+          "skipped": 0,
+          "wrong": 8272,
+          "fake_matches": 2576,
+          "fake_sessions": 213
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8739367150479591,
+          "true_patterns": 1678,
+          "true_found": 1331,
+          "false_calls": 34,
+          "preliminary_false": 304,
+          "outside": 7857,
+          "skipped": 0,
+          "wrong": 8210,
+          "fake_matches": 1767,
+          "fake_sessions": 167
+        }
+      }
+    },
+    "0.10/D_tanpa_keduanya": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 5424,
+        "false_calls": 215,
+        "preliminary_false": 7697,
+        "outside": 0,
+        "skipped": 0,
+        "wrong": 74263,
+        "fake_matches": 31069,
+        "fake_sessions": 5199,
+        "macro_f1": 0.7725998152122299,
+        "precision": 0.961872672459656,
+        "recall": 0.6695469695099371
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8556862471485912,
+          "true_patterns": 992,
+          "true_found": 753,
+          "false_calls": 15,
+          "preliminary_false": 742,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 11084,
+          "fake_matches": 3022,
+          "fake_sessions": 505
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8541337136331513,
+          "true_patterns": 1320,
+          "true_found": 1014,
+          "false_calls": 40,
+          "preliminary_false": 1109,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12391,
+          "fake_matches": 4236,
+          "fake_sessions": 765
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8196277665060361,
+          "true_patterns": 1320,
+          "true_found": 942,
+          "false_calls": 30,
+          "preliminary_false": 1173,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12629,
+          "fake_matches": 4368,
+          "fake_sessions": 787
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6351962956685792,
+          "true_patterns": 1113,
+          "true_found": 630,
+          "false_calls": 16,
+          "preliminary_false": 1287,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 10683,
+          "fake_matches": 5283,
+          "fake_sessions": 943
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.7657044620178941,
+          "true_patterns": 1678,
+          "true_found": 1103,
+          "false_calls": 66,
+          "preliminary_false": 1648,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 13331,
+          "fake_matches": 7088,
+          "fake_sessions": 1069
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.7052504062991273,
+          "true_patterns": 1678,
+          "true_found": 982,
+          "false_calls": 48,
+          "preliminary_false": 1738,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 14145,
+          "fake_matches": 7072,
+          "fake_sessions": 1130
+        }
+      }
+    },
+    "0.20/A_sekarang": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 5790,
+        "false_calls": 159,
+        "preliminary_false": 2221,
+        "outside": 17221,
+        "skipped": 25262,
+        "wrong": 45322,
+        "fake_matches": 10768,
+        "fake_sessions": 1405,
+        "macro_f1": 0.800943789566885,
+        "precision": 0.9732728189611699,
+        "recall": 0.7147265769658067
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.7756405382235642,
+          "true_patterns": 992,
+          "true_found": 633,
+          "false_calls": 7,
+          "preliminary_false": 317,
+          "outside": 1273,
+          "skipped": 3624,
+          "wrong": 7824,
+          "fake_matches": 1263,
+          "fake_sessions": 167
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8855900424718669,
+          "true_patterns": 1320,
+          "true_found": 1077,
+          "false_calls": 35,
+          "preliminary_false": 304,
+          "outside": 2865,
+          "skipped": 3651,
+          "wrong": 7771,
+          "fake_matches": 1300,
+          "fake_sessions": 162
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8486073075634615,
+          "true_patterns": 1320,
+          "true_found": 1000,
+          "false_calls": 33,
+          "preliminary_false": 304,
+          "outside": 3087,
+          "skipped": 3635,
+          "wrong": 7849,
+          "fake_matches": 1282,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6265907389415337,
+          "true_patterns": 1113,
+          "true_found": 612,
+          "false_calls": 13,
+          "preliminary_false": 670,
+          "outside": 1601,
+          "skipped": 4725,
+          "wrong": 6878,
+          "fake_matches": 2743,
+          "fake_sessions": 547
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8288367112626522,
+          "true_patterns": 1678,
+          "true_found": 1224,
+          "false_calls": 37,
+          "preliminary_false": 324,
+          "outside": 3667,
+          "skipped": 4785,
+          "wrong": 7498,
+          "fake_matches": 2448,
+          "fake_sessions": 208
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8403973989382313,
+          "true_patterns": 1678,
+          "true_found": 1244,
+          "false_calls": 34,
+          "preliminary_false": 302,
+          "outside": 4728,
+          "skipped": 4842,
+          "wrong": 7502,
+          "fake_matches": 1732,
+          "fake_sessions": 165
+        }
+      }
+    },
+    "0.20/B_tanpa_lewati_tebak": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 5844,
+        "false_calls": 269,
+        "preliminary_false": 5517,
+        "outside": 17262,
+        "skipped": 0,
+        "wrong": 64237,
+        "fake_matches": 25329,
+        "fake_sessions": 4095,
+        "macro_f1": 0.8030508022887074,
+        "precision": 0.9559954195975789,
+        "recall": 0.7213924206888038
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8379057725035445,
+          "true_patterns": 992,
+          "true_found": 724,
+          "false_calls": 12,
+          "preliminary_false": 804,
+          "outside": 1274,
+          "skipped": 0,
+          "wrong": 10508,
+          "fake_matches": 3198,
+          "fake_sessions": 593
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8812607160385826,
+          "true_patterns": 1320,
+          "true_found": 1089,
+          "false_calls": 61,
+          "preliminary_false": 700,
+          "outside": 2865,
+          "skipped": 0,
+          "wrong": 10499,
+          "fake_matches": 3233,
+          "fake_sessions": 523
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8554497908450718,
+          "true_patterns": 1320,
+          "true_found": 1028,
+          "false_calls": 52,
+          "preliminary_false": 725,
+          "outside": 3087,
+          "skipped": 0,
+          "wrong": 10558,
+          "fake_matches": 3231,
+          "fake_sessions": 518
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.615138003083222,
+          "true_patterns": 1113,
+          "true_found": 602,
+          "false_calls": 24,
+          "preliminary_false": 1333,
+          "outside": 1601,
+          "skipped": 0,
+          "wrong": 10446,
+          "fake_matches": 5394,
+          "fake_sessions": 994
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8068091451900726,
+          "true_patterns": 1678,
+          "true_found": 1191,
+          "false_calls": 70,
+          "preliminary_false": 1057,
+          "outside": 3702,
+          "skipped": 0,
+          "wrong": 11092,
+          "fake_matches": 5521,
+          "fake_sessions": 793
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.8217413860717514,
+          "true_patterns": 1678,
+          "true_found": 1210,
+          "false_calls": 50,
+          "preliminary_false": 898,
+          "outside": 4733,
+          "skipped": 0,
+          "wrong": 11134,
+          "fake_matches": 4752,
+          "fake_sessions": 674
+        }
+      }
+    },
+    "0.20/C_tanpa_lewati_luar": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 6109,
+        "false_calls": 201,
+        "preliminary_false": 2179,
+        "outside": 42483,
+        "skipped": 0,
+        "wrong": 45322,
+        "fake_matches": 10768,
+        "fake_sessions": 1405,
+        "macro_f1": 0.8254947508804631,
+        "precision": 0.9681458003169572,
+        "recall": 0.7541044315516603
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8296509935854667,
+          "true_patterns": 992,
+          "true_found": 711,
+          "false_calls": 11,
+          "preliminary_false": 313,
+          "outside": 4897,
+          "skipped": 0,
+          "wrong": 7824,
+          "fake_matches": 1263,
+          "fake_sessions": 167
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.907442351340763,
+          "true_patterns": 1320,
+          "true_found": 1142,
+          "false_calls": 54,
+          "preliminary_false": 285,
+          "outside": 6516,
+          "skipped": 0,
+          "wrong": 7771,
+          "fake_matches": 1300,
+          "fake_sessions": 162
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.8840501245122523,
+          "true_patterns": 1320,
+          "true_found": 1079,
+          "false_calls": 40,
+          "preliminary_false": 297,
+          "outside": 6722,
+          "skipped": 0,
+          "wrong": 7849,
+          "fake_matches": 1282,
+          "fake_sessions": 156
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6318599448503955,
+          "true_patterns": 1113,
+          "true_found": 621,
+          "false_calls": 13,
+          "preliminary_false": 670,
+          "outside": 6326,
+          "skipped": 0,
+          "wrong": 6878,
+          "fake_matches": 2743,
+          "fake_sessions": 547
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.8429512158069769,
+          "true_patterns": 1678,
+          "true_found": 1263,
+          "false_calls": 41,
+          "preliminary_false": 320,
+          "outside": 8452,
+          "skipped": 0,
+          "wrong": 7498,
+          "fake_matches": 2448,
+          "fake_sessions": 208
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.857013875186924,
+          "true_patterns": 1678,
+          "true_found": 1293,
+          "false_calls": 42,
+          "preliminary_false": 294,
+          "outside": 9570,
+          "skipped": 0,
+          "wrong": 7502,
+          "fake_matches": 1732,
+          "fake_sessions": 165
+        }
+      }
+    },
+    "0.20/D_tanpa_keduanya": {
+      "overall": {
+        "sessions": 8997,
+        "true_patterns": 8101,
+        "true_found": 5040,
+        "false_calls": 314,
+        "preliminary_false": 9445,
+        "outside": 0,
+        "skipped": 0,
+        "wrong": 77272,
+        "fake_matches": 36373,
+        "fake_sessions": 6241,
+        "macro_f1": 0.7331391512668392,
+        "precision": 0.9413522599925289,
+        "recall": 0.6221454141464017
+      },
+      "per_group": {
+        "addition/tens": {
+          "sessions": 1320,
+          "macro_f1": 0.8349069985555168,
+          "true_patterns": 992,
+          "true_found": 726,
+          "false_calls": 21,
+          "preliminary_false": 1034,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 11466,
+          "fake_matches": 3879,
+          "fake_sessions": 747
+        },
+        "addition/hundreds": {
+          "sessions": 1320,
+          "macro_f1": 0.8207656837793216,
+          "true_patterns": 1320,
+          "true_found": 961,
+          "false_calls": 60,
+          "preliminary_false": 1340,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12621,
+          "fake_matches": 4956,
+          "fake_sessions": 908
+        },
+        "addition/thousands": {
+          "sessions": 1320,
+          "macro_f1": 0.7862203221157267,
+          "true_patterns": 1320,
+          "true_found": 896,
+          "false_calls": 54,
+          "preliminary_false": 1429,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 12871,
+          "fake_matches": 5117,
+          "fake_sessions": 951
+        },
+        "subtraction/tens": {
+          "sessions": 1679,
+          "macro_f1": 0.6088196076011534,
+          "true_patterns": 1113,
+          "true_found": 594,
+          "false_calls": 25,
+          "preliminary_false": 1607,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 11657,
+          "fake_matches": 6268,
+          "fake_sessions": 1122
+        },
+        "subtraction/hundreds": {
+          "sessions": 1679,
+          "macro_f1": 0.7003335268931283,
+          "true_patterns": 1678,
+          "true_found": 978,
+          "false_calls": 85,
+          "preliminary_false": 1980,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 13929,
+          "fake_matches": 8101,
+          "fake_sessions": 1234
+        },
+        "subtraction/thousands": {
+          "sessions": 1679,
+          "macro_f1": 0.6477887686561882,
+          "true_patterns": 1678,
+          "true_found": 885,
+          "false_calls": 69,
+          "preliminary_false": 2055,
+          "outside": 0,
+          "skipped": 0,
+          "wrong": 14728,
+          "fake_matches": 8052,
+          "fake_sessions": 1279
+        }
+      }
+    }
+  },
+  "example": {
+    "unsure_rate": 0.2,
+    "operation": "subtraction",
+    "category": "hundreds",
+    "students": 1679,
+    "supported_changed": 178,
+    "example": {
+      "student_id": "ST01963",
+      "truth": [
+        "S3"
+      ],
+      "runs": {
+        "A_sekarang": {
+          "supported": [
+            "S3"
+          ],
+          "preliminary": [],
+          "scores": {
+            "S1": 0.004,
+            "S2": 0.009,
+            "S3": 0.811,
+            "S4": 0.294,
+            "S5": 0.029,
+            "S6": 0.021
+          },
+          "thresholds": {
+            "S1": 0.78,
+            "S2": 0.93,
+            "S3": 0.7,
+            "S4": 0.75,
+            "S5": 0.65,
+            "S6": 0.75
+          },
+          "counts": {
+            "correct": 9,
+            "wrong": 2,
+            "outside_options": 2,
+            "skipped": 2
+          },
+          "exact": {
+            "S3": 2
+          },
+          "unique": {
+            "S3": 2
+          },
+          "questions": [
+            {
+              "no": 1,
+              "soal": "615 - 251",
+              "benar": 364,
+              "opsi": [
+                364,
+                365,
+                444,
+                464
+              ],
+              "keadaan": "normal",
+              "dicatat": 364,
+              "cocok_pola": []
+            },
+            {
+              "no": 2,
+              "soal": "600 - 456",
+              "benar": 144,
+              "opsi": [
+                144,
+                200,
+                244,
+                254
+              ],
+              "keadaan": "normal",
+              "dicatat": 200,
+              "cocok_pola": [
+                "S3"
+              ]
+            },
+            {
+              "no": 3,
+              "soal": "550 - 271",
+              "benar": 279,
+              "opsi": [
+                279,
+                281,
+                321,
+                389
+              ],
+              "keadaan": "acak",
+              "dicatat": 279,
+              "cocok_pola": []
+            },
+            {
+              "no": 4,
+              "soal": "786 - 579",
+              "benar": 207,
+              "opsi": [
+                107,
+                207,
+                213,
+                217
+              ],
+              "keadaan": "normal",
+              "dicatat": 207,
+              "cocok_pola": []
+            },
+            {
+              "no": 5,
+              "soal": "680 - 353",
+              "benar": 327,
+              "opsi": [
+                227,
+                327,
+                330,
+                337
+              ],
+              "keadaan": "luar opsi",
+              "dicatat": "di luar opsi",
+              "cocok_pola": []
+            },
+            {
+              "no": 6,
+              "soal": "700 - 250",
+              "benar": 450,
+              "opsi": [
+                450,
+                451,
+                500,
+                550
+              ],
+              "keadaan": "ragu/kosong",
+              "dicatat": "dilewati",
+              "cocok_pola": []
+            },
+            {
+              "no": 7,
+              "soal": "503 - 235",
+              "benar": 268,
+              "opsi": [
+                268,
+                332,
+                368,
+                378
+              ],
+              "keadaan": "normal",
+              "dicatat": 268,
+              "cocok_pola": []
+            },
+            {
+              "no": 8,
+              "soal": "512 - 264",
+              "benar": 248,
+              "opsi": [
+                248,
+                308,
+                352,
+                368
+              ],
+              "keadaan": "ragu/kosong",
+              "dicatat": "dilewati",
+              "cocok_pola": []
+            },
+            {
+              "no": 9,
+              "soal": "706 - 648",
+              "benar": 58,
+              "opsi": [
+                58,
+                158,
+                168,
+                958
+              ],
+              "keadaan": "luar opsi",
+              "dicatat": "di luar opsi",
+              "cocok_pola": []
+            },
+            {
+              "no": 10,
+              "soal": "913 - 619",
+              "benar": 294,
+              "opsi": [
+                294,
+                304,
+                306,
+                314
+              ],
+              "keadaan": "normal",
+              "dicatat": 294,
+              "cocok_pola": []
+            },
+            {
+              "no": 11,
+              "soal": "602 - 278",
+              "benar": 324,
+              "opsi": [
+                224,
+                324,
+                424,
+                434
+              ],
+              "keadaan": "normal",
+              "dicatat": 324,
+              "cocok_pola": []
+            },
+            {
+              "no": 12,
+              "soal": "505 - 179",
+              "benar": 326,
+              "opsi": [
+                326,
+                426,
+                436,
+                474
+              ],
+              "keadaan": "normal",
+              "dicatat": 326,
+              "cocok_pola": []
+            },
+            {
+              "no": 13,
+              "soal": "547 - 338",
+              "benar": 209,
+              "opsi": [
+                109,
+                209,
+                211,
+                219
+              ],
+              "keadaan": "normal",
+              "dicatat": 209,
+              "cocok_pola": []
+            },
+            {
+              "no": 14,
+              "soal": "960 - 394",
+              "benar": 566,
+              "opsi": [
+                566,
+                570,
+                634,
+                676
+              ],
+              "keadaan": "normal",
+              "dicatat": 570,
+              "cocok_pola": [
+                "S3"
+              ]
+            },
+            {
+              "no": 15,
+              "soal": "404 - 305",
+              "benar": 99,
+              "opsi": [
+                99,
+                109,
+                199,
+                999
+              ],
+              "keadaan": "normal",
+              "dicatat": 99,
+              "cocok_pola": []
+            }
+          ]
+        },
+        "B_tanpa_lewati_tebak": {
+          "supported": [
+            "S4"
+          ],
+          "preliminary": [],
+          "scores": {
+            "S1": 0.013,
+            "S2": 0.012,
+            "S3": 0.369,
+            "S4": 0.996,
+            "S5": 0.075,
+            "S6": 0.018
+          },
+          "thresholds": {
+            "S1": 0.78,
+            "S2": 0.93,
+            "S3": 0.7,
+            "S4": 0.75,
+            "S5": 0.65,
+            "S6": 0.75
+          },
+          "counts": {
+            "correct": 9,
+            "wrong": 3,
+            "outside_options": 3
+          },
+          "exact": {
+            "S3": 1,
+            "S1": 1,
+            "S2": 1,
+            "S4": 2
+          },
+          "unique": {
+            "S3": 1,
+            "S4": 1
+          },
+          "questions": [
+            {
+              "no": 1,
+              "soal": "615 - 251",
+              "benar": 364,
+              "opsi": [
+                364,
+                365,
+                444,
+                464
+              ],
+              "keadaan": "normal",
+              "dicatat": 364,
+              "cocok_pola": []
+            },
+            {
+              "no": 2,
+              "soal": "600 - 456",
+              "benar": 144,
+              "opsi": [
+                144,
+                200,
+                244,
+                254
+              ],
+              "keadaan": "normal",
+              "dicatat": 200,
+              "cocok_pola": [
+                "S3"
+              ]
+            },
+            {
+              "no": 3,
+              "soal": "550 - 271",
+              "benar": 279,
+              "opsi": [
+                279,
+                281,
+                321,
+                389
+              ],
+              "keadaan": "acak",
+              "dicatat": 279,
+              "cocok_pola": []
+            },
+            {
+              "no": 4,
+              "soal": "786 - 579",
+              "benar": 207,
+              "opsi": [
+                107,
+                207,
+                213,
+                217
+              ],
+              "keadaan": "normal",
+              "dicatat": 207,
+              "cocok_pola": []
+            },
+            {
+              "no": 5,
+              "soal": "680 - 353",
+              "benar": 327,
+              "opsi": [
+                227,
+                327,
+                330,
+                337
+              ],
+              "keadaan": "luar opsi",
+              "dicatat": "di luar opsi",
+              "cocok_pola": []
+            },
+            {
+              "no": 6,
+              "soal": "700 - 250",
+              "benar": 450,
+              "opsi": [
+                450,
+                451,
+                500,
+                550
+              ],
+              "keadaan": "ragu/kosong",
+              "dicatat": 550,
+              "cocok_pola": [
+                "S1",
+                "S2",
+                "S4"
+              ]
+            },
+            {
+              "no": 7,
+              "soal": "503 - 235",
+              "benar": 268,
+              "opsi": [
+                268,
+                332,
+                368,
+                378
+              ],
+              "keadaan": "normal",
+              "dicatat": 268,
+              "cocok_pola": []
+            },
+            {
+              "no": 8,
+              "soal": "512 - 264",
+              "benar": 248,
+              "opsi": [
+                248,
+                308,
+                352,
+                368
+              ],
+              "keadaan": "ragu/kosong",
+              "dicatat": 368,
+              "cocok_pola": [
+                "S4"
+              ]
+            },
+            {
+              "no": 9,
+              "soal": "706 - 648",
+              "benar": 58,
+              "opsi": [
+                58,
+                158,
+                168,
+                958
+              ],
+              "keadaan": "luar opsi",
+              "dicatat": "di luar opsi",
+              "cocok_pola": []
+            },
+            {
+              "no": 10,
+              "soal": "434 - 378",
+              "benar": 56,
+              "opsi": [
+                56,
+                57,
+                144,
+                166
+              ],
+              "keadaan": "normal",
+              "dicatat": 56,
+              "cocok_pola": []
+            },
+            {
+              "no": 11,
+              "soal": "885 - 638",
+              "benar": 247,
+              "opsi": [
+                147,
+                247,
+                253,
+                257
+              ],
+              "keadaan": "luar opsi",
+              "dicatat": "di luar opsi",
+              "cocok_pola": []
+            },
+            {
+              "no": 12,
+              "soal": "977 - 419",
+              "benar": 558,
+              "opsi": [
+                458,
+                558,
+                562,
+                568
+              ],
+              "keadaan": "ragu/kosong",
+              "dicatat": 558,
+              "cocok_pola": []
+            },
+            {
+              "no": 13,
+              "soal": "921 - 190",
+              "benar": 731,
+              "opsi": [
+                731,
+                732,
+                831,
+                871
+              ],
+              "keadaan": "ragu/kosong",
+              "dicatat": 731,
+              "cocok_pola": []
+            },
+            {
+              "no": 14,
+              "soal": "861 - 791",
+              "benar": 70,
+              "opsi": [
+                70,
+                71,
+                130,
+                170
+              ],
+              "keadaan": "normal",
+              "dicatat": 70,
+              "cocok_pola": []
+            },
+            {
+              "no": 15,
+              "soal": "803 - 348",
+              "benar": 455,
+              "opsi": [
+                355,
+                455,
+                545,
+                565
+              ],
+              "keadaan": "normal",
+              "dicatat": 455,
+              "cocok_pola": []
+            }
+          ]
+        }
+      }
+    }
+  }
+}

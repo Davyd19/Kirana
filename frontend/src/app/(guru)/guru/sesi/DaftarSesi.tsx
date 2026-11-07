@@ -161,9 +161,6 @@ function TabelSesi({ baris }: { baris: Sesi[] }) {
                   <Link href={`/guru/sesi/${s.id}`} aria-label={`Lihat detail sesi ${s.kode}`} className={kelasAksi}>
                     Lihat Detail
                   </Link>
-                  <Link href={`/guru/hasil/${s.id}`} aria-label={`Lihat hasil sesi ${s.kode}`} className={`${kelasAksi} ml-2`}>
-                    Lihat Hasil
-                  </Link>
                 </td>
               </tr>
             ))}
@@ -182,14 +179,10 @@ function TabelSesi({ baris }: { baris: Sesi[] }) {
               {namaOperasi(s.operasi)} · {namaKategori(s.numberCategory)} · {s.jumlahSoal} soal · {formatTanggal(s.dibuatPada)} · {s.jumlahPengumpulan}{" "}
               pengumpulan
             </span>
-            <div className="grid grid-cols-2 gap-2">
-              <TombolLink href={`/guru/sesi/${s.id}`} varian="sekunder" tinggi={44} className="text-sm!">
-                Lihat Detail
-              </TombolLink>
-              <TombolLink href={`/guru/hasil/${s.id}`} varian="sekunder" tinggi={44} className="text-sm!">
-                Lihat Hasil
-              </TombolLink>
-            </div>
+            {/* Hasil dibuka dari halaman Detail Sesi (tombol "Lihat Hasil" di sana). */}
+            <TombolLink href={`/guru/sesi/${s.id}`} aria-label={`Lihat detail sesi ${s.kode}`} varian="sekunder" tinggi={44} penuh className="text-sm!">
+              Lihat Detail
+            </TombolLink>
           </li>
         ))}
       </ul>
